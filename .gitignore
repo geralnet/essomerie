@@ -12,6 +12,7 @@ Client/bin
 Client/test/bin
 Server/bin
 Server/test/bin
+Server/sql
 Shared/bin
 Shared/test/bin
 tools
