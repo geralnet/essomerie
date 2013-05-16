@@ -1,4 +1,4 @@
 essomerie
 =========
 
-Restaurant Manager
+Restaurant Management Software
