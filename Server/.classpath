@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" output="test/bin" path="test/src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Essomerie Shared"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/GeralNET"/>
+	<classpathentry kind="lib" path="mysql-connector-java-5.1.13-bin.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="/GeralNET/joda-time-2.2.jar" sourcepath="D:/droperto/git-projects/geralnet-javalib/git/libs/joda-time-2.2-sources.jar"/>
+	<classpathentry kind="lib" path="/GeralNET/log4j-1.2.17.jar"/>
+	<classpathentry kind="con" path="org.eclipse.ajdt.core.ASPECTJRT_CONTAINER"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
