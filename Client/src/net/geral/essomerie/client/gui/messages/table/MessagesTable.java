@@ -2,6 +2,8 @@ package net.geral.essomerie.client.gui.messages.table;
 
 import java.util.Comparator;
 
+import javax.swing.ListSelectionModel;
+
 import net.geral.essomerie._shared.User;
 import net.geral.essomerie._shared.mensagens.Message;
 import net.geral.essomerie.client.core.Client;
@@ -17,6 +19,8 @@ public class MessagesTable extends GNTable<MessagesModel> {
 
   public MessagesTable(final MessagesTabPanel panel) {
     super(new MessagesModel(), new MessagesRenderer());
+    getSelectionModel().setSelectionMode(
+        ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
     messagesPanel = panel;
     initialSort(0, true);
   }
