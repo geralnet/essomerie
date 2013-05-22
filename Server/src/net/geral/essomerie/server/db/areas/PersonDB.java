@@ -10,6 +10,8 @@ import net.geral.essomerie.shared.person.Address;
 import net.geral.essomerie.shared.person.Addresses;
 import net.geral.essomerie.shared.person.Person;
 import net.geral.essomerie.shared.person.PersonData;
+import net.geral.essomerie.shared.person.PersonDocument;
+import net.geral.essomerie.shared.person.PersonDocuments;
 import net.geral.essomerie.shared.person.PersonFullData;
 import net.geral.essomerie.shared.person.PersonLogDetails;
 import net.geral.essomerie.shared.person.PersonType;
@@ -42,6 +44,22 @@ public class PersonDB extends DatabaseArea {
 	    db.insert(sql, idperson, a.getPostalCode(), a.getAddress(),
 		    a.getSuburb(), a.getCity(), a.getState(), a.getCountry(),
 		    a.getComments(), a.getClassification(), iduser);
+	}
+    }
+
+    private void addNewDocuments(final int iduser, final int idperson,
+	    final ArrayList<PersonDocument> news) throws SQLException {
+	final String sql = "INSERT INTO `person_document` "// insert
+		+ " (`idperson`,`type`,`number`,`image`,`updated_by`,`updated_when`) " // fields
+		+ " VALUES (?,?,?,?,?,NOW()) ";// values
+	for (final PersonDocument d : news) {
+	    byte[] img = d.getImageBytes();
+	    if (img == null) {
+		logger.warn("No image information for document to save.");
+	    } else if (img.length == 0) {
+		img = null;
+	    }
+	    db.insert(sql, idperson, d.getType(), d.getNumber(), img, iduser);
 	}
     }
 
@@ -165,6 +183,19 @@ public class PersonDB extends DatabaseArea {
 	db.update(sql.toString(), iduser, idperson);
     }
 
+    private void deleteNonExistingDocuments(final int iduser,
+	    final int idperson, final ArrayList<PersonDocument> olds)
+	    throws SQLException {
+	final StringBuilder sql = new StringBuilder();
+	sql.append("UPDATE `person_document` SET `deleted_by`=?, `deleted_when`=NOW() WHERE (TRUE ");
+	for (final PersonDocument doc : olds) {
+	    sql.append(" AND `id`<>");
+	    sql.append(doc.getId());
+	}
+	sql.append(") AND (`idperson`=? AND `deleted_when` IS NULL) ");
+	db.update(sql.toString(), iduser, idperson);
+    }
+
     private void deleteNonExistingTelephones(final int iduser,
 	    final int idperson, final ArrayList<Telephone> olds)
 	    throws SQLException {
@@ -201,6 +232,31 @@ public class PersonDB extends DatabaseArea {
 	}
 	r.close();
 	return new Addresses(idperson, addresses);
+    }
+
+    private PersonDocuments fetchDocuments(final int idperson,
+	    final boolean withImages) throws SQLException {
+	final String sql = "SELECT `id`,`type`,`number` "// select
+		+ (withImages ? ",`image` " : "") // images?
+		+ " FROM `person_document` "// from
+		+ " WHERE `idperson`=? AND `deleted_when` IS NULL"// where
+	;
+	final PreparedResultSet r = db.select(sql, idperson);
+	final ArrayList<PersonDocument> documents = new ArrayList<>();
+	while (r.rs.next()) {
+	    final int id = r.rs.getInt("id");
+	    final String type = r.rs.getString("type");
+	    final String number = r.rs.getString("number");
+	    byte[] image = withImages ? r.rs.getBytes("image") : null;
+	    if (withImages && (image == null)) {
+		image = new byte[0];
+	    }
+	    final PersonDocument a = new PersonDocument(id, idperson, type,
+		    number, image);
+	    documents.add(a);
+	}
+	r.close();
+	return new PersonDocuments(idperson, documents);
     }
 
     private PersonLogDetails fetchLogDetails(final int idperson)
@@ -280,8 +336,9 @@ public class PersonDB extends DatabaseArea {
 	    final PersonLogDetails log = fetchLogDetails(id);
 	    final Telephones telephones = fetchTelephones(id);
 	    final Addresses addresses = fetchAddresses(id);
+	    final PersonDocuments documents = fetchDocuments(id, true);
 	    p = new PersonData(id, type, name, alias, deleted, comments, log,
-		    telephones, addresses);
+		    telephones, addresses, documents);
 	}
 	if (r.rs.next()) {
 	    logger.warn("get(" + idperson + ") found more than one result");
@@ -340,6 +397,29 @@ public class PersonDB extends DatabaseArea {
 	return adds;
     }
 
+    private PersonDocument[] getAllDocuments(final boolean withImages)
+	    throws SQLException {
+	final String sql = "SELECT `id`,`idperson`,`type`,`number` "// select
+		+ (withImages ? ",`image` " : "") // images?
+		+ " FROM `person_document` "// from
+		+ " WHERE `deleted_when` IS NULL";// where
+	final PreparedResultSet r = db.select(sql);
+	final PersonDocument[] docs = new PersonDocument[r.getRowCount()];
+	int i = 0;
+	while (r.rs.next()) {
+	    final int id = r.rs.getInt("id");
+	    final int idperson = r.rs.getInt("idperson");
+	    final String type = r.rs.getString("type");
+	    final String number = r.rs.getString("number");
+	    byte[] image = withImages ? r.rs.getBytes("image") : null;
+	    if (withImages && (image == null)) {
+		image = new byte[0];
+	    }
+	    docs[i++] = new PersonDocument(id, idperson, type, number, image);
+	}
+	return docs;
+    }
+
     private Telephone[] getAllTelephones() throws SQLException {
 	final String sql = "SELECT `id`,`idperson`,`country`,`area`,`number`,`extension`,`type` "// select
 		+ " FROM `person_telephone` "// from
@@ -383,7 +463,7 @@ public class PersonDB extends DatabaseArea {
 	    final String comments = r.rs.getString("comments");
 	    final PersonLogDetails log = fetchLogDetails(id);
 	    person[i++] = new PersonData(id, type, name, alias, deleted,
-		    comments, log, null, null);
+		    comments, log, null, null, null);
 	}
 	r.close();
 	return person;
@@ -403,12 +483,13 @@ public class PersonDB extends DatabaseArea {
 	return candidates.size() == 1 ? candidates.get(0) : null;
     }
 
-    public PersonFullData getFullData(final boolean withDeletedPersons)
-	    throws SQLException {
+    public PersonFullData getFullData(final boolean withDeletedPersons,
+	    final boolean withImages) throws SQLException {
 	final PersonData[] persons = getAllWithData(withDeletedPersons);
 	final Telephone[] telephones = getAllTelephones();
 	final Address[] addresses = getAllAddresses();
-	return new PersonFullData(persons, telephones, addresses);
+	final PersonDocument[] documents = getAllDocuments(false);
+	return new PersonFullData(persons, telephones, addresses, documents);
     }
 
     public PersonData save(final int userid, final PersonData person)
@@ -434,6 +515,18 @@ public class PersonDB extends DatabaseArea {
 	    final PersonData data) throws SQLException {
 	saveTelephones(iduser, idperson, data.getTelephones());
 	saveAddresses(iduser, idperson, data.getAddresses());
+	saveDocuments(iduser, idperson, data.getDocuments());
+    }
+
+    private void saveDocuments(final int iduser, final int idperson,
+	    final PersonDocuments documents) throws SQLException {
+	final ArrayList<PersonDocument> olds = new ArrayList<>();
+	final ArrayList<PersonDocument> news = new ArrayList<>();
+	for (final PersonDocument d : documents.getAll()) {
+	    ((d.getId() == 0) ? news : olds).add(d);
+	}
+	deleteNonExistingDocuments(iduser, idperson, olds);
+	addNewDocuments(iduser, idperson, news);
     }
 
     private void saveTelephones(final int iduser, final int idperson,

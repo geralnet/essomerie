@@ -16,7 +16,6 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTextArea;
-import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 
 import net.geral.essomerie.client.core.Client;
@@ -56,7 +55,6 @@ public class GeneralPersonEditor extends PersonEditorPanel implements
   private final JSplitPane      splitPane;
 
   public GeneralPersonEditor() {
-    setBorder(new EmptyBorder(2, 2, 2, 2));
     final GridBagLayout gridBagLayout = new GridBagLayout();
     gridBagLayout.columnWidths = new int[] { 1, 0 };
     gridBagLayout.rowHeights = new int[] { 0, 0, 0, 180, 0, 0 };
@@ -284,6 +282,7 @@ public class GeneralPersonEditor extends PersonEditorPanel implements
     }
   }
 
+  @Override
   public void setEditable(final boolean yn) {
     rdbtnLegalPerson.setEnabled(yn);
     rdbtnNaturalPerson.setEnabled(yn);
@@ -316,6 +315,7 @@ public class GeneralPersonEditor extends PersonEditorPanel implements
     lblUpdated.setText(String.format("%s (%s)", updatedWhen, updatedBy));
   }
 
+  @Override
   public void setPerson(Person p) {
     lblID.setText("-");
     lblRegistered.setText("-");

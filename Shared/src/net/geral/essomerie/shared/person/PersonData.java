@@ -7,14 +7,16 @@ public class PersonData extends Person {
   private final PersonLogDetails log;
   private final Telephones       telephones;
   private final Addresses        addresses;
+  private final PersonDocuments  documents;
 
   public PersonData() {
-    this(0, PersonType.Unknown, "", "", false, "", null, null, null);
+    this(0, PersonType.Unknown, "", "", false, "", null, null, null, null);
   }
 
   public PersonData(final int id, final PersonType type, final String name,
       final String alias, final boolean deleted, final String comments,
-      final PersonLogDetails log, Telephones telephones, Addresses addresses) {
+      final PersonLogDetails log, Telephones telephones, Addresses addresses,
+      PersonDocuments documents) {
     super(id, type, name, alias, deleted);
     // check arguments
     if (comments == null) {
@@ -26,17 +28,22 @@ public class PersonData extends Person {
     if (addresses == null) {
       addresses = new Addresses(id);
     }
+    if (documents == null) {
+      documents = new PersonDocuments(id);
+    }
     // set arguments
     this.comments = comments;
     this.log = log;
     this.telephones = telephones;
     this.addresses = addresses;
+    this.documents = documents;
   }
 
   public PersonData(final PersonData p, final Telephones telephones,
       final Addresses addresses) {
     this(p.getId(), p.getType(), p.getName(), p.getAlias(), p.isDeleted(), p
-        .getComments(), p.getLogDetails(), telephones, addresses);
+        .getComments(), p.getLogDetails(), telephones, addresses, p
+        .getDocuments());
   }
 
   public Addresses getAddresses() {
@@ -45,6 +52,10 @@ public class PersonData extends Person {
 
   public String getComments() {
     return comments;
+  }
+
+  public PersonDocuments getDocuments() {
+    return documents;
   }
 
   public PersonLogDetails getLogDetails() {

@@ -253,6 +253,8 @@ public class MySQL {
 		ps.setString(i, o.toString());
 	    } else if (o instanceof Float) {
 		ps.setFloat(i, ((Float) o).floatValue());
+	    } else if (o instanceof byte[]) {
+		ps.setBytes(i, (byte[]) o);
 	    } else if (o instanceof Dinheiro) {
 		ps.setString(i, ((Dinheiro) o).toSQL());
 	    } else if (o instanceof char[]) {

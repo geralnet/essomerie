@@ -10,6 +10,7 @@ import java.util.HashMap;
 import net.geral.essomerie._shared.communication.IMessageType;
 import net.geral.essomerie._shared.communication.MessageData;
 import net.geral.essomerie._shared.communication.MessageSubSystem;
+import net.geral.lib.filechooser.GNFileChooser;
 
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
@@ -143,7 +144,16 @@ public enum S {
   ORGANIZER_PERSONS_ADDRESS_ADDRESS("Address"),
   ORGANIZER_PERSONS_ADDRESS_COMMENTS("Comments"),
   ORGANIZER_PERSONS_ADDRESS_CLASSIFICATION("Class"),
-  MENU_USER("User");
+  MENU_USER("User"),
+  ORGANIZER_PERSONS_DOCUMENTS("Documents"),
+  ORGANIZER_PERSONS_DOCUMENTS_TYPE("Type"),
+  ORGANIZER_PERSONS_DOCUMENTS_NUMBER("Number"),
+  ORGANIZER_PERSONS_DOCUMENTS_TYPE_NEW("[add new]"),
+  ORGANIZER_PERSONS_DOCUMENTS_NUMBER_NEW(""),
+  BUTTON_CLEAR("Clear"),
+  GNFILECHOOSER_ONLYIMAGES(GNFileChooser.getTextOnlyImages()),
+  ORGANIZER_PERSONS_DOCUMENTS_SAVEPNG("Save PNG"),
+  ERROR_SAVING_FILE("Error saving file:");
 
   private static final Logger            logger   = Logger.getLogger(S.class);
   private static HashMap<String, String> messages = new HashMap<>();

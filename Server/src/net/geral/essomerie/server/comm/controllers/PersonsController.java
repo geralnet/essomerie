@@ -59,7 +59,8 @@ public class PersonsController extends
     }
 
     private void requestFullData() throws SQLException, IOException {
-	final PersonFullData pfd = Server.db().person().getFullData(false);
+	final PersonFullData pfd = Server.db().person()
+		.getFullData(false, false);
 	send(PersonsMessageType.InformFullData, (Object) pfd);
     }
 

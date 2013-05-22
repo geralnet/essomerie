@@ -1,6 +1,8 @@
 package net.geral.essomerie.client.gui.organizer.persons;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -14,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
+import javax.swing.border.MatteBorder;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.TreeSelectionModel;
@@ -26,12 +29,14 @@ import net.geral.essomerie.client.core.events.listeners.CallerIdListener;
 import net.geral.essomerie.client.core.events.listeners.CommConfirmationListener;
 import net.geral.essomerie.client.core.events.listeners.PersonsListener;
 import net.geral.essomerie.client.gui.main.TabPanel;
+import net.geral.essomerie.client.gui.organizer.persons.editors.DocumentsPersonEditor;
 import net.geral.essomerie.client.gui.organizer.persons.editors.GeneralPersonEditor;
 import net.geral.essomerie.client.gui.organizer.persons.tree.PersonsTreeNode;
 import net.geral.essomerie.client.resources.S;
 import net.geral.essomerie.shared.person.Addresses;
 import net.geral.essomerie.shared.person.Person;
 import net.geral.essomerie.shared.person.PersonData;
+import net.geral.essomerie.shared.person.PersonDocuments;
 import net.geral.essomerie.shared.person.PersonLogDetails;
 import net.geral.essomerie.shared.person.PersonType;
 import net.geral.essomerie.shared.person.Telephone;
@@ -46,25 +51,27 @@ import org.apache.log4j.Logger;
 public class OrganizerPersonsTabPanel extends TabPanel implements
     TreeSelectionListener, PersonsListener, ActionDelayListener<Person>,
     CommConfirmationListener, ActionListener, CallerIdListener {
-  private static final long         serialVersionUID = 1L;
-  private static final Logger       logger           = Logger
-                                                         .getLogger(OrganizerPersonsTabPanel.class);
-  private final PersonsList         list             = new PersonsList();
-  private final GeneralPersonEditor panelGeneral;
-  private final ActionDelay<Person> actionDelay      = new ActionDelay<>(
-                                                         "PersonsChangeDelay",
-                                                         this, this);
-  private Person                    showing          = null;
-  private boolean                   editing          = false;
-  private Person                    lastSaved        = null;
-  private long                      savingMessageId  = 0;
-  private final ActionButton        btnCancel;
-  private final ActionButton        btnSave;
-  private final ActionButton        btnDelete;
-  private final ActionButton        btnChange;
-  private final ActionButton        btnAdd;
-  private final ActionButton        btnPrint;
-  private final JPanel              panelButtons;
+  private static final long           serialVersionUID = 1L;
+  private static final Logger         logger           = Logger
+                                                           .getLogger(OrganizerPersonsTabPanel.class);
+  private final PersonsList           list             = new PersonsList();
+  private final GeneralPersonEditor   panelGeneral;
+  private final DocumentsPersonEditor panelDocuments;
+  private final ActionDelay<Person>   actionDelay      = new ActionDelay<>(
+                                                           "PersonsChangeDelay",
+                                                           this, this);
+  private Person                      showing          = null;
+  private boolean                     editing          = false;
+  private Person                      lastSaved        = null;
+  private long                        savingMessageId  = 0;
+  private final ActionButton          btnCancel;
+  private final ActionButton          btnSave;
+  private final ActionButton          btnDelete;
+  private final ActionButton          btnChange;
+  private final ActionButton          btnAdd;
+  private final ActionButton          btnPrint;
+  private final JPanel                panelButtons;
+  private final JTabbedPane           tabbedPane;
 
   public OrganizerPersonsTabPanel() {
     setLayout(new BorderLayout(0, 0));
@@ -75,21 +82,25 @@ public class OrganizerPersonsTabPanel extends TabPanel implements
         .setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
     list.getTree().addTreeSelectionListener(this);
 
-    panelGeneral = new GeneralPersonEditor();
-
     add(split);
 
     final JPanel panelRight = new JPanel();
 
-    final JTabbedPane tabbedPane = new JTabbedPane(SwingConstants.TOP);
+    tabbedPane = new JTabbedPane(SwingConstants.TOP);
     split.setRightComponent(panelRight);
     panelRight.setLayout(new BorderLayout(0, 0));
     panelRight.add(tabbedPane, BorderLayout.CENTER);
 
+    panelGeneral = new GeneralPersonEditor();
     tabbedPane
         .addTab(S.ORGANIZER_PERSONS_GENERAL.s(), null, panelGeneral, null);
 
+    panelDocuments = new DocumentsPersonEditor();
+    tabbedPane.addTab(S.ORGANIZER_PERSONS_DOCUMENTS.s(), null, panelDocuments,
+        null);
+
     final JPanel panelButtonsFlow = new JPanel();
+    panelButtonsFlow.setBorder(new MatteBorder(1, 0, 0, 0, new Color(0, 0, 0)));
     final FlowLayout flowLayout = (FlowLayout) panelButtonsFlow.getLayout();
     flowLayout.setAlignment(FlowLayout.TRAILING);
     flowLayout.setVgap(0);
@@ -189,8 +200,9 @@ public class OrganizerPersonsTabPanel extends TabPanel implements
     final PersonLogDetails log = null;
     final Telephones telephones = panelGeneral.getPersonTelephones(idperson);
     final Addresses addresses = panelGeneral.getPersonAddresses(idperson);
+    final PersonDocuments documents = panelDocuments.getDocuments(idperson);
     final PersonData p = new PersonData(idperson, type, name, alias, deleted,
-        comments, log, telephones, addresses);
+        comments, log, telephones, addresses, documents);
     return p;
   }
 
@@ -284,13 +296,21 @@ public class OrganizerPersonsTabPanel extends TabPanel implements
 
   private void setPanelsEditing(final boolean yn) {
     list.setEnabled(!yn);
-    panelGeneral.setEditable(yn);
+    for (final Component c : tabbedPane.getComponents()) {
+      if (c instanceof PersonEditorPanel) {
+        ((PersonEditorPanel) c).setEditable(yn);
+      }
+    }
   }
 
   private void setPerson(final Person p) {
     showing = p;
-    panelGeneral.setPerson(p);
     editingStop(); // just in case...
+    for (final Component c : tabbedPane.getComponents()) {
+      if (c instanceof PersonEditorPanel) {
+        ((PersonEditorPanel) c).setPerson(p);
+      }
+    }
   }
 
   @Override

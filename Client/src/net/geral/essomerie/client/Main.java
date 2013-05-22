@@ -18,6 +18,7 @@ import net.geral.essomerie.client.core.configuration.Preferences;
 import net.geral.essomerie.client.resources.IMG;
 import net.geral.essomerie.client.resources.S;
 import net.geral.lib.datepicker.DatePickerPanel;
+import net.geral.lib.filechooser.GNFileChooser;
 import net.geral.lib.strings.GNStrings;
 import net.geral.lib.table.GNTableRenderer;
 
@@ -249,6 +250,7 @@ public class Main {
     // initialize components
     GNTableRenderer.setDefaultDeleteIcon(IMG.ICON__DELETE
         .icon(config.DeleteIconSize));
+    GNFileChooser.setTextImagesOnly(S.GNFILECHOOSER_ONLYIMAGES.s());
   }
 
   private static void showHelpAndExit() {
