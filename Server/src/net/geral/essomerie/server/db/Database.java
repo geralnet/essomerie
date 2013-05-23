@@ -39,7 +39,7 @@ import org.apache.log4j.Logger;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
 
-//TODO padronizar nomes de metodos -- tudo para 'areas'
+// FIXME TODO padronizar nomes de metodos -- tudo para 'areas'
 public class Database extends MySQL {
     private static final Logger logger = Logger.getLogger(Database.class);
 

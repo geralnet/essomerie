@@ -153,7 +153,16 @@ public enum S {
   BUTTON_CLEAR("Clear"),
   GNFILECHOOSER_ONLYIMAGES(GNFileChooser.getTextOnlyImages()),
   ORGANIZER_PERSONS_DOCUMENTS_SAVEPNG("Save PNG"),
-  ERROR_SAVING_FILE("Error saving file:");
+  ERROR_SAVING_FILE("Error saving file:"),
+  ORGANIZER_PERSONS_SALES_ORDERS("Orders:"),
+  ORGANIZER_PERSONS_SALES_SPENT("Spent:"),
+  ORGANIZER_PERSONS_SALES_AVERAGE("Average:"),
+  ORGANIZER_PERSONS_SALES_LASTORDER("Last Order:"),
+  ORGANIZER_PERSONS_SALES("Sales"),
+  ORGANIZER_PERSONS_SALES_WHEN("When"),
+  ORGANIZER_PERSONS_SALES_PRICE("Price"),
+  ORGANIZER_PERSONS_SALES_COMMENTS("Comments"),
+  ORGANIZER_PERSONS_SALES_FIRSTORDER("First Order:");
 
   private static final Logger            logger   = Logger.getLogger(S.class);
   private static HashMap<String, String> messages = new HashMap<>();

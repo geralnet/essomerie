@@ -1,7 +1,5 @@
 package net.geral.essomerie.client.gui.inventory.table;
 
-import java.awt.Rectangle;
-
 import net.geral.essomerie._shared.contagem.InventoryItem;
 import net.geral.essomerie.client.core.Client;
 import net.geral.essomerie.client.core.configuration.CoreConfiguration;
@@ -44,18 +42,6 @@ public class InventoryTable extends GNTable<InventoryModel> {
       return null;
     }
     return getModel().get(convertRowIndexToModel(s));
-  }
-
-  public void scrollToSelected() {
-    final int n = getSelectedRow();
-    int c = getSelectedColumn();
-    if (c == -1) {
-      c = 0;
-    }
-    if (n == -1) {
-      return;
-    }
-    scrollRectToVisible(new Rectangle(getCellRect(n, c, true)));
   }
 
   public void selectNext() {

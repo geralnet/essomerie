@@ -8,42 +8,33 @@ public class PersonData extends Person {
   private final Telephones       telephones;
   private final Addresses        addresses;
   private final PersonDocuments  documents;
+  private final PersonSales      sales;
 
   public PersonData() {
-    this(0, PersonType.Unknown, "", "", false, "", null, null, null, null);
+    this(0, PersonType.Unknown, "", "", false, "", null, null, null, null, null);
   }
 
   public PersonData(final int id, final PersonType type, final String name,
       final String alias, final boolean deleted, final String comments,
       final PersonLogDetails log, Telephones telephones, Addresses addresses,
-      PersonDocuments documents) {
+      PersonDocuments documents, PersonSales sales) {
     super(id, type, name, alias, deleted);
     // check arguments
     if (comments == null) {
       throw new IllegalArgumentException("comments cannot be null.");
     }
-    if (telephones == null) {
-      telephones = new Telephones(id);
-    }
-    if (addresses == null) {
-      addresses = new Addresses(id);
-    }
-    if (documents == null) {
-      documents = new PersonDocuments(id);
-    }
+    telephones = (telephones == null) ? new Telephones(id) : telephones;
+    addresses = (addresses == null) ? new Addresses(id) : addresses;
+    documents = (documents == null) ? new PersonDocuments(id) : documents;
+    sales = (sales == null) ? new PersonSales(id) : sales;
+
     // set arguments
     this.comments = comments;
     this.log = log;
     this.telephones = telephones;
     this.addresses = addresses;
     this.documents = documents;
-  }
-
-  public PersonData(final PersonData p, final Telephones telephones,
-      final Addresses addresses) {
-    this(p.getId(), p.getType(), p.getName(), p.getAlias(), p.isDeleted(), p
-        .getComments(), p.getLogDetails(), telephones, addresses, p
-        .getDocuments());
+    this.sales = sales;
   }
 
   public Addresses getAddresses() {
@@ -62,6 +53,10 @@ public class PersonData extends Person {
     return log;
   }
 
+  public PersonSales getSales() {
+    return sales;
+  }
+
   public Telephones getTelephones() {
     return telephones;
   }
@@ -70,5 +65,11 @@ public class PersonData extends Person {
   public String toString() {
     return super.toString() + "[" + telephones.getCount() + "T;"
         + addresses.getCount() + "A]";
+  }
+
+  public PersonData withTelephonesAddresses(final Telephones telephones,
+      final Addresses addresses) {
+    return new PersonData(getId(), getType(), getName(), getAlias(),
+        isDeleted(), comments, log, telephones, addresses, documents, sales);
   }
 }

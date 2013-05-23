@@ -31,6 +31,7 @@ import net.geral.essomerie.client.core.events.listeners.PersonsListener;
 import net.geral.essomerie.client.gui.main.TabPanel;
 import net.geral.essomerie.client.gui.organizer.persons.editors.DocumentsPersonEditor;
 import net.geral.essomerie.client.gui.organizer.persons.editors.GeneralPersonEditor;
+import net.geral.essomerie.client.gui.organizer.persons.editors.SalesPersonEditor;
 import net.geral.essomerie.client.gui.organizer.persons.tree.PersonsTreeNode;
 import net.geral.essomerie.client.resources.S;
 import net.geral.essomerie.shared.person.Addresses;
@@ -38,6 +39,7 @@ import net.geral.essomerie.shared.person.Person;
 import net.geral.essomerie.shared.person.PersonData;
 import net.geral.essomerie.shared.person.PersonDocuments;
 import net.geral.essomerie.shared.person.PersonLogDetails;
+import net.geral.essomerie.shared.person.PersonSales;
 import net.geral.essomerie.shared.person.PersonType;
 import net.geral.essomerie.shared.person.Telephone;
 import net.geral.essomerie.shared.person.Telephones;
@@ -57,6 +59,7 @@ public class OrganizerPersonsTabPanel extends TabPanel implements
   private final PersonsList           list             = new PersonsList();
   private final GeneralPersonEditor   panelGeneral;
   private final DocumentsPersonEditor panelDocuments;
+  private final SalesPersonEditor     panelSales;
   private final ActionDelay<Person>   actionDelay      = new ActionDelay<>(
                                                            "PersonsChangeDelay",
                                                            this, this);
@@ -98,6 +101,9 @@ public class OrganizerPersonsTabPanel extends TabPanel implements
     panelDocuments = new DocumentsPersonEditor();
     tabbedPane.addTab(S.ORGANIZER_PERSONS_DOCUMENTS.s(), null, panelDocuments,
         null);
+
+    panelSales = new SalesPersonEditor();
+    tabbedPane.addTab(S.ORGANIZER_PERSONS_SALES.s(), null, panelSales, null);
 
     final JPanel panelButtonsFlow = new JPanel();
     panelButtonsFlow.setBorder(new MatteBorder(1, 0, 0, 0, new Color(0, 0, 0)));
@@ -201,8 +207,9 @@ public class OrganizerPersonsTabPanel extends TabPanel implements
     final Telephones telephones = panelGeneral.getPersonTelephones(idperson);
     final Addresses addresses = panelGeneral.getPersonAddresses(idperson);
     final PersonDocuments documents = panelDocuments.getDocuments(idperson);
+    final PersonSales sales = panelSales.getSales(idperson);
     final PersonData p = new PersonData(idperson, type, name, alias, deleted,
-        comments, log, telephones, addresses, documents);
+        comments, log, telephones, addresses, documents, sales);
     return p;
   }
 

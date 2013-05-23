@@ -3,6 +3,7 @@ package net.geral.essomerie.server.db.areas;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import net.geral.essomerie._shared.Dinheiro;
 import net.geral.essomerie.server.db.Database;
 import net.geral.essomerie.server.db.DatabaseArea;
 import net.geral.essomerie.server.db.PreparedResultSet;
@@ -14,6 +15,8 @@ import net.geral.essomerie.shared.person.PersonDocument;
 import net.geral.essomerie.shared.person.PersonDocuments;
 import net.geral.essomerie.shared.person.PersonFullData;
 import net.geral.essomerie.shared.person.PersonLogDetails;
+import net.geral.essomerie.shared.person.PersonSale;
+import net.geral.essomerie.shared.person.PersonSales;
 import net.geral.essomerie.shared.person.PersonType;
 import net.geral.essomerie.shared.person.Telephone;
 import net.geral.essomerie.shared.person.Telephones;
@@ -60,6 +63,17 @@ public class PersonDB extends DatabaseArea {
 		img = null;
 	    }
 	    db.insert(sql, idperson, d.getType(), d.getNumber(), img, iduser);
+	}
+    }
+
+    private void addNewSales(final int iduser, final int idperson,
+	    final ArrayList<PersonSale> news) throws SQLException {
+	final String sql = "INSERT INTO `person_sale` "// insert
+		+ " (`idperson`,`price`,`when`,`comments`,`updated_by`,`updated_when`) " // fields
+		+ " VALUES (?,?,?,?,?,NOW()) ";// values
+	for (final PersonSale s : news) {
+	    db.insert(sql, idperson, s.getPrice(), s.getWhen(),
+		    s.getComments(), iduser);
 	}
     }
 
@@ -196,6 +210,18 @@ public class PersonDB extends DatabaseArea {
 	db.update(sql.toString(), iduser, idperson);
     }
 
+    private void deleteNonExistingSales(final int iduser, final int idperson,
+	    final ArrayList<PersonSale> olds) throws SQLException {
+	final StringBuilder sql = new StringBuilder();
+	sql.append("UPDATE `person_sale` SET `deleted_by`=?, `deleted_when`=NOW() WHERE (TRUE ");
+	for (final PersonSale s : olds) {
+	    sql.append(" AND `id`<>");
+	    sql.append(s.getId());
+	}
+	sql.append(") AND (`idperson`=? AND `deleted_when` IS NULL) ");
+	db.update(sql.toString(), iduser, idperson);
+    }
+
     private void deleteNonExistingTelephones(final int iduser,
 	    final int idperson, final ArrayList<Telephone> olds)
 	    throws SQLException {
@@ -290,6 +316,25 @@ public class PersonDB extends DatabaseArea {
 		createdBy, updatedBy);
     }
 
+    private PersonSales fetchSales(final int idperson) throws SQLException {
+	final String sql = "SELECT `id`,ROUND(`price`*100) AS `price`,`when`,`comments` "// select
+		+ " FROM `person_sale` "
+		+ " WHERE `idperson`=? AND `deleted_when` IS NULL";
+	final PreparedResultSet r = db.select(sql, idperson);
+	final ArrayList<PersonSale> sales = new ArrayList<>();
+	while (r.rs.next()) {
+	    final int id = r.rs.getInt("id");
+	    final Dinheiro price = new Dinheiro(r.rs.getLong("price"));
+	    final LocalDateTime when = JodaTimeUtils.parseLocalDateTime(r.rs
+		    .getString("when"));
+	    final String comments = r.rs.getString("comments");
+	    final PersonSale s = new PersonSale(id, when, price, comments);
+	    sales.add(s);
+	}
+	r.close();
+	return new PersonSales(idperson, sales);
+    }
+
     private Telephones fetchTelephones(final int idperson) throws SQLException {
 	final String sql = "SELECT `id`,`country`,`area`,`number`,`extension`,`type` "// select
 		+ " FROM `person_telephone` "
@@ -337,8 +382,9 @@ public class PersonDB extends DatabaseArea {
 	    final Telephones telephones = fetchTelephones(id);
 	    final Addresses addresses = fetchAddresses(id);
 	    final PersonDocuments documents = fetchDocuments(id, true);
+	    final PersonSales sales = fetchSales(id);
 	    p = new PersonData(id, type, name, alias, deleted, comments, log,
-		    telephones, addresses, documents);
+		    telephones, addresses, documents, sales);
 	}
 	if (r.rs.next()) {
 	    logger.warn("get(" + idperson + ") found more than one result");
@@ -443,6 +489,7 @@ public class PersonDB extends DatabaseArea {
 
     public PersonData[] getAllWithData(final boolean withDeleted)
 	    throws SQLException {
+	// TODO bad method name
 	final String sql = "SELECT `id`,`type`,`name`,`alias`,`comments`,`replaced_to` "// select
 		+ " FROM `person` "// from
 		+ " WHERE " // where
@@ -463,7 +510,7 @@ public class PersonDB extends DatabaseArea {
 	    final String comments = r.rs.getString("comments");
 	    final PersonLogDetails log = fetchLogDetails(id);
 	    person[i++] = new PersonData(id, type, name, alias, deleted,
-		    comments, log, null, null, null);
+		    comments, log, null, null, null, null);
 	}
 	r.close();
 	return person;
@@ -516,6 +563,7 @@ public class PersonDB extends DatabaseArea {
 	saveTelephones(iduser, idperson, data.getTelephones());
 	saveAddresses(iduser, idperson, data.getAddresses());
 	saveDocuments(iduser, idperson, data.getDocuments());
+	saveSales(iduser, idperson, data.getSales());
     }
 
     private void saveDocuments(final int iduser, final int idperson,
@@ -527,6 +575,17 @@ public class PersonDB extends DatabaseArea {
 	}
 	deleteNonExistingDocuments(iduser, idperson, olds);
 	addNewDocuments(iduser, idperson, news);
+    }
+
+    private void saveSales(final int iduser, final int idperson,
+	    final PersonSales sales) throws SQLException {
+	final ArrayList<PersonSale> olds = new ArrayList<>();
+	final ArrayList<PersonSale> news = new ArrayList<>();
+	for (final PersonSale s : sales.getAll()) {
+	    ((s.getId() == 0) ? news : olds).add(s);
+	}
+	deleteNonExistingSales(iduser, idperson, olds);
+	addNewSales(iduser, idperson, news);
     }
 
     private void saveTelephones(final int iduser, final int idperson,

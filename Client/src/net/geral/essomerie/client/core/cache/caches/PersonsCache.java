@@ -78,7 +78,7 @@ public class PersonsCache {
       final int pid = p.getId();
       final Telephones telephones = data.getTelephones(pid);
       final Addresses addresses = data.getAddresses(pid);
-      final PersonData pd = new PersonData(p, telephones, addresses);
+      final PersonData pd = p.withTelephonesAddresses(telephones, addresses);
       persons.put(p.getId(), pd);
     }
     Events.persons().fireCacheReloaded(true);

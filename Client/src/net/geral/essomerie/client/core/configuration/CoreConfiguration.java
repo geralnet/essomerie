@@ -184,4 +184,13 @@ public class CoreConfiguration extends ConfigurationBase {
   public GNTableColumnWidth TableColumnWidth_Organizer_Persons_Documents_Type   = null;
 
   public GNTableColumnWidth TableColumnWidth_Organizer_Persons_Documents_Number = null;
+
+  public GNTableColumnWidth TableColumnWidth_Organizer_Persons_Sales_DateTime   = null;
+
+  public GNTableColumnWidth TableColumnWidth_Organizer_Persons_Sales_Price      = new GNTableColumnWidth(
+                                                                                    80,
+                                                                                    100,
+                                                                                    1000);
+
+  public GNTableColumnWidth TableColumnWidth_Organizer_Persons_Sales_Comments   = null;
 }
