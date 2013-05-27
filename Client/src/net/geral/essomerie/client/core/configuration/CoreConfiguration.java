@@ -127,6 +127,9 @@ public class CoreConfiguration extends ConfigurationBase {
                                                                                     80);
   public GNTableColumnWidth TableColumnWidth_Default_DateTimeNoSeconds          = new GNTableColumnWidth(
                                                                                     110);
+  public GNTableColumnWidth TableColumnWidth_Default_DateTimeWithSeconds        = new GNTableColumnWidth(
+                                                                                    130);
+
   public GNTableColumnWidth TableColumnWidth_Default_Username                   = TableColumnWidth_Default
                                                                                     .withMinPref(30);
   public GNTableColumnWidth TableColumnWidth_Default_RemoveIcon                 = new GNTableColumnWidth(
@@ -193,4 +196,14 @@ public class CoreConfiguration extends ConfigurationBase {
                                                                                     1000);
 
   public GNTableColumnWidth TableColumnWidth_Organizer_Persons_Sales_Comments   = null;
+
+  public GNTableColumnWidth TableColumnWidth_Tools_SalesRegister_Log_Registered = null;
+
+  public GNTableColumnWidth TableColumnWidth_Tools_SalesRegister_Log_DateTime   = null;
+
+  public GNTableColumnWidth TableColumnWidth_Tools_SalesRegister_Log_Price      = null;
+
+  public GNTableColumnWidth TableColumnWidth_Tools_SalesRegister_Log_Person     = null;
+
+  public GNTableColumnWidth TableColumnWidth_Tools_SalesRegister_Log_Comments   = null;
 }

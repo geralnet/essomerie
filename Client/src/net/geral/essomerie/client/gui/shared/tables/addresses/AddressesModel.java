@@ -13,8 +13,8 @@ public class AddressesModel extends GNTableModel<Address> {
   private static final Logger logger           = Logger
                                                    .getLogger(AddressesModel.class);
 
-  public AddressesModel() {
-    super(true, true, true);
+  public AddressesModel(final boolean mayBecomeEditable) {
+    super(mayBecomeEditable, mayBecomeEditable, mayBecomeEditable);
   }
 
   @Override

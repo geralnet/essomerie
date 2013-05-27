@@ -336,7 +336,7 @@ public class ClientePanelDadosCliente extends JPanel {
     scrollEnderecos = new JScrollPane();
     panelEnderecos.add(scrollEnderecos, BorderLayout.CENTER);
 
-    tableEnderecos = new AddressesTable();
+    tableEnderecos = new AddressesTable(false);
     scrollEnderecos.setViewportView(tableEnderecos);
 
     txtEnderecos = new JTextField();

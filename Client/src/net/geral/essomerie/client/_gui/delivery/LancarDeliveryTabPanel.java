@@ -85,7 +85,7 @@ public class LancarDeliveryTabPanel extends TabPanel implements ActionListener {
     springLayout.putConstraint(SpringLayout.SOUTH, scrollEnderecos, -5,
         SpringLayout.NORTH, panelButtons);
 
-    tableEnderecos = new AddressesTable();
+    tableEnderecos = new AddressesTable(false);
     scrollEnderecos.setViewportView(tableEnderecos);
 
     final JLabel lblValor = new JLabel("Valor:");

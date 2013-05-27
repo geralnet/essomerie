@@ -30,6 +30,7 @@ import net.geral.essomerie.client.gui.organizer.calendar.CalendarTabPanel;
 import net.geral.essomerie.client.gui.organizer.persons.OrganizerPersonsTabPanel;
 import net.geral.essomerie.client.gui.shared.notification.CallerIdNotificationPanel;
 import net.geral.essomerie.client.gui.shared.notification.NotificationWindow;
+import net.geral.essomerie.client.gui.tools.salesregister.ToolsSalesRegister;
 import net.geral.essomerie.client.resources.IMG;
 import net.geral.essomerie.client.resources.S;
 import net.geral.essomerie.shared.person.PersonData;
@@ -226,6 +227,9 @@ public class MainWindow extends JFrame implements ActionListener,
     }
     if (S.MENU_ORGANIZER_PERSONS.name().equals(cmd)) {
       return openTab(OrganizerPersonsTabPanel.class);
+    }
+    if (S.MENU_ORGANIZER_TOOLS_SALESREGISTER.name().equals(cmd)) {
+      return openTab(ToolsSalesRegister.class);
     }
     // if ("agenda_funcionarios".equals(cmd)) { return
     // openTab(OrganizerPersonsTabPanel.class); }

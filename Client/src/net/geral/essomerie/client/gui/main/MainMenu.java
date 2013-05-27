@@ -142,11 +142,16 @@ public class MainMenu extends JMenuBar implements BulletionBoardListener {
   private void createOrganizer() {
     final JMenu menu = createMenu(S.MENU_ORGANIZER);
     addItem(menu, S.MENU_ORGANIZER_CALENDAR);
+    addItem(menu, S.MENU_ORGANIZER_PERSONS);
     // criarItem(menu, "Reservas", "agenda_reservas");
     // criarItem(menu, "Escala", "agenda_escala");
     // criarItem(menu, "Telefones", "agenda_telefones");
     // addItem(menu, S.MENU_ORGANIZER_PERSONS);
     // addItem(menu, "Funcionários", "agenda_funcionarios");
+    addSeparator(menu);
+    final JMenu tools = new JMenu(S.MENU_ORGANIZER_TOOLS.s());
+    addItem(tools, S.MENU_ORGANIZER_TOOLS_SALESREGISTER);
+    menu.add(tools);
   }
 
   private void createUser() {

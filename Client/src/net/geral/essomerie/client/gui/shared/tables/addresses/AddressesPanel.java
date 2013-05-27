@@ -11,7 +11,7 @@ import net.geral.essomerie.shared.person.Addresses;
 public class AddressesPanel extends JPanel {
   private static final long    serialVersionUID = 1L;
 
-  private final AddressesTable table            = new AddressesTable();
+  private final AddressesTable table            = new AddressesTable(true);
 
   public AddressesPanel() {
     setLayout(new BorderLayout(0, 0));

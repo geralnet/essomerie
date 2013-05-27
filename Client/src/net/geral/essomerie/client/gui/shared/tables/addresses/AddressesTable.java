@@ -8,8 +8,8 @@ import net.geral.lib.table.GNTable;
 public class AddressesTable extends GNTable<AddressesModel> {
   private static final long serialVersionUID = 1L;
 
-  public AddressesTable() {
-    super(new AddressesModel());
+  public AddressesTable(final boolean mayBecomeEditable) {
+    super(new AddressesModel(mayBecomeEditable));
     initialSort(4, false);
   }
 
