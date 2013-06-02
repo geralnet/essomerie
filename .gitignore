@@ -1,18 +1,18 @@
 # do not send your configuration/preferences
 *.config
-Client/config
-Server/config
+/Client/config
+/Server/config
 
 #ignore binaries
 *.class
-build
-CallerID/bin
-CallerID/test/bin
-Client/bin
-Client/test/bin
-Server/bin
-Server/test/bin
-Server/sql
-Shared/bin
-Shared/test/bin
-tools
+/build
+/CallerID/bin
+/CallerID/test/bin
+/Client/bin
+/Client/test/bin
+/Server/bin
+/Server/test/bin
+/Server/sql
+/Shared/bin
+/Shared/test/bin
+/tools
