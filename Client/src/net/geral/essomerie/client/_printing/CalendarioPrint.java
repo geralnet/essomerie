@@ -6,7 +6,7 @@ import java.awt.Font;
 import java.util.ArrayList;
 
 import net.geral.essomerie._shared.calendario.CalendarEvent;
-import net.geral.jodatime.JodaTimeUtils;
+import net.geral.jodatime.GNJoda;
 
 import org.joda.time.LocalDate;
 
@@ -24,7 +24,7 @@ public class CalendarioPrint extends CRPrintDocument {
   @Override
   protected void printBody() {
     g.setFont(new Font("SansSerif", Font.PLAIN, 8));
-    String s = JodaTimeUtils.DMA.print(data) + " (" + data.getDayOfWeek() + ")"; // TODO
+    String s = GNJoda.DMA.print(data) + " (" + data.getDayOfWeek() + ")"; // TODO
                                                                                  // nome
                                                                                  // semana
     centralizar(s, new Font("SansSerif", Font.BOLD, 10));

@@ -2,6 +2,7 @@ package net.geral.essomerie._shared;
 
 import java.io.Serializable;
 
+@Deprecated
 public final class Dinheiro implements Serializable, Comparable<Dinheiro> {
   private static final long    serialVersionUID     = 1L;
   public static final Dinheiro ZERO                 = new Dinheiro(0L);
@@ -96,8 +97,24 @@ public final class Dinheiro implements Serializable, Comparable<Dinheiro> {
     return (centavos <= 0);
   }
 
+  public boolean isNegative() {
+    return getCentavos() < 0;
+  }
+
   public boolean isNegativo() {
     return (centavos < 0);
+  }
+
+  public boolean isNonNegative() {
+    return getCentavos() >= 0;
+  }
+
+  public boolean isNonPositive() {
+    return getCentavos() <= 0;
+  }
+
+  public boolean isPositive() {
+    return getCentavos() > 0;
   }
 
   public boolean isZero() {

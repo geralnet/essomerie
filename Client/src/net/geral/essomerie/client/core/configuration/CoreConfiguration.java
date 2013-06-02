@@ -206,4 +206,17 @@ public class CoreConfiguration extends ConfigurationBase {
   public GNTableColumnWidth TableColumnWidth_Tools_SalesRegister_Log_Person     = null;
 
   public GNTableColumnWidth TableColumnWidth_Tools_SalesRegister_Log_Comments   = null;
+
+  public String             ToolsSalesRegisterDayTime                           = "07:00";
+  public String             ToolsSalesRegisterNightTime                         = "19:00";
+
+  public String             ToolsSalesRegisterDefaultTime                       = "12:00";
+
+  public int                SalesCachePreloadEntries                            = 20;
+
+  public GNTableColumnWidth TableColumnWidth_Tools_SalesRegister_Log_ByUser;
+
+  public boolean            ToolsSalesAutoAddressComment                        = true;
+
+  public boolean            ToolsSalesCommentsRequired                          = true;
 }

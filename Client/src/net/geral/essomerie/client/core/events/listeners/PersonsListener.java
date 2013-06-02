@@ -12,5 +12,7 @@ public interface PersonsListener extends EventListener {
 
   public void personsFullDataReceived(PersonData p);
 
+  public void personsSalesChanged(int idperson);
+
   public void personsSaved(Person p);
 }

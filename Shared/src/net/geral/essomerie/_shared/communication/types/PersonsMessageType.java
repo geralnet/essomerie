@@ -13,7 +13,8 @@ public enum PersonsMessageType implements IMessageType {
   RequestPersonData,
   InformPersonData,
   RequestFullData,
-  InformFullData;
+  InformFullData,
+  InformIdNotFound;
 
   @Override
   public UserPermission requires() {

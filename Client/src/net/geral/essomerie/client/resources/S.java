@@ -177,7 +177,14 @@ public enum S {
   TOOLS_SALESREGISTER_PRICE("Price:"),
   TOOLS_SALESREGISTER_COMMENTS("Comments:"),
   TOOLS_SALESREGISTER_PERSON("Person:"),
-  TOOLS_SALESREGISTER_ADDRESS("Address (use in comment):");
+  TOOLS_SALESREGISTER_ADDRESS("Address (use in comment):"),
+  TOOLS_SALESREGISTER_TIME_DAY("Day"),
+  TOOLS_SALESREGISTER_TIME_NIGHT("Night"),
+  TOOLS_SALESREGISTER_TIME_CUSTOM("Specify%s"),
+  FORMAT_TIME_NO_SECONDS("HH:mm"),
+  TOOLS_SALESREGISTER_LOG_BYUSER("User"),
+  ERROR_INVALID_FIELD("A field contains invalid data."),
+  TOOLS_SALESREGISTER_AUTOCOMMENT("Sent to: %s");
 
   private static final Logger            logger   = Logger.getLogger(S.class);
   private static HashMap<String, String> messages = new HashMap<>();

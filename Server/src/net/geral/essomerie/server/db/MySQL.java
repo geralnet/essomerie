@@ -10,7 +10,7 @@ import java.sql.Types;
 
 import net.geral.essomerie._shared.Dinheiro;
 import net.geral.essomerie.server.core.Configuration;
-import net.geral.jodatime.JodaTimeUtils;
+import net.geral.jodatime.GNJoda;
 
 import org.apache.log4j.Logger;
 import org.joda.time.LocalDate;
@@ -211,7 +211,7 @@ public class MySQL {
 	    p.close();
 	    throw new SQLException("Cannot fetch first row.");
 	}
-	final LocalDateTime dt = JodaTimeUtils.parseLocalDateTime(p.rs
+	final LocalDateTime dt = GNJoda.sqlLocalDateTime(p.rs
 		.getString(1));
 	p.close();
 	return dt;

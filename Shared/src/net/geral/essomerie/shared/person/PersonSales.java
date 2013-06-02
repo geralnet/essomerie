@@ -85,4 +85,8 @@ public class PersonSales implements Serializable {
   public int getIdPerson() {
     return idperson;
   }
+
+  public synchronized void register(final PersonSaleExtended sale) {
+    sales.add(sale);
+  }
 }

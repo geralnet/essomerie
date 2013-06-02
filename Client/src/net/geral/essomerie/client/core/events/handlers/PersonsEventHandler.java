@@ -54,6 +54,18 @@ public class PersonsEventHandler extends EventListenerList {
     });
   }
 
+  public void fireSalesChanged(final int idperson) {
+    Edt.run(false, new Runnable() {
+      @Override
+      public void run() {
+        logger.debug("Fired: fireSalesChanged");
+        for (final PersonsListener l : getListeners(PersonsListener.class)) {
+          l.personsSalesChanged(idperson);
+        }
+      }
+    });
+  }
+
   public void fireSaved(final Person p) {
     Edt.run(false, new Runnable() {
       @Override

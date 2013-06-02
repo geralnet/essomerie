@@ -4,24 +4,26 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class PreparedResultSet {
-	public final ResultSet			rs;
-	private final PreparedStatement	preparedStatement;
+public class PreparedResultSet implements AutoCloseable {
+    public final ResultSet rs;
+    private final PreparedStatement preparedStatement;
 
-	public PreparedResultSet(final ResultSet result, final PreparedStatement statement) {
-		rs = result;
-		preparedStatement = statement;
-	}
+    public PreparedResultSet(final ResultSet result,
+	    final PreparedStatement statement) {
+	rs = result;
+	preparedStatement = statement;
+    }
 
-	public void close() throws SQLException {
-		preparedStatement.close();
-	}
+    @Override
+    public void close() throws SQLException {
+	preparedStatement.close();
+    }
 
-	public int getRowCount() throws SQLException {
-		return MySQL.getRowCount(rs);
-	}
+    public int getRowCount() throws SQLException {
+	return MySQL.getRowCount(rs);
+    }
 
-	public PreparedStatement getStatement() {
-		return preparedStatement;
-	}
+    public PreparedStatement getStatement() {
+	return preparedStatement;
+    }
 }

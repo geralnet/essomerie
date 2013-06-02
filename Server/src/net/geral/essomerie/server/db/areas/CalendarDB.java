@@ -9,7 +9,7 @@ import net.geral.essomerie.server.db.PreparedResultSet;
 import net.geral.essomerie._shared.calendario.CalendarEvent;
 import net.geral.essomerie._shared.roster.RosterInfo;
 import net.geral.essomerie._shared.roster.RosterInfoAssignments;
-import net.geral.jodatime.JodaTimeUtils;
+import net.geral.jodatime.GNJoda;
 
 import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
@@ -53,12 +53,12 @@ public class CalendarDB extends DatabaseArea {
 	CalendarEvent ce = null;
 	if (rs.next()) {
 	    idevent = rs.getInt("id");
-	    final LocalDate data = JodaTimeUtils.parseLocalDate(rs
+	    final LocalDate data = GNJoda.parseLocalDate(rs
 		    .getString("data"));
 	    final String evento = rs.getString("mensagem");
 	    final int log_iduser = rs.getInt("log_usuario");
-	    final LocalDateTime log_datahora = JodaTimeUtils
-		    .parseLocalDateTime(rs.getString("log_datahora"));
+	    final LocalDateTime log_datahora = GNJoda
+		    .sqlLocalDateTime(rs.getString("log_datahora"));
 	    final CalendarEvent referencia = (withPrevious ? get(
 		    rs.getInt("idreferencia"), true) : null);
 	    ce = new CalendarEvent(idevent, data, evento, log_iduser,
@@ -78,12 +78,12 @@ public class CalendarDB extends DatabaseArea {
 	final ResultSet rs = p.rs;
 	while (rs.next()) {
 	    final int id = rs.getInt("id");
-	    final LocalDate data = JodaTimeUtils.parseLocalDate(rs
+	    final LocalDate data = GNJoda.parseLocalDate(rs
 		    .getString("data"));
 	    final String evento = rs.getString("mensagem");
 	    final int log_iduser = rs.getInt("log_usuario");
-	    final LocalDateTime log_datahora = JodaTimeUtils
-		    .parseLocalDateTime(rs.getString("log_datahora"));
+	    final LocalDateTime log_datahora = GNJoda
+		    .sqlLocalDateTime(rs.getString("log_datahora"));
 	    final CalendarEvent referencia = null;
 	    cs[i++] = new CalendarEvent(id, data, evento, log_iduser,
 		    log_datahora, referencia);

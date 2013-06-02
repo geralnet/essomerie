@@ -22,7 +22,7 @@ public class UsersController {
 		connection = c;
 	}
 
-	public void proccess(final MessageData md) throws IOException, SQLException {
+	public void process(final MessageData md) throws IOException, SQLException {
 		final UsersMessageType type = (UsersMessageType)md.getType();
 		switch (type) {
 			case RequestList:

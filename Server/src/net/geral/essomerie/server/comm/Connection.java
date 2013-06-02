@@ -20,6 +20,7 @@ import net.geral.essomerie.server.comm.controllers.CallerIdController;
 import net.geral.essomerie.server.comm.controllers.InventoryController;
 import net.geral.essomerie.server.comm.controllers.MessagesController;
 import net.geral.essomerie.server.comm.controllers.PersonsController;
+import net.geral.essomerie.server.comm.controllers.SalesController;
 import net.geral.essomerie.server.comm.controllers.SystemController;
 import net.geral.essomerie.server.comm.controllers.UsersController;
 
@@ -46,6 +47,7 @@ public class Connection extends Thread implements ICommunication {
     private final SystemController system = new SystemController(this);
     private final UsersController users = new UsersController(this);
     private final CallerIdController callerid = new CallerIdController(this);
+    private final SalesController sales = new SalesController(this);
 
     public Connection(final Socket socket) throws IOException {
 	id = ++lastId;
@@ -121,10 +123,13 @@ public class Connection extends Thread implements ICommunication {
 	    system.process(md);
 	    break;
 	case Users:
-	    users.proccess(md);
+	    users.process(md);
 	    break;
 	case CallerId:
-	    callerid.proccess(md);
+	    callerid.process(md);
+	    break;
+	case Sales:
+	    sales.process(md);
 	    break;
 	default:
 	    logger.warn("Invalid subsystem: " + md.getSubSystem());

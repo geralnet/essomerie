@@ -9,6 +9,7 @@ import net.geral.essomerie.shared.person.Addresses;
 import net.geral.essomerie.shared.person.Person;
 import net.geral.essomerie.shared.person.PersonData;
 import net.geral.essomerie.shared.person.PersonFullData;
+import net.geral.essomerie.shared.person.PersonSaleExtended;
 import net.geral.essomerie.shared.person.Telephones;
 
 import org.apache.log4j.Logger;
@@ -22,7 +23,7 @@ public class PersonsCache {
   private boolean                        fullDataLoaded = false;
 
   public synchronized int count() {
-    load();
+    preload();
     return persons.size();
   }
 
@@ -40,7 +41,7 @@ public class PersonsCache {
   }
 
   public synchronized Person get(final int id) {
-    load();
+    preload();
     final Person p = persons.get(id);
     if (!(p instanceof PersonData)) {
       // fetch full data
@@ -54,7 +55,7 @@ public class PersonsCache {
   }
 
   public synchronized Person[] getAll() {
-    load();
+    preload();
     final Person[] ps = new Person[persons.size()];
     int i = 0;
     for (final Person p : persons.values()) {
@@ -112,7 +113,9 @@ public class PersonsCache {
     Events.persons().fireSaved(p);
   }
 
-  private void load() {
+  public void preload() {
+    // it is not needed to be called directly
+    // but may be called to preload in advance
     if (loaded) {
       return;
     }
@@ -121,6 +124,17 @@ public class PersonsCache {
       loaded = true;
     } catch (final IOException e) {
       logger.warn(e, e);
+    }
+  }
+
+  public void registerSale(final PersonSaleExtended sale) {
+    final Person p = persons.get(sale.getIdPerson());
+    if (p instanceof PersonData) {
+      final PersonData pd = (PersonData) p;
+      if (pd.getId() == sale.getIdPerson()) {
+        pd.getSales().register(sale);
+        Events.persons().fireSalesChanged(pd.getId());
+      }
     }
   }
 }

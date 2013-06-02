@@ -1,6 +1,6 @@
 package net.geral.essomerie._shared.dispositivos;
 
-import net.geral.jodatime.JodaTimeUtils;
+import net.geral.jodatime.GNJoda;
 
 import org.joda.time.LocalDateTime;
 
@@ -19,6 +19,6 @@ public class DispositivoMonitor {
 
 	@Override
 	public String toString() {
-		return JodaTimeUtils.DMAHMS.print(datahora) + " (" + id + ")";
+		return GNJoda.DMAHMS.print(datahora) + " (" + id + ")";
 	}
 }

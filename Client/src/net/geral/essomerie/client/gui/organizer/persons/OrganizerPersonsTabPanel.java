@@ -270,6 +270,13 @@ public class OrganizerPersonsTabPanel extends TabPanel implements
   }
 
   @Override
+  public void personsSalesChanged(final int idperson) {
+    if (showing.getId() == idperson) {
+      panelSales.setPerson(showing);
+    }
+  }
+
+  @Override
   public void personsSaved(final Person p) {
     // remove if exists
     list.getTree().getModel().removeById(p.getId());

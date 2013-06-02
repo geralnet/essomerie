@@ -16,10 +16,19 @@ public class Person implements Serializable, Comparable<Person> {
     return GNStrings.removeAccents(name + " (" + alias + ")").toUpperCase();
   }
 
+  public static Integer getIdOrNull(final String text) {
+    final int id = GNStrings.toInt(text, 0);
+    if (id <= 0) {
+      return null;
+    }
+    return new Integer(id);
+  }
+
   private final int        id;
   private final PersonType type;
   private final String     name;
   private final String     alias;
+
   private final boolean    deleted;
 
   transient private String comparissonNameAlias = null;

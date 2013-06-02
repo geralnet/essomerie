@@ -72,7 +72,11 @@ public class PersonsController extends
     private void requestPersonData(final int idperson) throws SQLException,
 	    IOException {
 	final PersonData person = Server.db().person().get(idperson);
-	send(PersonsMessageType.InformPersonData, person);
+	if (person == null) {
+	    send(PersonsMessageType.InformIdNotFound, idperson);
+	} else {
+	    send(PersonsMessageType.InformPersonData, person);
+	}
     }
 
     private void requestSave(final PersonData person) throws SQLException,

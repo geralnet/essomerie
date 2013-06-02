@@ -8,7 +8,7 @@ import org.joda.time.LocalDateTime;
 
 public class PersonSale implements Serializable {
   private static final long   serialVersionUID = 1L;
-  private final int           id;
+  private final int           idsale;
   private final LocalDateTime when;
   private final Dinheiro      price;
   private final String        comments;
@@ -17,9 +17,9 @@ public class PersonSale implements Serializable {
     this(0, LocalDateTime.now(), new Dinheiro(), "");
   }
 
-  public PersonSale(final int id, final LocalDateTime when,
+  public PersonSale(final int idsale, final LocalDateTime when,
       final Dinheiro price, final String comments) {
-    this.id = id;
+    this.idsale = idsale;
     this.when = when;
     this.price = price;
     this.comments = comments;
@@ -29,8 +29,8 @@ public class PersonSale implements Serializable {
     return comments;
   }
 
-  public int getId() {
-    return id;
+  public int getIdSale() {
+    return idsale;
   }
 
   public Dinheiro getPrice() {
@@ -42,7 +42,7 @@ public class PersonSale implements Serializable {
   }
 
   public PersonSale withComments(final String comments) {
-    return new PersonSale(id, when, price, comments);
+    return new PersonSale(idsale, when, price, comments);
   }
 
   public PersonSale withPrice(final Dinheiro price) {

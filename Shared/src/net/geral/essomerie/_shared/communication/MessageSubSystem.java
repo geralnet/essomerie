@@ -6,6 +6,7 @@ import net.geral.essomerie._shared.communication.types.CallerIdMessageType;
 import net.geral.essomerie._shared.communication.types.InventoryMessageType;
 import net.geral.essomerie._shared.communication.types.MessagesMessageType;
 import net.geral.essomerie._shared.communication.types.PersonsMessageType;
+import net.geral.essomerie._shared.communication.types.SalesMessageType;
 import net.geral.essomerie._shared.communication.types.SystemMessageType;
 import net.geral.essomerie._shared.communication.types.UsersMessageType;
 
@@ -22,7 +23,8 @@ public enum MessageSubSystem {
   Employees,
   Products,
   Users,
-  CallerId;
+  CallerId,
+  Sales;
 
   public static IMessageType[] getMessages(final MessageSubSystem mss) {
     switch (mss) {
@@ -42,6 +44,8 @@ public enum MessageSubSystem {
         return SystemMessageType.values();
       case Users:
         return UsersMessageType.values();
+      case Sales:
+        return SalesMessageType.values();
       case Custommers:
       case Delivery:
       case Employees:

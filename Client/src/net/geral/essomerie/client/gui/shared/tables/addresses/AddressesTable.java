@@ -3,6 +3,7 @@ package net.geral.essomerie.client.gui.shared.tables.addresses;
 import net.geral.essomerie.client.core.Client;
 import net.geral.essomerie.client.core.configuration.CoreConfiguration;
 import net.geral.essomerie.client.resources.S;
+import net.geral.essomerie.shared.person.Address;
 import net.geral.lib.table.GNTable;
 
 public class AddressesTable extends GNTable<AddressesModel> {
@@ -40,5 +41,10 @@ public class AddressesTable extends GNTable<AddressesModel> {
   @Override
   public String getNewEntryText(final int columnIndex) {
     return columnIndex == 4 ? "[add new addreess]" : null;
+  }
+
+  @Override
+  public Address getSelected() {
+    return (Address) super.getSelected();
   }
 }

@@ -36,7 +36,7 @@ public class CallerIdController {
 	// connection = c;
     }
 
-    public void proccess(final MessageData md) throws IOException, SQLException {
+    public void process(final MessageData md) throws IOException, SQLException {
 	final CallerIdMessageType type = (CallerIdMessageType) md.getType();
 	switch (type) {
 	default:

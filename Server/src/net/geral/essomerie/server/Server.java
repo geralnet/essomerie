@@ -69,8 +69,7 @@ public class Server {
     }
 
     public static void broadcast(final MessageSubSystem subsystem,
-	    final Enum<? extends IMessageType> type, final Object... objects)
-	    throws IOException {
+	    final Enum<? extends IMessageType> type, final Object... objects) {
 	broadcast(new MessageData(subsystem, type, objects));
     }
 
