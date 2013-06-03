@@ -1,6 +1,6 @@
 package net.geral.essomerie.client._gui.caixa.base.editor;
 
-import net.geral.essomerie.client._gui.shared.textfield.MoneyTextField;
+import net.geral.essomerie.client.gui.shared.textfield.MoneyTextField;
 import net.geral.essomerie.shared.money.Money;
 
 public class DinheiroTableCellEditor extends

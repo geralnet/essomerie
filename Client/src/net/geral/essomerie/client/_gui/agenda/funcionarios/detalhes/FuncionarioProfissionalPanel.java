@@ -19,8 +19,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 import net.geral.essomerie._shared.funcionario.FuncionarioProfissional;
-import net.geral.essomerie.client._gui.shared.textfield.MoneyTextField;
 import net.geral.essomerie.client.core.Client;
+import net.geral.essomerie.client.gui.shared.textfield.MoneyTextField;
 import net.geral.essomerie.shared.money.Money;
 
 import org.joda.time.LocalDateTime;

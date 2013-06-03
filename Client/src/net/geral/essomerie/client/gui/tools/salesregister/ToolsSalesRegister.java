@@ -26,13 +26,13 @@ import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import net.geral.essomerie.client._gui.shared.textfield.MoneyTextField;
 import net.geral.essomerie.client.core.Client;
 import net.geral.essomerie.client.core.events.Events;
 import net.geral.essomerie.client.core.events.listeners.PersonsListener;
 import net.geral.essomerie.client.core.events.listeners.SalesListener;
 import net.geral.essomerie.client.gui.main.TabPanel;
 import net.geral.essomerie.client.gui.shared.tables.addresses.AddressesTable;
+import net.geral.essomerie.client.gui.shared.textfield.MoneyTextField;
 import net.geral.essomerie.client.gui.tools.salesregister.log.LogTable;
 import net.geral.essomerie.client.resources.S;
 import net.geral.essomerie.shared.money.Money;

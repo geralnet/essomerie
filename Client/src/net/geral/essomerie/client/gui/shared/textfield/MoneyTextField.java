@@ -1,8 +1,9 @@
-package net.geral.essomerie.client._gui.shared.textfield;
+package net.geral.essomerie.client.gui.shared.textfield;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import net.geral.essomerie.client._gui.shared.textfield.DinheiroDialog;
 import net.geral.essomerie.shared.money.Money;
 import net.geral.gui.textfield.formula.FormulaTextField;
 
