@@ -3,8 +3,6 @@ package net.geral.essomerie.client.resources;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.HashMap;
 
 import net.geral.essomerie._shared.communication.IMessageType;
@@ -26,7 +24,10 @@ public enum S {
   BULLETINBOARD_LOADING("Load Bulletin Board Entry #%1$d..."),
   BULLETINBOARD_NEW("Bulletin Board Entry"),
   BULLETINBOARD_OUTDATED("This entry was changed and is outdated."),
+  BUTTON_ADD("Add"),
   BUTTON_CANCEL("Cancel"),
+  BUTTON_CHANGE("Change"),
+  BUTTON_CLEAR("Clear"),
   BUTTON_DELETE("Delete"),
   BUTTON_DETAILS("Details"),
   BUTTON_EDIT("Edit"),
@@ -34,20 +35,33 @@ public enum S {
   BUTTON_PRINT("Print"),
   BUTTON_SAVE("Save"),
   BUTTON_SEND("Send"),
+  BUTTON_TODAY("today"),
+  CALLERID_LINE("Line:"),
+  CALLERID_PERSON("Person"),
+  CALLERID_TELEPHONE("Telephone:"),
+  CALLERID_TITLE("Caller ID"),
+  ERROR_INVALID_FIELD("A field contains invalid data."),
+  ERROR_SAVING_FILE("Error saving file:"),
   FORMAT_DATE_SIMPLE("dd/MM/yyyy"),
   FORMAT_DATETIME_SIMPLE("dd/MM/yyyy HH:mm:ss"),
   FORMAT_DATETIME_SIMPLE_NO_SECONDS("dd/MM/yyyy HH:mm"),
+  FORMAT_TIME_NO_SECONDS("HH:mm"),
+  GNFILECHOOSER_ONLYIMAGES(GNFileChooser.getTextOnlyImages()),
   INVENTORY_ADJUSTMENT_TITLE("Inventory Adjustment"),
   INVENTORY_GROUP("Group:"),
   INVENTORY_SUBGROUP("Subgroup:"),
   INVENTORY_TITLE("Inventory"),
   MENU_BULLETINBOARD("Bulletin Board"),
   MENU_BULLETINBOARD_ADD("Create New Entry..."),
+  MENU_DELIVERY_CUSTOMERS("Customers"),
   MENU_INVENTORY("Inventory"),
   MENU_INVENTORY_MANAGEMENT("Management"),
   MENU_ORGANIZER("Organizer"),
   MENU_ORGANIZER_CALENDAR("Calendar"),
   MENU_ORGANIZER_PERSONS("Persons"),
+  MENU_ORGANIZER_TOOLS("Tools"),
+  MENU_ORGANIZER_TOOLS_SALESREGISTER("Sales Register"),
+  MENU_USER("User"),
   MENU_USER_LOGOUT("Logout"),
   MENU_USER_MESSAGES("Messages"),
   MESSAGE_FULL("Inbox Full: %1$d of %2$d"),
@@ -92,9 +106,70 @@ public enum S {
   ORGANIZER_CALENDAR_ROSTER_NIGHT("Night Shift"),
   ORGANIZER_CALENDAR_ROSTER_SAVE("Save changes on roster?"),
   ORGANIZER_CALENDAR_TITLE("Calendar"),
+  ORGANIZER_PERSONS_ADDRESS_ADDRESS("Address"),
+  ORGANIZER_PERSONS_ADDRESS_CLASSIFICATION("Class"),
+  ORGANIZER_PERSONS_ADDRESS_COMMENTS("Comments"),
+  ORGANIZER_PERSONS_ADDRESS_COUNTRY("Country"),
+  ORGANIZER_PERSONS_ADDRESS_POSTALCODE("Postal Code"),
+  ORGANIZER_PERSONS_ADDRESS_STATE("State"),
+  ORGANIZER_PERSONS_ADDRESS_SUBURB("Suburb"),
+  ORGANIZER_PERSONS_DELETE_PERSON("Delete %1$s?"),
+  ORGANIZER_PERSONS_DISCARD_CHANGES("Discard changes?"),
+  ORGANIZER_PERSONS_DOCUMENTS("Documents"),
+  ORGANIZER_PERSONS_DOCUMENTS_NUMBER("Number"),
+  ORGANIZER_PERSONS_DOCUMENTS_NUMBER_NEW(""),
+  ORGANIZER_PERSONS_DOCUMENTS_SAVEPNG("Save PNG"),
+  ORGANIZER_PERSONS_DOCUMENTS_TYPE("Type"),
+  ORGANIZER_PERSONS_DOCUMENTS_TYPE_NEW("[add new]"),
+  ORGANIZER_PERSONS_FILTER_ADDRESS("Address"),
+  ORGANIZER_PERSONS_FILTER_ID("ID"),
+  ORGANIZER_PERSONS_FILTER_NAME("Name"),
+  ORGANIZER_PERSONS_FILTER_SEARCH("Search:"),
+  ORGANIZER_PERSONS_FILTER_TELEPHONE("Telephone"),
+  ORGANIZER_PERSONS_GENERAL("General"),
+  ORGANIZER_PERSONS_GENERAL_ALIAS("Alias:"),
+  ORGANIZER_PERSONS_GENERAL_ALIAS_LEGAL("Fantasy Name:"),
+  ORGANIZER_PERSONS_GENERAL_ALIAS_NATURAL("Nickname:"),
+  ORGANIZER_PERSONS_GENERAL_COMMENTS("Comments:"),
+  ORGANIZER_PERSONS_GENERAL_DELETED("Deleted:"),
+  ORGANIZER_PERSONS_GENERAL_ID("ID"),
+  ORGANIZER_PERSONS_GENERAL_NAME("Name:"),
+  ORGANIZER_PERSONS_GENERAL_REGISTERED("Registered:"),
+  ORGANIZER_PERSONS_GENERAL_UNKNOWN("Unknown"),
+  ORGANIZER_PERSONS_GENERAL_UPDATED("Updated:"),
+  ORGANIZER_PERSONS_LEGAL("Legal Person"),
+  ORGANIZER_PERSONS_NATURAL("Natural Person"),
+  ORGANIZER_PERSONS_SALES("Sales"),
+  ORGANIZER_PERSONS_SALES_AVERAGE("Average:"),
+  ORGANIZER_PERSONS_SALES_COMMENTS("Comments"),
+  ORGANIZER_PERSONS_SALES_FIRSTORDER("First Order:"),
+  ORGANIZER_PERSONS_SALES_LASTORDER("Last Order:"),
+  ORGANIZER_PERSONS_SALES_ORDERS("Orders:"),
+  ORGANIZER_PERSONS_SALES_PRICE("Price"),
+  ORGANIZER_PERSONS_SALES_SPENT("Spent:"),
+  ORGANIZER_PERSONS_SALES_WHEN("When"),
+  ORGANIZER_PERSONS_USER_CALLERID("User Caller ID"),
   SOFTWARE_NAME("Essomerie"),
   TITLE_CONFIRM("Confirm"),
   TITLE_ERROR("Error"),
+  TOOLS_SALESREGISTER("Sales Register"),
+  TOOLS_SALESREGISTER_ADDRESS("Address (use in comment):"),
+  TOOLS_SALESREGISTER_AUTOCOMMENT("Sent to: %s"),
+  TOOLS_SALESREGISTER_COMMENTS("Comments:"),
+  TOOLS_SALESREGISTER_DATETIME("Date/Time:"),
+  TOOLS_SALESREGISTER_ID("Person ID:"),
+  TOOLS_SALESREGISTER_LOG("Log:"),
+  TOOLS_SALESREGISTER_LOG_BYUSER("User"),
+  TOOLS_SALESREGISTER_LOG_COMMENTS("Comments"),
+  TOOLS_SALESREGISTER_LOG_DATETIME("Sale Date"),
+  TOOLS_SALESREGISTER_LOG_PERSON("Person"),
+  TOOLS_SALESREGISTER_LOG_PRICE("Price"),
+  TOOLS_SALESREGISTER_LOG_REGISTERED("Registered"),
+  TOOLS_SALESREGISTER_PERSON("Person:"),
+  TOOLS_SALESREGISTER_PRICE("Price:"),
+  TOOLS_SALESREGISTER_TIME_CUSTOM("Specify%s"),
+  TOOLS_SALESREGISTER_TIME_DAY("Day"),
+  TOOLS_SALESREGISTER_TIME_NIGHT("Night"),
   WINDOW_AUTH_CONNECTED("connected!"),
   WINDOW_AUTH_CONNECTING("Connecting to %1$s:%2$d..."),
   WINDOW_AUTH_CONNECTION_FAILED("failed!"),
@@ -107,84 +182,7 @@ public enum S {
   WINDOW_AUTH_WRONG_PASSWORD("Incorrect Password!"),
   WINDOW_MAIN_CLOSE_PROMPT("Do you want to close the application?"),
   YOUR_NAME("Your Name:"),
-  YOUR_PASSWORD("Your Password:"),
-  MENU_DELIVERY_CUSTOMERS("Customers"),
-  BUTTON_TODAY("today"),
-  ORGANIZER_PERSONS_FILTER_ID("ID"),
-  ORGANIZER_PERSONS_FILTER_NAME("Name"),
-  ORGANIZER_PERSONS_FILTER_TELEPHONE("Telephone"),
-  ORGANIZER_PERSONS_FILTER_ADDRESS("Address"),
-  ORGANIZER_PERSONS_USER_CALLERID("User Caller ID"),
-  ORGANIZER_PERSONS_GENERAL_ID("ID"),
-  ORGANIZER_PERSONS_GENERAL_ALIAS_LEGAL("Fantasy Name:"),
-  ORGANIZER_PERSONS_GENERAL_ALIAS_NATURAL("Nickname:"),
-  ORGANIZER_PERSONS_GENERAL_REGISTERED("Registered:"),
-  ORGANIZER_PERSONS_GENERAL_UPDATED("Updated:"),
-  ORGANIZER_PERSONS_NATURAL("Natural Person"),
-  ORGANIZER_PERSONS_LEGAL("Legal Person"),
-  ORGANIZER_PERSONS_GENERAL_NAME("Name:"),
-  ORGANIZER_PERSONS_GENERAL_ALIAS("Alias:"),
-  ORGANIZER_PERSONS_GENERAL_COMMENTS("Comments:"),
-  ORGANIZER_PERSONS_GENERAL_DELETED("Deleted:"),
-  ORGANIZER_PERSONS_DELETE_PERSON("Delete %1$s?"),
-  ORGANIZER_PERSONS_GENERAL("General"),
-  ORGANIZER_PERSONS_DISCARD_CHANGES("Discard changes?"),
-  ORGANIZER_PERSONS_GENERAL_UNKNOWN("Unknown"),
-  ORGANIZER_PERSONS_FILTER_SEARCH("Search:"),
-  BUTTON_ADD("Add"),
-  BUTTON_CHANGE("Change"),
-  CALLERID_TITLE("Caller ID"),
-  CALLERID_LINE("Line:"),
-  CALLERID_TELEPHONE("Telephone:"),
-  CALLERID_PERSON("Person"),
-  ORGANIZER_PERSONS_ADDRESS_POSTALCODE("Postal Code"),
-  ORGANIZER_PERSONS_ADDRESS_COUNTRY("Country"),
-  ORGANIZER_PERSONS_ADDRESS_STATE("State"),
-  ORGANIZER_PERSONS_ADDRESS_SUBURB("Suburb"),
-  ORGANIZER_PERSONS_ADDRESS_ADDRESS("Address"),
-  ORGANIZER_PERSONS_ADDRESS_COMMENTS("Comments"),
-  ORGANIZER_PERSONS_ADDRESS_CLASSIFICATION("Class"),
-  MENU_USER("User"),
-  ORGANIZER_PERSONS_DOCUMENTS("Documents"),
-  ORGANIZER_PERSONS_DOCUMENTS_TYPE("Type"),
-  ORGANIZER_PERSONS_DOCUMENTS_NUMBER("Number"),
-  ORGANIZER_PERSONS_DOCUMENTS_TYPE_NEW("[add new]"),
-  ORGANIZER_PERSONS_DOCUMENTS_NUMBER_NEW(""),
-  BUTTON_CLEAR("Clear"),
-  GNFILECHOOSER_ONLYIMAGES(GNFileChooser.getTextOnlyImages()),
-  ORGANIZER_PERSONS_DOCUMENTS_SAVEPNG("Save PNG"),
-  ERROR_SAVING_FILE("Error saving file:"),
-  ORGANIZER_PERSONS_SALES_ORDERS("Orders:"),
-  ORGANIZER_PERSONS_SALES_SPENT("Spent:"),
-  ORGANIZER_PERSONS_SALES_AVERAGE("Average:"),
-  ORGANIZER_PERSONS_SALES_LASTORDER("Last Order:"),
-  ORGANIZER_PERSONS_SALES("Sales"),
-  ORGANIZER_PERSONS_SALES_WHEN("When"),
-  ORGANIZER_PERSONS_SALES_PRICE("Price"),
-  ORGANIZER_PERSONS_SALES_COMMENTS("Comments"),
-  ORGANIZER_PERSONS_SALES_FIRSTORDER("First Order:"),
-  MENU_ORGANIZER_TOOLS("Tools"),
-  MENU_ORGANIZER_TOOLS_SALESREGISTER("Sales Register"),
-  TOOLS_SALESREGISTER("Sales Register"),
-  TOOLS_SALESREGISTER_LOG("Log:"),
-  TOOLS_SALESREGISTER_LOG_REGISTERED("Registered"),
-  TOOLS_SALESREGISTER_LOG_DATETIME("Sale Date"),
-  TOOLS_SALESREGISTER_LOG_PRICE("Price"),
-  TOOLS_SALESREGISTER_LOG_PERSON("Person"),
-  TOOLS_SALESREGISTER_LOG_COMMENTS("Comments"),
-  TOOLS_SALESREGISTER_ID("Person ID:"),
-  TOOLS_SALESREGISTER_DATETIME("Date/Time:"),
-  TOOLS_SALESREGISTER_PRICE("Price:"),
-  TOOLS_SALESREGISTER_COMMENTS("Comments:"),
-  TOOLS_SALESREGISTER_PERSON("Person:"),
-  TOOLS_SALESREGISTER_ADDRESS("Address (use in comment):"),
-  TOOLS_SALESREGISTER_TIME_DAY("Day"),
-  TOOLS_SALESREGISTER_TIME_NIGHT("Night"),
-  TOOLS_SALESREGISTER_TIME_CUSTOM("Specify%s"),
-  FORMAT_TIME_NO_SECONDS("HH:mm"),
-  TOOLS_SALESREGISTER_LOG_BYUSER("User"),
-  ERROR_INVALID_FIELD("A field contains invalid data."),
-  TOOLS_SALESREGISTER_AUTOCOMMENT("Sent to: %s");
+  YOUR_PASSWORD("Your Password:");
 
   private static final Logger            logger   = Logger.getLogger(S.class);
   private static HashMap<String, String> messages = new HashMap<>();
@@ -244,39 +242,24 @@ public enum S {
 
   public static void main(final String[] args) {
     BasicConfigurator.configure();
-    if (args.length > 0) {
-      if ("file".equals(args[0])) {
-        main_file(args);
-        return;
-      }
-    }
-    System.err.println("Missing parameter, use 'file' or 'enum'.");
-  }
-
-  private static void main_file(final String[] args) {
-    if (args.length < 2) {
+    if (args.length < 1) {
       System.err.println("Missing language to compare with.");
       System.exit(1);
     }
-    final S[] ss = S.values();
-    Arrays.sort(ss, new Comparator<S>() {
-      @Override
-      public int compare(final S s1, final S s2) {
-        return s1.name().compareTo(s2.name());
-      }
-    });
+    load(args[0]);
 
-    load(args[1]);
-    final StringBuilder sb = new StringBuilder();
-    for (final S s : ss) {
+    main_dumpTranslated();
+    main_dumpMissing();
+  }
+
+  private static void main_dumpMissing() {
+    System.out.println();
+    System.out.println("********** MISSING **********");
+    for (final S s : values()) {
       if (s.text == null) {
-        sb.append(s.name());
-        sb.append('=');
-        sb.append(s.s());
-        sb.append('\n');
+        System.out.println(s.name() + "=" + s.original);
       }
     }
-    System.out.println(sb.toString());
 
     for (final MessageSubSystem mss : MessageSubSystem.values()) {
       final IMessageType[] msgs = MessageSubSystem.getMessages(mss);
@@ -290,13 +273,40 @@ public enum S {
         String msg = messages.get(key);
         if (msg == null) {
           msg = imt.toEnglish();
-          if (msg == null) {
-            continue;
+          if (msg != null) {
+            System.out.println(key + "=" + imt.toEnglish());
           }
         }
-        System.out.println(key + "=" + msg);
       }
     }
+    System.out.println();
+  }
+
+  private static void main_dumpTranslated() {
+    System.out.println();
+    System.out.println("********** TRANSLATED **********");
+    for (final S s : values()) {
+      if (s.text != null) {
+        System.out.println(s.name() + "=" + s.text);
+      }
+    }
+
+    for (final MessageSubSystem mss : MessageSubSystem.values()) {
+      final IMessageType[] msgs = MessageSubSystem.getMessages(mss);
+      if (msgs == null) {
+        logger.warn("No messages for: " + mss.name());
+        System.exit(1);
+      }
+      for (final IMessageType imt : msgs) {
+        final String name = ((Enum<?>) imt).name();
+        final String key = mss.name() + ":" + name;
+        final String msg = messages.get(key);
+        if (msg != null) {
+          System.out.println(key + "=" + msg);
+        }
+      }
+    }
+    System.out.println();
   }
 
   public static String msg(final MessageData md) {

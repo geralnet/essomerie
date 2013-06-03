@@ -3,15 +3,15 @@ package net.geral.essomerie.shared.person;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import net.geral.essomerie._shared.Dinheiro;
+import net.geral.essomerie.shared.money.Money;
 
 public class PersonSales implements Serializable {
   private static final long           serialVersionUID = 1L;
   private final int                   idperson;
   private final ArrayList<PersonSale> sales;
 
-  private transient Dinheiro          cacheTotal       = null;
-  private transient Dinheiro          cacheAverage     = null;
+  private transient Money             cacheTotal       = null;
+  private transient Money             cacheAverage     = null;
   private transient PersonSale        cacheFirstOrder  = null;
   private transient PersonSale        cacheLastOrder   = null;
 
@@ -36,7 +36,7 @@ public class PersonSales implements Serializable {
     PersonSale last = null;
     int n = 0;
     for (final PersonSale s : sales) {
-      sum += s.getPrice().getCentavos();
+      sum += s.getPrice().toLong();
       if ((last == null) || (last.getWhen().compareTo(s.getWhen()) < 0)) {
         last = s;
       }
@@ -46,8 +46,8 @@ public class PersonSales implements Serializable {
       n++;
     }
     // set cache
-    cacheTotal = new Dinheiro(sum);
-    cacheAverage = (n == 0) ? null : new Dinheiro(sum / n);
+    cacheTotal = Money.fromLong(sum);
+    cacheAverage = (n == 0) ? null : Money.fromLong(sum / n);
     cacheFirstOrder = first;
     cacheLastOrder = last;
   }
@@ -56,7 +56,7 @@ public class PersonSales implements Serializable {
     return sales.toArray(new PersonSale[sales.size()]);
   }
 
-  public Dinheiro getCacheAverage() {
+  public Money getCacheAverage() {
     if (cacheAverage == null) {
       calculateCache();
     }
@@ -71,7 +71,7 @@ public class PersonSales implements Serializable {
     return cacheLastOrder;
   }
 
-  public Dinheiro getCacheTotal() {
+  public Money getCacheTotal() {
     if (cacheTotal == null) {
       calculateCache();
     }

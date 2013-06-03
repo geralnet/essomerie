@@ -15,7 +15,7 @@ import javax.swing.border.EmptyBorder;
 import net.geral.essomerie._shared.cliente.Customer;
 import net.geral.essomerie.client._gui.delivery.tabelas.UltimosPedidosTable;
 import net.geral.essomerie.client._gui.shared.label.TitleLabel;
-import net.geral.essomerie.client._gui.shared.textfield.DinheiroTextField;
+import net.geral.essomerie.client._gui.shared.textfield.MoneyTextField;
 import net.geral.essomerie.client.gui.main.TabPanel;
 import net.geral.essomerie.client.gui.shared.tables.addresses.AddressesTable;
 import net.geral.gui.button.ActionButton;
@@ -25,7 +25,7 @@ import net.geral.lib.edt.Edt;
 public class LancarDeliveryTabPanel extends TabPanel implements ActionListener {
   private static final long         serialVersionUID = 1L;
   private final AddressesTable      tableEnderecos;
-  private final DinheiroTextField   txtValor;
+  private final MoneyTextField      txtValor;
   private final UltimosPedidosTable tableUltimosPedidos;
   private final Customer            cliente;
   private final DatePickerPanel     calendario;
@@ -95,7 +95,7 @@ public class LancarDeliveryTabPanel extends TabPanel implements ActionListener {
         lblValor.getFont().getStyle() | Font.BOLD));
     add(lblValor);
 
-    txtValor = new DinheiroTextField(false, false);
+    txtValor = new MoneyTextField(false, true, true, false);
     springLayout.putConstraint(SpringLayout.SOUTH, lblValor, -5,
         SpringLayout.SOUTH, txtValor);
     springLayout.putConstraint(SpringLayout.SOUTH, txtValor, -2,

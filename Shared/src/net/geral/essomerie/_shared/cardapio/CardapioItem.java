@@ -1,14 +1,14 @@
 package net.geral.essomerie._shared.cardapio;
 
-import net.geral.essomerie._shared.Dinheiro;
+import net.geral.essomerie.shared.money.Money;
 import net.geral.lib.strings._Conversor;
 
 public class CardapioItem {
 	public final int			id;
 	public final int			ordem;
 	public final int			idcategoria;
-	public final Dinheiro		meia;
-	public final Dinheiro		inteira;
+	public final Money		meia;
+	public final Money		inteira;
 	public final String			codigo;
 	public final String			nome;
 	public final String			nomeNavegacao;
@@ -24,8 +24,8 @@ public class CardapioItem {
 				ci.nomeCardapio, ci.descricaoPortugues, ci.descricaoIngles);
 	}
 
-	public CardapioItem(final int id, final int ordem, final int idcategoria, final Dinheiro meia,
-			final Dinheiro inteira, final String codigo, final String nome, final String nomeNavegacao,
+	public CardapioItem(final int id, final int ordem, final int idcategoria, final Money meia,
+			final Money inteira, final String codigo, final String nome, final String nomeNavegacao,
 			final String nomeCardapio, final String descricaoPortugues, final String descricaoIngles) {
 		this.id = id;
 		this.ordem = ordem;

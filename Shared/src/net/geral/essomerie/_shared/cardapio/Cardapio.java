@@ -3,12 +3,12 @@ package net.geral.essomerie._shared.cardapio;
 import java.util.Hashtable;
 import java.util.Vector;
 
-import net.geral.essomerie._shared.Dinheiro;
+import net.geral.essomerie.shared.money.Money;
 
 public class Cardapio {
 	public static final double	FRACAO_MEIA_INTEIRA	= 0.6f;
 
-	public static Dinheiro calcularPrecoMeia(final Dinheiro inteira) {
+	public static Money calcularPrecoMeia(final Money inteira) {
 		return inteira.multiply(FRACAO_MEIA_INTEIRA);
 	}
 

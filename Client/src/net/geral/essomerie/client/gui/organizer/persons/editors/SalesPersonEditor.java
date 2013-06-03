@@ -9,30 +9,27 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EtchedBorder;
 
-import net.geral.essomerie._shared.Dinheiro;
 import net.geral.essomerie.client.gui.organizer.persons.PersonEditorPanel;
 import net.geral.essomerie.client.gui.organizer.persons.editors.tables.sales.SalesTable;
 import net.geral.essomerie.client.resources.S;
+import net.geral.essomerie.shared.money.Money;
 import net.geral.essomerie.shared.person.Person;
 import net.geral.essomerie.shared.person.PersonData;
 import net.geral.essomerie.shared.person.PersonSale;
 import net.geral.essomerie.shared.person.PersonSales;
 
-import org.apache.log4j.Logger;
 import org.joda.time.format.DateTimeFormat;
 
 public class SalesPersonEditor extends PersonEditorPanel {
-  private static final Logger logger           = Logger
-                                                   .getLogger(SalesPersonEditor.class);
-  private static final long   serialVersionUID = 1L;
-  private final JPanel        summaryPanel;
-  private final JLabel        lblOrders;
-  private final JLabel        lblSpent;
-  private final JLabel        lblAverage;
-  private final JLabel        lblLastOrder;
-  private final SalesTable    table;
-  private final JLabel        lblTFirstOrder;
-  private final JLabel        lblFirstOrder;
+  private static final long serialVersionUID = 1L;
+  private final JPanel      summaryPanel;
+  private final JLabel      lblOrders;
+  private final JLabel      lblSpent;
+  private final JLabel      lblAverage;
+  private final JLabel      lblLastOrder;
+  private final SalesTable  table;
+  private final JLabel      lblTFirstOrder;
+  private final JLabel      lblFirstOrder;
 
   public SalesPersonEditor() {
     setLayout(new BorderLayout(0, 0));
@@ -113,7 +110,7 @@ public class SalesPersonEditor extends PersonEditorPanel {
       sales.calculateCache();
       lblOrders.setText(String.valueOf(sales.getCount()));
       lblSpent.setText(sales.getCacheTotal().toString());
-      final Dinheiro average = sales.getCacheAverage();
+      final Money average = sales.getCacheAverage();
       lblAverage.setText(average == null ? "-" : average.toString());
       final PersonSale first = sales.getCacheFirstOrder();
       lblFirstOrder.setText(first == null ? "-" : first.getWhen().toString(

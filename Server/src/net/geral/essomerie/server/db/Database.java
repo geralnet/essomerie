@@ -6,7 +6,6 @@ import java.util.Vector;
 
 import net.geral.essomerie._shared.CEP;
 import net.geral.essomerie._shared.CPF;
-import net.geral.essomerie._shared.Dinheiro;
 import net.geral.essomerie._shared.cardapio.Cardapio;
 import net.geral.essomerie._shared.cardapio.CardapioCategoria;
 import net.geral.essomerie._shared.cardapio.CardapioItem;
@@ -31,6 +30,7 @@ import net.geral.essomerie.server.db.areas.InventoryDB;
 import net.geral.essomerie.server.db.areas.MessageDB;
 import net.geral.essomerie.server.db.areas.PersonDB;
 import net.geral.essomerie.server.db.areas.UsersDB;
+import net.geral.essomerie.shared.money.Money;
 import net.geral.essomerie.shared.person.Address;
 import net.geral.essomerie.shared.person.Telephone;
 import net.geral.jodatime.GNJoda;
@@ -184,8 +184,8 @@ public class Database extends MySQL {
 	    final int id = rs.getInt(c++);
 	    final int ordem = rs.getInt(c++);
 	    final int idcategoria = rs.getInt(c++);
-	    final Dinheiro meia = new Dinheiro(rs.getLong(c++));
-	    final Dinheiro inteira = new Dinheiro(rs.getLong(c++));
+	    final Money meia = Money.fromLong(rs.getLong(c++));
+	    final Money inteira = Money.fromLong(rs.getLong(c++));
 	    final String codigo = rs.getString(c++);
 	    final String nome = rs.getString(c++);
 	    final String nomeNavegacao = rs.getString(c++);
@@ -256,7 +256,7 @@ public class Database extends MySQL {
 	final PreparedResultSet prs = select(sql, idcliente);
 	prs.rs.next(); // go to first result
 	final int numeroPedidos = prs.rs.getInt(1);
-	final Dinheiro consumoPedidos = new Dinheiro(prs.rs.getLong(2));
+	final Money consumoPedidos = Money.fromLong(prs.rs.getLong(2));
 	LocalDateTime ultimoPedido = GNJoda.sqlLocalDateTime(prs.rs
 		.getString(3));
 	prs.rs.close();
@@ -291,8 +291,8 @@ public class Database extends MySQL {
 	    final int idmotivo = p.rs.getInt("idmotivo");
 	    final float quantidadeInicial = p.rs.getFloat("quantidade_inicial");
 	    final float variacao = p.rs.getFloat("variacao");
-	    final LocalDateTime datahora = GNJoda
-		    .sqlLocalDateTime(p.rs.getString("datahora"));
+	    final LocalDateTime datahora = GNJoda.sqlLocalDateTime(p.rs
+		    .getString("datahora"));
 	    final String observacoes = p.rs.getString("observacoes");
 	    res[i++] = new InventoryLogEntry(id, iditem, idusuario, tipo,
 		    idmotivo, quantidadeInicial, variacao, datahora,
@@ -312,8 +312,8 @@ public class Database extends MySQL {
 	for (int i = 0; i < dm.length; i++) {
 	    p.rs.next();
 	    final int id = p.rs.getInt("id");
-	    final LocalDateTime datahora = GNJoda
-		    .sqlLocalDateTime(p.rs.getString("datahora"));
+	    final LocalDateTime datahora = GNJoda.sqlLocalDateTime(p.rs
+		    .getString("datahora"));
 	    final long uptime = p.rs.getLong("uptime");
 	    final boolean hasScreen = p.rs.getString("screen").equals("Y");
 	    dm[i] = new DispositivoMonitor(id, datahora, uptime, hasScreen);
@@ -386,8 +386,8 @@ public class Database extends MySQL {
 	    prs.close();
 	    return null;
 	}
-	final LocalDateTime cadastradoEm = GNJoda
-		.sqlLocalDateTime(prs.rs.getString("datahora_cadastrado"));
+	final LocalDateTime cadastradoEm = GNJoda.sqlLocalDateTime(prs.rs
+		.getString("datahora_cadastrado"));
 	prs.close();
 	// fetch data
 	final FuncionarioPessoal pessoal = getFuncionarioPessoal(idfuncionario);
@@ -468,8 +468,8 @@ public class Database extends MySQL {
 		.getString("admissao"));
 	final String cargo = rs.getString("cargo");
 	final String funcao = rs.getString("funcao");
-	final Dinheiro salario = new Dinheiro(rs.getLong("salario"));
-	final Dinheiro extra = new Dinheiro(rs.getLong("extra"));
+	final Money salario = Money.fromLong(rs.getLong("salario"));
+	final Money extra = Money.fromLong(rs.getLong("extra"));
 	final String extraObservacoes = rs.getString("extra_observacoes");
 	final String pagamentoBanco = rs.getString("pagamento_banco");
 	final int pagamentoAgencia = rs.getInt("pagamento_agencia");
@@ -558,9 +558,9 @@ public class Database extends MySQL {
 	int i = 0;
 	while (r.rs.next()) {
 	    final int idendereco = r.rs.getInt("idendereco");
-	    final Dinheiro consumo = new Dinheiro(r.rs.getLong("valor"));
-	    final LocalDateTime datahora = GNJoda
-		    .sqlLocalDateTime(r.rs.getString("datahora"));
+	    final Money consumo = Money.fromLong(r.rs.getLong("valor"));
+	    final LocalDateTime datahora = GNJoda.sqlLocalDateTime(r.rs
+		    .getString("datahora"));
 	    pedidos[i++] = new ResumoPedido(idendereco, consumo, datahora);
 	}
 	r.close();

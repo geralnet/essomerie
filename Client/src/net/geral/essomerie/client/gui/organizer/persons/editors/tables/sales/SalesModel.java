@@ -2,8 +2,8 @@ package net.geral.essomerie.client.gui.organizer.persons.editors.tables.sales;
 
 import java.util.ArrayList;
 
-import net.geral.essomerie._shared.Dinheiro;
 import net.geral.essomerie.client.resources.S;
+import net.geral.essomerie.shared.money.Money;
 import net.geral.essomerie.shared.person.PersonSale;
 import net.geral.lib.table.GNTableModel;
 
@@ -29,7 +29,7 @@ public class SalesModel extends GNTableModel<PersonSale> {
             DateTimeFormat.forPattern(S.FORMAT_DATETIME_SIMPLE_NO_SECONDS.s()));
         return s.withWhen(when);
       case 1:
-        final Dinheiro price = new Dinheiro(aValue.toString());
+        final Money price = Money.fromString(aValue.toString());
         return s.withPrice(price);
       case 2:
         return s.withComments(aValue.toString());

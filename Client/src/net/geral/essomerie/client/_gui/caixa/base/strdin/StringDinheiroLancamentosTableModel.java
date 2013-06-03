@@ -6,45 +6,53 @@ import net.geral.essomerie.client._gui.caixa.base.BaseLancamentos;
 import net.geral.essomerie.client._gui.caixa.base.BaseLancamentosTableModel;
 import net.geral.essomerie.client._gui.caixa.base.editor.DescricaoTableCellEditor;
 import net.geral.essomerie.client._gui.caixa.base.editor.DinheiroTableCellEditor;
-import net.geral.essomerie._shared.Dinheiro;
+import net.geral.essomerie.shared.money.Money;
 
-public class StringDinheiroLancamentosTableModel extends BaseLancamentosTableModel {
-	private static final long				serialVersionUID	= 1L;
+public class StringDinheiroLancamentosTableModel extends
+    BaseLancamentosTableModel {
+  private static final long              serialVersionUID = 1L;
 
-	private static final String[]			COLUNAS				= { "Descrição", "Valor" };
-	private static final int[]				TAMANHOS			= { 0, 80 };
-	private static final Class<?>[]			TIPOS				= { String.class, Dinheiro.class };
+  private static final String[]          COLUNAS          = { "Descrição",
+      "Valor"                                            };
+  private static final int[]             TAMANHOS         = { 0, 80 };
+  private static final Class<?>[]        TIPOS            = { String.class,
+      Money.class                                        };
 
-	private final DinheiroTableCellEditor	dinheiroEditor		= new DinheiroTableCellEditor(false, true);
-	private final DescricaoTableCellEditor	descricaoEditor		= new DescricaoTableCellEditor();
+  private final DinheiroTableCellEditor  dinheiroEditor   = new DinheiroTableCellEditor(
+                                                              false, true,
+                                                              true, true);
+  private final DescricaoTableCellEditor descricaoEditor  = new DescricaoTableCellEditor();
 
-	public StringDinheiroLancamentosTableModel(final BaseLancamentos lancamentos) {
-		super(lancamentos, COLUNAS, TAMANHOS);
-	}
+  public StringDinheiroLancamentosTableModel(final BaseLancamentos lancamentos) {
+    super(lancamentos, COLUNAS, TAMANHOS);
+  }
 
-	@Override
-	public TableCellEditor getCellEditor(final int row, final int column) {
-		if (column == 0) { return descricaoEditor; }
-		return dinheiroEditor;
-	}
+  @Override
+  public TableCellEditor getCellEditor(final int row, final int column) {
+    if (column == 0) {
+      return descricaoEditor;
+    }
+    return dinheiroEditor;
+  }
 
-	@Override
-	public Class<?> getColumnClass(final int columnIndex) {
-		return TIPOS[columnIndex];
-	}
+  @Override
+  public Class<?> getColumnClass(final int columnIndex) {
+    return TIPOS[columnIndex];
+  }
 
-	@Override
-	public Object getValueAt(final int row, final int column) {
-		return lancamentos.get(column, row);
-	}
+  @Override
+  public Object getValueAt(final int row, final int column) {
+    return lancamentos.get(column, row);
+  }
 
-	@Override
-	public boolean isCellEditable(final int rowIndex, final int columnIndex) {
-		return true;
-	}
+  @Override
+  public boolean isCellEditable(final int rowIndex, final int columnIndex) {
+    return true;
+  }
 
-	@Override
-	public void setValueAt(final Object aValue, final int rowIndex, final int columnIndex) {
-		lancamentos.set(rowIndex, columnIndex, aValue);
-	}
+  @Override
+  public void setValueAt(final Object aValue, final int rowIndex,
+      final int columnIndex) {
+    lancamentos.set(rowIndex, columnIndex, aValue);
+  }
 }

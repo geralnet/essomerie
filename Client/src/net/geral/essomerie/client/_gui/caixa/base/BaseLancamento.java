@@ -2,17 +2,17 @@ package net.geral.essomerie.client._gui.caixa.base;
 
 import java.security.InvalidParameterException;
 
-import net.geral.essomerie._shared.Dinheiro;
+import net.geral.essomerie.shared.money.Money;
 import net.geral.lib.strings.GNStrings;
 
 public abstract class BaseLancamento {
   public static final String SEPARATOR = "\t";
 
-  public static Dinheiro loadDinheiro(final String s) {
+  public static Money loadDinheiro(final String s) {
     if (s == null) {
       return null;
     }
-    return new Dinheiro(s);
+    return Money.fromString(s);
   }
 
   public static Integer loadInteger(final String s) {
@@ -51,21 +51,21 @@ public abstract class BaseLancamento {
 
   protected abstract int getColumnCount();
 
-  public Dinheiro getDinheiroOrNull(final int i) {
+  public Money getDinheiroOrNull(final int i) {
     if (campos[i] == null) {
       return null;
     }
-    if (campos[i] instanceof Dinheiro) {
-      return (Dinheiro) campos[i];
+    if (campos[i] instanceof Money) {
+      return (Money) campos[i];
     }
     throw new InvalidParameterException("Field " + i + " not Dinheiro: "
         + campos[i].getClass() + "[" + campos[i].toString() + "]");
   }
 
-  public Dinheiro getDinheiroOrZero(final int i) {
-    final Dinheiro d = getDinheiroOrNull(i);
+  public Money getDinheiroOrZero(final int i) {
+    final Money d = getDinheiroOrNull(i);
     if (d == null) {
-      return Dinheiro.ZERO;
+      return Money.zero();
     }
     return d;
   }

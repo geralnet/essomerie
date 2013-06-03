@@ -8,8 +8,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
 
-import net.geral.essomerie._shared.Dinheiro;
 import net.geral.essomerie.server.core.Configuration;
+import net.geral.essomerie.shared.money.Money;
 import net.geral.jodatime.GNJoda;
 
 import org.apache.log4j.Logger;
@@ -211,8 +211,7 @@ public class MySQL {
 	    p.close();
 	    throw new SQLException("Cannot fetch first row.");
 	}
-	final LocalDateTime dt = GNJoda.sqlLocalDateTime(p.rs
-		.getString(1));
+	final LocalDateTime dt = GNJoda.sqlLocalDateTime(p.rs.getString(1));
 	p.close();
 	return dt;
     }
@@ -255,8 +254,8 @@ public class MySQL {
 		ps.setFloat(i, ((Float) o).floatValue());
 	    } else if (o instanceof byte[]) {
 		ps.setBytes(i, (byte[]) o);
-	    } else if (o instanceof Dinheiro) {
-		ps.setString(i, ((Dinheiro) o).toSQL());
+	    } else if (o instanceof Money) {
+		ps.setString(i, ((Money) o).toSQL());
 	    } else if (o instanceof char[]) {
 		ps.setString(i, String.copyValueOf((char[]) o));
 	    } else if (o instanceof Enum<?>) {

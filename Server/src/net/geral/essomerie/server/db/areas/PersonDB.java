@@ -3,10 +3,10 @@ package net.geral.essomerie.server.db.areas;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import net.geral.essomerie._shared.Dinheiro;
 import net.geral.essomerie.server.db.Database;
 import net.geral.essomerie.server.db.DatabaseArea;
 import net.geral.essomerie.server.db.PreparedResultSet;
+import net.geral.essomerie.shared.money.Money;
 import net.geral.essomerie.shared.person.Address;
 import net.geral.essomerie.shared.person.Addresses;
 import net.geral.essomerie.shared.person.Person;
@@ -325,7 +325,7 @@ public class PersonDB extends DatabaseArea {
 	final ArrayList<PersonSale> sales = new ArrayList<>();
 	while (r.rs.next()) {
 	    final int id = r.rs.getInt("id");
-	    final Dinheiro price = new Dinheiro(r.rs.getLong("price"));
+	    final Money price = Money.fromLong(r.rs.getLong("price"));
 	    final LocalDateTime when = GNJoda.sqlLocalDateTime(r.rs
 		    .getString("when"));
 	    final String comments = r.rs.getString("comments");
@@ -554,7 +554,7 @@ public class PersonDB extends DatabaseArea {
 	while (p.rs.next()) {
 	    final int idsale = p.rs.getInt("id");
 	    final int idperson = p.rs.getInt("idperson");
-	    final Dinheiro price = new Dinheiro(p.rs.getLong("price"));
+	    final Money price = Money.fromLong(p.rs.getLong("price"));
 	    final LocalDateTime when = GNJoda.sqlLocalDateTime(p.rs
 		    .getString("when"));
 	    final String comments = p.rs.getString("comments");
@@ -577,7 +577,7 @@ public class PersonDB extends DatabaseArea {
 	try (PreparedResultSet p = db.select(sql, idsale)) {
 	    if (p.rs.next()) {
 		final int idperson = p.rs.getInt("idperson");
-		final Dinheiro price = new Dinheiro(p.rs.getLong("price"));
+		final Money price = Money.fromLong(p.rs.getLong("price"));
 		final LocalDateTime when = GNJoda.sqlLocalDateTime(p.rs
 			.getString("when"));
 		final String comments = p.rs.getString("comments");

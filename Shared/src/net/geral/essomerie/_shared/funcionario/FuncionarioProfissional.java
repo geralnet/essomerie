@@ -1,6 +1,6 @@
 package net.geral.essomerie._shared.funcionario;
 
-import net.geral.essomerie._shared.Dinheiro;
+import net.geral.essomerie.shared.money.Money;
 
 import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
@@ -13,8 +13,8 @@ public class FuncionarioProfissional {
 	public final LocalDate		admissao;
 	public final String			cargo;
 	public final String			funcao;
-	public final Dinheiro		salario;
-	public final Dinheiro		extra;
+	public final Money		salario;
+	public final Money		extra;
 	public final String			extraObservacoes;
 	public final String			pagamentoBanco;
 	public final int			pagamentoAgencia;
@@ -23,7 +23,7 @@ public class FuncionarioProfissional {
 
 	public FuncionarioProfissional(final int id, final int idfuncionario, final LocalDateTime alteradoEm,
 			final int alteradoPor, final LocalDate admissao, final String cargo, final String funcao,
-			final Dinheiro salario, final Dinheiro extra, final String extraObservacoes, final String pagamentoBanco,
+			final Money salario, final Money extra, final String extraObservacoes, final String pagamentoBanco,
 			final int pagamentoAgencia, final int pagamentoConta, final String responsabilidades) {
 
 		this.id = id;

@@ -26,8 +26,7 @@ import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import net.geral.essomerie._shared.Dinheiro;
-import net.geral.essomerie.client._gui.shared.textfield.DinheiroTextField;
+import net.geral.essomerie.client._gui.shared.textfield.MoneyTextField;
 import net.geral.essomerie.client.core.Client;
 import net.geral.essomerie.client.core.events.Events;
 import net.geral.essomerie.client.core.events.listeners.PersonsListener;
@@ -36,6 +35,7 @@ import net.geral.essomerie.client.gui.main.TabPanel;
 import net.geral.essomerie.client.gui.shared.tables.addresses.AddressesTable;
 import net.geral.essomerie.client.gui.tools.salesregister.log.LogTable;
 import net.geral.essomerie.client.resources.S;
+import net.geral.essomerie.shared.money.Money;
 import net.geral.essomerie.shared.person.Address;
 import net.geral.essomerie.shared.person.Addresses;
 import net.geral.essomerie.shared.person.Person;
@@ -66,7 +66,7 @@ public class ToolsSalesRegister extends TabPanel implements PersonsListener,
   private final JTextField           txtCustomTime;
   private final JTextField           txtId;
   private final JTextField           txtDateTime;
-  private final DinheiroTextField    txtPrice;
+  private final MoneyTextField       txtPrice;
   private final JTextField           txtComments;
   private final JTextField           txtPerson;
   private final AddressesTable       addressTable;
@@ -180,7 +180,8 @@ public class ToolsSalesRegister extends TabPanel implements PersonsListener,
     gbc_txtId.gridy = 1;
     bottomCenterL1.add(txtId, gbc_txtId);
 
-    txtPrice = new DinheiroTextField(false, false);
+    txtPrice = new MoneyTextField(false, false, true, false);
+    txtPrice.setErrorFieldSetter(efs);
     txtPrice.setColumns(10);
     txtPrice.setHorizontalAlignment(SwingConstants.TRAILING);
     final GridBagConstraints gbc_txtPrice = new GridBagConstraints();
@@ -403,9 +404,7 @@ public class ToolsSalesRegister extends TabPanel implements PersonsListener,
     });
     panelButtons.add(btnClear);
 
-    changedId();
-    changedComments();
-    changedDateXorTime(true, false);
+    initialChanges();
   }
 
   private void changedAddress() {
@@ -559,6 +558,12 @@ public class ToolsSalesRegister extends TabPanel implements PersonsListener,
     return S.TOOLS_SALESREGISTER.s();
   }
 
+  private void initialChanges() {
+    changedId();
+    changedComments();
+    changedDateXorTime(true, false);
+  }
+
   @Override
   public void personsCacheReloaded(final boolean fullData) {
     // force reload
@@ -692,7 +697,7 @@ public class ToolsSalesRegister extends TabPanel implements PersonsListener,
       return false;
     }
     // price
-    final Dinheiro d = txtPrice.getValue(true);
+    final Money d = txtPrice.getValue(true);
     if ((d == null) || d.isNonPositive()) {
       return false;
     }

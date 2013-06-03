@@ -46,6 +46,7 @@ public class PersonsCache {
     if (!(p instanceof PersonData)) {
       // fetch full data
       try {
+        // TODO if ID already requested, do not send more requests
         Client.connection().persons().requestPersonData(id);
       } catch (final IOException e) {
         logger.warn(e, e);

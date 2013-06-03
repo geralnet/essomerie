@@ -1,6 +1,6 @@
 package net.geral.essomerie.shared.person;
 
-import net.geral.essomerie._shared.Dinheiro;
+import net.geral.essomerie.shared.money.Money;
 
 import org.joda.time.LocalDateTime;
 
@@ -11,12 +11,12 @@ public class PersonSaleExtended extends PersonSale {
   private final LocalDateTime registered;
 
   public PersonSaleExtended() {
-    this(0, 0, LocalDateTime.now(), 0, LocalDateTime.now(), new Dinheiro(), "");
+    this(0, 0, LocalDateTime.now(), 0, LocalDateTime.now(), Money.zero(), "");
   }
 
   public PersonSaleExtended(final int iduser, final int idperson,
       final LocalDateTime registered, final int idsale,
-      final LocalDateTime when, final Dinheiro price, final String comments) {
+      final LocalDateTime when, final Money price, final String comments) {
     super(idsale, when, price, comments);
     this.iduser = iduser;
     this.idperson = idperson;
