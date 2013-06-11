@@ -33,7 +33,7 @@ import net.geral.essomerie.server.db.areas.UsersDB;
 import net.geral.essomerie.shared.money.Money;
 import net.geral.essomerie.shared.person.Address;
 import net.geral.essomerie.shared.person.Telephone;
-import net.geral.jodatime.GNJoda;
+import net.geral.lib.jodatime.GNJoda;
 
 import org.apache.log4j.Logger;
 import org.joda.time.LocalDate;
@@ -257,8 +257,8 @@ public class Database extends MySQL {
 	prs.rs.next(); // go to first result
 	final int numeroPedidos = prs.rs.getInt(1);
 	final Money consumoPedidos = Money.fromLong(prs.rs.getLong(2));
-	LocalDateTime ultimoPedido = GNJoda.sqlLocalDateTime(prs.rs
-		.getString(3));
+	LocalDateTime ultimoPedido = GNJoda.sqlLocalDateTime(
+		prs.rs.getString(3), true);
 	prs.rs.close();
 
 	if (ultimoPedido == null) {
@@ -291,8 +291,8 @@ public class Database extends MySQL {
 	    final int idmotivo = p.rs.getInt("idmotivo");
 	    final float quantidadeInicial = p.rs.getFloat("quantidade_inicial");
 	    final float variacao = p.rs.getFloat("variacao");
-	    final LocalDateTime datahora = GNJoda.sqlLocalDateTime(p.rs
-		    .getString("datahora"));
+	    final LocalDateTime datahora = GNJoda.sqlLocalDateTime(
+		    p.rs.getString("datahora"), false);
 	    final String observacoes = p.rs.getString("observacoes");
 	    res[i++] = new InventoryLogEntry(id, iditem, idusuario, tipo,
 		    idmotivo, quantidadeInicial, variacao, datahora,
@@ -312,8 +312,8 @@ public class Database extends MySQL {
 	for (int i = 0; i < dm.length; i++) {
 	    p.rs.next();
 	    final int id = p.rs.getInt("id");
-	    final LocalDateTime datahora = GNJoda.sqlLocalDateTime(p.rs
-		    .getString("datahora"));
+	    final LocalDateTime datahora = GNJoda.sqlLocalDateTime(
+		    p.rs.getString("datahora"), false);
 	    final long uptime = p.rs.getLong("uptime");
 	    final boolean hasScreen = p.rs.getString("screen").equals("Y");
 	    dm[i] = new DispositivoMonitor(id, datahora, uptime, hasScreen);
@@ -386,8 +386,8 @@ public class Database extends MySQL {
 	    prs.close();
 	    return null;
 	}
-	final LocalDateTime cadastradoEm = GNJoda.sqlLocalDateTime(prs.rs
-		.getString("datahora_cadastrado"));
+	final LocalDateTime cadastradoEm = GNJoda.sqlLocalDateTime(
+		prs.rs.getString("datahora_cadastrado"), false);
 	prs.close();
 	// fetch data
 	final FuncionarioPessoal pessoal = getFuncionarioPessoal(idfuncionario);
@@ -461,11 +461,11 @@ public class Database extends MySQL {
 	}
 	final ResultSet rs = p.rs;
 	final int id = rs.getInt("id");
-	final LocalDateTime alteradoEm = GNJoda.sqlLocalDateTime(rs
-		.getString("datahora_alterado"));
+	final LocalDateTime alteradoEm = GNJoda.sqlLocalDateTime(
+		rs.getString("datahora_alterado"), false);
 	final int alteradoPor = rs.getInt("alterado_por");
-	final LocalDate admissao = GNJoda.parseLocalDate(rs
-		.getString("admissao"));
+	final LocalDate admissao = GNJoda.sqlLocalDate(
+		rs.getString("admissao"), true);
 	final String cargo = rs.getString("cargo");
 	final String funcao = rs.getString("funcao");
 	final Money salario = Money.fromLong(rs.getLong("salario"));
@@ -559,8 +559,8 @@ public class Database extends MySQL {
 	while (r.rs.next()) {
 	    final int idendereco = r.rs.getInt("idendereco");
 	    final Money consumo = Money.fromLong(r.rs.getLong("valor"));
-	    final LocalDateTime datahora = GNJoda.sqlLocalDateTime(r.rs
-		    .getString("datahora"));
+	    final LocalDateTime datahora = GNJoda.sqlLocalDateTime(
+		    r.rs.getString("datahora"), false);
 	    pedidos[i++] = new ResumoPedido(idendereco, consumo, datahora);
 	}
 	r.close();
@@ -638,8 +638,8 @@ public class Database extends MySQL {
 	    final int idmotivo = rs.getInt("idmotivo");
 	    final float quantidadeInicial = rs.getFloat("quantidade_inicial");
 	    final float variacao = rs.getFloat("variacao");
-	    final LocalDateTime datahora = GNJoda.sqlLocalDateTime(rs
-		    .getString("datahora"));
+	    final LocalDateTime datahora = GNJoda.sqlLocalDateTime(
+		    rs.getString("datahora"), false);
 	    final String observacoes = rs.getString("observacoes");
 	    final InventoryLogEntry hr = new InventoryLogEntry(id, iditem,
 		    idusuario, tipo, idmotivo, quantidadeInicial, variacao,

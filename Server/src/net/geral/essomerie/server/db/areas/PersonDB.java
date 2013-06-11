@@ -21,7 +21,7 @@ import net.geral.essomerie.shared.person.PersonSales;
 import net.geral.essomerie.shared.person.PersonType;
 import net.geral.essomerie.shared.person.Telephone;
 import net.geral.essomerie.shared.person.Telephones;
-import net.geral.jodatime.GNJoda;
+import net.geral.lib.jodatime.GNJoda;
 
 import org.apache.log4j.Logger;
 import org.joda.time.LocalDateTime;
@@ -297,8 +297,8 @@ public class PersonDB extends DatabaseArea {
 	    p.close();
 	    return null;
 	}
-	final LocalDateTime createdWhen = GNJoda.sqlLocalDateTime(p.rs
-		.getString("updated_when"));
+	final LocalDateTime createdWhen = GNJoda.sqlLocalDateTime(
+		p.rs.getString("updated_when"), false);
 	final int createdBy = p.rs.getInt("updated_by");
 	p.close();
 
@@ -308,8 +308,8 @@ public class PersonDB extends DatabaseArea {
 	    p.close();
 	    return null;
 	}
-	final LocalDateTime updatedWhen = GNJoda.sqlLocalDateTime(p.rs
-		.getString("updated_when"));
+	final LocalDateTime updatedWhen = GNJoda.sqlLocalDateTime(
+		p.rs.getString("updated_when"), false);
 	final int updatedBy = p.rs.getInt("updated_by");
 	p.close();
 
@@ -326,8 +326,8 @@ public class PersonDB extends DatabaseArea {
 	while (r.rs.next()) {
 	    final int id = r.rs.getInt("id");
 	    final Money price = Money.fromLong(r.rs.getLong("price"));
-	    final LocalDateTime when = GNJoda.sqlLocalDateTime(r.rs
-		    .getString("when"));
+	    final LocalDateTime when = GNJoda.sqlLocalDateTime(
+		    r.rs.getString("when"), false);
 	    final String comments = r.rs.getString("comments");
 	    final PersonSale s = new PersonSale(id, when, price, comments);
 	    sales.add(s);
@@ -555,12 +555,12 @@ public class PersonDB extends DatabaseArea {
 	    final int idsale = p.rs.getInt("id");
 	    final int idperson = p.rs.getInt("idperson");
 	    final Money price = Money.fromLong(p.rs.getLong("price"));
-	    final LocalDateTime when = GNJoda.sqlLocalDateTime(p.rs
-		    .getString("when"));
+	    final LocalDateTime when = GNJoda.sqlLocalDateTime(
+		    p.rs.getString("when"), false);
 	    final String comments = p.rs.getString("comments");
 	    final int iduser = p.rs.getInt("updated_by");
-	    final LocalDateTime registered = GNJoda.sqlLocalDateTime(p.rs
-		    .getString("updated_when"));
+	    final LocalDateTime registered = GNJoda.sqlLocalDateTime(
+		    p.rs.getString("updated_when"), false);
 	    sales[i++] = new PersonSaleExtended(iduser, idperson, registered,
 		    idsale, when, price, comments);
 	}
@@ -578,12 +578,12 @@ public class PersonDB extends DatabaseArea {
 	    if (p.rs.next()) {
 		final int idperson = p.rs.getInt("idperson");
 		final Money price = Money.fromLong(p.rs.getLong("price"));
-		final LocalDateTime when = GNJoda.sqlLocalDateTime(p.rs
-			.getString("when"));
+		final LocalDateTime when = GNJoda.sqlLocalDateTime(
+			p.rs.getString("when"), false);
 		final String comments = p.rs.getString("comments");
 		final int iduser = p.rs.getInt("updated_by");
-		final LocalDateTime registered = GNJoda.sqlLocalDateTime(p.rs
-			.getString("updated_when"));
+		final LocalDateTime registered = GNJoda.sqlLocalDateTime(
+			p.rs.getString("updated_when"), false);
 		return new PersonSaleExtended(iduser, idperson, registered,
 			idsale, when, price, comments);
 	    }

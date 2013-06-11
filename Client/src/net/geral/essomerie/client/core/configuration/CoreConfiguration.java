@@ -3,8 +3,8 @@ package net.geral.essomerie.client.core.configuration;
 import java.awt.Color;
 import java.awt.Dimension;
 
-import net.geral.configuration.ConfigurationBase;
 import net.geral.essomerie._shared.User;
+import net.geral.lib.configuration.ConfigurationBase;
 import net.geral.lib.table.GNTable;
 import net.geral.lib.table.GNTableColumnWidth;
 

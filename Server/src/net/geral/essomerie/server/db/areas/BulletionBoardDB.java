@@ -8,7 +8,7 @@ import net.geral.essomerie.server.db.DatabaseArea;
 import net.geral.essomerie.server.db.PreparedResultSet;
 import net.geral.essomerie.shared.bulletinboard.BulletinBoardEntry;
 import net.geral.essomerie.shared.bulletinboard.BulletinBoardTitle;
-import net.geral.jodatime.GNJoda;
+import net.geral.lib.jodatime.GNJoda;
 import net.geral.lib.strings._Conversor;
 
 import org.joda.time.LocalDateTime;
@@ -37,8 +37,8 @@ public class BulletionBoardDB extends DatabaseArea {
 	    final int id = rs.getInt("id");
 	    final String title = rs.getString("title");
 	    final byte[] contents = rs.getBytes("contents");
-	    final LocalDateTime createdWhen = GNJoda
-		    .sqlLocalDateTime(rs.getString("created_when"));
+	    final LocalDateTime createdWhen = GNJoda.sqlLocalDateTime(
+		    rs.getString("created_when"), false);
 	    final int createdBy = rs.getInt("created_by");
 	    bbe = new BulletinBoardEntry(id, title, contents, createdWhen,
 		    createdBy);

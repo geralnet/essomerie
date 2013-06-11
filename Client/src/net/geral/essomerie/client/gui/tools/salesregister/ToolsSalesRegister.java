@@ -42,11 +42,11 @@ import net.geral.essomerie.shared.person.Person;
 import net.geral.essomerie.shared.person.PersonData;
 import net.geral.essomerie.shared.person.PersonSale;
 import net.geral.essomerie.shared.person.PersonSaleExtended;
-import net.geral.jodatime.GNJoda;
 import net.geral.lib.actiondelay.ActionDelay;
 import net.geral.lib.actiondelay.ActionDelayListener;
 import net.geral.lib.datepicker.DatePickerListener;
 import net.geral.lib.datepicker.DatePickerPanel;
+import net.geral.lib.jodatime.GNJoda;
 import net.geral.lib.strings.GNStrings;
 import net.geral.lib.textfieds.ErrorFieldSetter;
 

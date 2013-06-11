@@ -6,8 +6,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
 
-import net.geral.configuration.ConfigurationBase;
 import net.geral.essomerie.client.core.Client;
+import net.geral.lib.configuration.ConfigurationBase;
 
 import org.apache.log4j.Logger;
 

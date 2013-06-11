@@ -42,7 +42,7 @@ public enum S {
   CALLERID_TITLE("Caller ID"),
   ERROR_INVALID_FIELD("A field contains invalid data."),
   ERROR_SAVING_FILE("Error saving file:"),
-  FORMAT_DATE_SIMPLE("dd/MM/yyyy"),
+  FORMAT_DATE_SIMPLE("dd/MM/yyyy"), // FIXME create DateTimeFormat field instead
   FORMAT_DATETIME_SIMPLE("dd/MM/yyyy HH:mm:ss"),
   FORMAT_DATETIME_SIMPLE_NO_SECONDS("dd/MM/yyyy HH:mm"),
   FORMAT_TIME_NO_SECONDS("HH:mm"),

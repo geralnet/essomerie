@@ -6,9 +6,10 @@ import java.awt.Font;
 import java.util.ArrayList;
 
 import net.geral.essomerie._shared.calendario.CalendarEvent;
-import net.geral.jodatime.GNJoda;
+import net.geral.essomerie.client.resources.S;
 
 import org.joda.time.LocalDate;
+import org.joda.time.format.DateTimeFormat;
 
 // TODO translate & check
 public class CalendarioPrint extends CRPrintDocument {
@@ -24,9 +25,11 @@ public class CalendarioPrint extends CRPrintDocument {
   @Override
   protected void printBody() {
     g.setFont(new Font("SansSerif", Font.PLAIN, 8));
-    String s = GNJoda.DMA.print(data) + " (" + data.getDayOfWeek() + ")"; // TODO
-                                                                                 // nome
-                                                                                 // semana
+    String s = data
+        .toString(DateTimeFormat.forPattern(S.FORMAT_DATE_SIMPLE.s()))
+        + " (" + data.getDayOfWeek() + ")"; // TODO
+                                            // nome
+                                            // semana
     centralizar(s, new Font("SansSerif", Font.BOLD, 10));
     s = (eventos.length > 1) ? "s" : "";
     centralizar(eventos.length + " evento" + s + ".");

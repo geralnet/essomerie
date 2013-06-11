@@ -1,6 +1,6 @@
 package net.geral.essomerie.server.core;
 
-import net.geral.configuration.ConfigurationBase;
+import net.geral.lib.configuration.ConfigurationBase;
 
 public class Configuration extends ConfigurationBase {
     /**

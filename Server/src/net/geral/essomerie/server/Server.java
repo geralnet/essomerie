@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Vector;
 
-import net.geral.configuration.ConfigurationException;
 import net.geral.essomerie._server.comm.ClientController;
 import net.geral.essomerie._shared.communication.Communication;
 import net.geral.essomerie._shared.communication.IMessageType;
@@ -19,6 +18,7 @@ import net.geral.essomerie.server.comm.Connection;
 import net.geral.essomerie.server.comm.Listener;
 import net.geral.essomerie.server.core.Configuration;
 import net.geral.essomerie.server.db.Database;
+import net.geral.lib.configuration.ConfigurationException;
 import net.geral.lib.strings.GNStrings;
 
 import org.apache.log4j.ConsoleAppender;

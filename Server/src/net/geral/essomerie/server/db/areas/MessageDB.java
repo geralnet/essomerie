@@ -4,12 +4,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import net.geral.essomerie._shared.mensagens.Message;
+import net.geral.essomerie._shared.mensagens.MessageStatus;
 import net.geral.essomerie.server.db.Database;
 import net.geral.essomerie.server.db.DatabaseArea;
 import net.geral.essomerie.server.db.PreparedResultSet;
-import net.geral.essomerie._shared.mensagens.Message;
-import net.geral.essomerie._shared.mensagens.MessageStatus;
-import net.geral.jodatime.GNJoda;
+import net.geral.lib.jodatime.GNJoda;
 
 import org.apache.log4j.Logger;
 
@@ -104,8 +104,8 @@ public class MessageDB extends DatabaseArea {
 	    msg.setFrom(rs.getInt("from"));
 	    msg.setTo(rs.getInt("to"));
 	    msg.setMessage(rs.getString("message"));
-	    msg.setSent(GNJoda.sqlLocalDateTime(rs
-		    .getString("sent_when")));
+	    msg.setSent(GNJoda.sqlLocalDateTime(rs.getString("sent_when"),
+		    false));
 	    final MessageStatus[] leituras = getStatus(idmessage);
 	    msg.setStatus(leituras);
 	}
@@ -126,9 +126,9 @@ public class MessageDB extends DatabaseArea {
 	int i = 0;
 	final ResultSet rs = p.rs;
 	while (rs.next()) {
-	    mls[i++] = new MessageStatus(rs.getInt("iduser"),
-		    GNJoda.sqlLocalDateTime(rs
-			    .getString("datetime_read")));
+	    mls[i++] = new MessageStatus(
+		    rs.getInt("iduser"),
+		    GNJoda.sqlLocalDateTime(rs.getString("datetime_read"), true));
 	}
 	p.close();
 
@@ -150,8 +150,8 @@ public class MessageDB extends DatabaseArea {
 	    msg.setFrom(rs.getInt("from"));
 	    msg.setTo(rs.getInt("to"));
 	    msg.setMessage(rs.getString("message"));
-	    msg.setSent(GNJoda.sqlLocalDateTime(rs
-		    .getString("sent_when")));
+	    msg.setSent(GNJoda.sqlLocalDateTime(rs.getString("sent_when"),
+		    false));
 	    final MessageStatus[] status = getStatus(rs.getInt("id"));
 	    msg.setStatus(status);
 	    msgs[i++] = msg;
