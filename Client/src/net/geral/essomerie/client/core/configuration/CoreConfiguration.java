@@ -219,4 +219,8 @@ public class CoreConfiguration extends ConfigurationBase {
   public boolean            ToolsSalesAutoAddressComment                        = true;
 
   public boolean            ToolsSalesCommentsRequired                          = true;
+
+  public String             DefaultTelephoneCountryCode                         = "";
+
+  public String             DefaultTelephoneAreaCode                            = "";
 }

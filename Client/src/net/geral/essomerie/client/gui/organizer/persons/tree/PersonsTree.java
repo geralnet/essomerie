@@ -42,7 +42,7 @@ public class PersonsTree extends JTree {
   }
 
   public void setSelected(final Person p) {
-    final TreePath path = getModel().getPathToPerson(p);
+    final TreePath path = (p == null) ? null : getModel().getPathToPerson(p);
     setSelectionPath(path);
     if (path != null) {
       scrollPathToVisible(path);

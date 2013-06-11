@@ -17,6 +17,7 @@ import net.geral.essomerie.client.core.configuration.CoreConfiguration;
 import net.geral.essomerie.client.core.configuration.Preferences;
 import net.geral.essomerie.client.resources.IMG;
 import net.geral.essomerie.client.resources.S;
+import net.geral.essomerie.shared.person.Telephone;
 import net.geral.lib.datepicker.DatePickerPanel;
 import net.geral.lib.filechooser.GNFileChooser;
 import net.geral.lib.strings.GNStrings;
@@ -251,6 +252,8 @@ public class Main {
     GNTableRenderer.setDefaultDeleteIcon(IMG.ICON__DELETE
         .icon(config.DeleteIconSize));
     GNFileChooser.setTextImagesOnly(S.GNFILECHOOSER_ONLYIMAGES.s());
+    Telephone.setDefaults(config.DefaultTelephoneCountryCode,
+        config.DefaultTelephoneAreaCode);
   }
 
   private static void showHelpAndExit() {
