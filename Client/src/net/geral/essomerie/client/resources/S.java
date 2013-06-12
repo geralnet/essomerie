@@ -53,7 +53,6 @@ public enum S {
   INVENTORY_TITLE("Inventory"),
   MENU_BULLETINBOARD("Bulletin Board"),
   MENU_BULLETINBOARD_ADD("Create New Entry..."),
-  MENU_DELIVERY_CUSTOMERS("Customers"),
   MENU_INVENTORY("Inventory"),
   MENU_INVENTORY_MANAGEMENT("Management"),
   MENU_ORGANIZER("Organizer"),

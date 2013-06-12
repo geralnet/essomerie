@@ -23,7 +23,6 @@ import net.geral.essomerie.client.core.events.listeners.CallerIdListener;
 import net.geral.essomerie.client.gui.bulletinboard.BulletinBoardEditorTabPanel;
 import net.geral.essomerie.client.gui.bulletinboard.BulletinBoardTabPanel;
 import net.geral.essomerie.client.gui.connection.ConnectionDialog;
-import net.geral.essomerie.client.gui.delivery.customer.DeliveryCustomerTabPanel;
 import net.geral.essomerie.client.gui.inventory.InventoryManagementTabPanel;
 import net.geral.essomerie.client.gui.messages.MessagesTabPanel;
 import net.geral.essomerie.client.gui.organizer.calendar.CalendarTabPanel;
@@ -235,9 +234,6 @@ public class MainWindow extends JFrame implements ActionListener,
     // openTab(OrganizerPersonsTabPanel.class); }
     if (S.MENU_INVENTORY_MANAGEMENT.name().equals(cmd)) {
       return openTab(InventoryManagementTabPanel.class);
-    }
-    if (S.MENU_DELIVERY_CUSTOMERS.name().equals(cmd)) {
-      return openTab(DeliveryCustomerTabPanel.class);
     }
     // if ("cardapio_editar".equals(cmd)) { return
     // openTab(CardapioEditorPanel.class); }

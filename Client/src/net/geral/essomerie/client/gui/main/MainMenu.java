@@ -117,11 +117,6 @@ public class MainMenu extends JMenuBar implements BulletionBoardListener {
     addItem(mBulletinBoard, S.MENU_BULLETINBOARD_ADD);
   }
 
-  private void createDelivery() {
-    final JMenu menu = createMenu("Delivery");
-    addItem(menu, S.MENU_DELIVERY_CUSTOMERS);
-  }
-
   private void createInventory() {
     final JMenu menu = createMenu(S.MENU_INVENTORY);
     addItem(menu, S.MENU_INVENTORY_MANAGEMENT);
