@@ -3,6 +3,7 @@ package net.geral.essomerie._shared.communication;
 import net.geral.essomerie._shared.communication.types.BulletinBoardMessageType;
 import net.geral.essomerie._shared.communication.types.CalendarMessageType;
 import net.geral.essomerie._shared.communication.types.CallerIdMessageType;
+import net.geral.essomerie._shared.communication.types.CatalogMessageType;
 import net.geral.essomerie._shared.communication.types.InventoryMessageType;
 import net.geral.essomerie._shared.communication.types.MessagesMessageType;
 import net.geral.essomerie._shared.communication.types.PersonsMessageType;
@@ -24,7 +25,8 @@ public enum MessageSubSystem {
   Products,
   Users,
   CallerId,
-  Sales;
+  Sales,
+  Catalog;
 
   public static IMessageType[] getMessages(final MessageSubSystem mss) {
     switch (mss) {
@@ -46,6 +48,8 @@ public enum MessageSubSystem {
         return UsersMessageType.values();
       case Sales:
         return SalesMessageType.values();
+      case Catalog:
+        return CatalogMessageType.values();
       case Custommers:
       case Delivery:
       case Employees:

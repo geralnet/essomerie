@@ -3,6 +3,7 @@ package net.geral.essomerie.client.core.events;
 import net.geral.essomerie.client.core.events.handlers.BulletinBoardEventHandler;
 import net.geral.essomerie.client.core.events.handlers.CalendarEventHandler;
 import net.geral.essomerie.client.core.events.handlers.CallerIdEventHandler;
+import net.geral.essomerie.client.core.events.handlers.CatalogEventHandler;
 import net.geral.essomerie.client.core.events.handlers.CommConfirmationEventHandler;
 import net.geral.essomerie.client.core.events.handlers.InventoryEventHandler;
 import net.geral.essomerie.client.core.events.handlers.MessagesEventHandler;
@@ -21,7 +22,8 @@ public class Events {
   private static final UsersEventHandler            users         = new UsersEventHandler();
   private static final CallerIdEventHandler         callerid      = new CallerIdEventHandler();
   private static final CommConfirmationEventHandler comm          = new CommConfirmationEventHandler();
-  private static SalesEventHandler                  sales         = new SalesEventHandler();
+  private static final SalesEventHandler            sales         = new SalesEventHandler();
+  private static final CatalogEventHandler          catalog       = new CatalogEventHandler();
 
   public static BulletinBoardEventHandler bulletinBoard() {
     return bulletinBoard;
@@ -33,6 +35,10 @@ public class Events {
 
   public static CallerIdEventHandler callerid() {
     return callerid;
+  }
+
+  public static CatalogEventHandler catalog() {
+    return catalog;
   }
 
   public static CommConfirmationEventHandler comm() {

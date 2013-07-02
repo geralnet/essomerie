@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import net.geral.essomerie.client.core.Client;
 import net.geral.essomerie.client.core.cache.caches.BulletinBoardCache;
+import net.geral.essomerie.client.core.cache.caches.CatalogCache;
 import net.geral.essomerie.client.core.cache.caches.MessagesCache;
 import net.geral.essomerie.client.core.cache.caches.PersonsCache;
 import net.geral.essomerie.client.core.cache.caches.SalesCache;
@@ -20,9 +21,14 @@ public class Cache {
   private final PersonsCache       persons       = new PersonsCache();
   private final UsersCache         users         = new UsersCache();
   private final SalesCache         sales         = new SalesCache();
+  private final CatalogCache       catalog       = new CatalogCache();
 
   public BulletinBoardCache bulletinBoard() {
     return bulletinBoard;
+  }
+
+  public CatalogCache catalog() {
+    return catalog;
   }
 
   public void makeInicialRequests() {

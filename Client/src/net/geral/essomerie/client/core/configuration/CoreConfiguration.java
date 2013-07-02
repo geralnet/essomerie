@@ -223,4 +223,20 @@ public class CoreConfiguration extends ConfigurationBase {
   public String             DefaultTelephoneCountryCode                         = "";
 
   public String             DefaultTelephoneAreaCode                            = "";
+
+  public GNTableColumnWidth TableColumnWidth_Catalog_GroupTitle_Language        = null;
+
+  public GNTableColumnWidth TableColumnWidth_Catalog_GroupTitle_Title           = null;
+
+  public GNTableColumnWidth TableColumnWidth_Catalog_GroupTitle_Subtitle        = null;
+
+  public GNTableColumnWidth TableColumnWidth_Catalog_ItemTitle_Language         = null;
+
+  public GNTableColumnWidth TableColumnWidth_Catalog_ItemTitle_Title            = null;
+
+  public GNTableColumnWidth TableColumnWidth_Catalog_ItemTitle_Description      = null;
+
+  public GNTableColumnWidth TableColumnWidth_Catalog_ItemPrice_Code             = null;
+
+  public GNTableColumnWidth TableColumnWidth_Catalog_ItemPrice_Price            = null;
 }

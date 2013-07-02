@@ -3,13 +3,14 @@ package net.geral.essomerie.shared.money;
 import java.io.Serializable;
 
 public class Money implements Serializable, Comparable<Money> {
-  private static final long  serialVersionUID   = 1L;
+  private static final long   serialVersionUID            = 1L;
 
-  private static MoneyType[] types              = null;
-  private static char        decimalSeparator   = ',';
-  private static char        thousandsSeparator = '.';
+  private static MoneyType[]  types                       = null;
+  private static char         decimalSeparator            = ',';
+  private static char         thousandsSeparator          = '.';
 
-  private static final Money zero               = new Money(0L);
+  private static final Money  zero                        = new Money(0L);
+  private static final String SQL_REGEX_DECIMAL_SEPARATOR = "\\.";
 
   private static MoneyType[] createDefaultStandardTypes() {
     return new MoneyType[] { new MoneyType("$100", 10000),
@@ -27,6 +28,30 @@ public class Money implements Serializable, Comparable<Money> {
 
   public static Money fromLong(final long value) {
     return new Money(value);
+  }
+
+  public static Money fromSQL(final String s) {
+    final String[] parts = s.split(SQL_REGEX_DECIMAL_SEPARATOR, 2);
+    final long integer = Long.parseLong(parts[0]);
+    byte decimal = 0;
+    if (parts.length == 2) {
+      String sDecimal = parts[1];
+      switch (sDecimal.length()) {
+        case 0:
+          sDecimal = "0";
+          break;
+        case 1:
+          sDecimal = sDecimal + "0";
+          break;
+        case 2:
+          break;
+        default:
+          sDecimal = sDecimal.substring(0, 2);
+          break;
+      }
+      decimal = Byte.parseByte(sDecimal);
+    }
+    return new Money((integer * 100) + decimal);
   }
 
   public static Money fromString(String s) {
@@ -84,10 +109,11 @@ public class Money implements Serializable, Comparable<Money> {
   }
 
   private final long value;
+
   private String     toStringCache = null;
 
-  private Money(final long centavos) {
-    this.value = centavos;
+  private Money(final long l) {
+    this.value = l;
   }
 
   public Money add(final Money d) {
@@ -104,12 +130,6 @@ public class Money implements Serializable, Comparable<Money> {
       return null;
     }
     return new Money(value / by);
-  }
-
-  public Money fromSQL(final String s) {
-    // TODO assume format is like #.## (with signal?)
-    // no just stripe invalid chars and use long
-    return fromString(s);
   }
 
   public double getDouble() {

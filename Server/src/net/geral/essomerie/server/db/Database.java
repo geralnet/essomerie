@@ -26,6 +26,7 @@ import net.geral.essomerie._shared.pedido.ResumoPedido;
 import net.geral.essomerie.server.core.Configuration;
 import net.geral.essomerie.server.db.areas.BulletionBoardDB;
 import net.geral.essomerie.server.db.areas.CalendarDB;
+import net.geral.essomerie.server.db.areas.CatalogDB;
 import net.geral.essomerie.server.db.areas.InventoryDB;
 import net.geral.essomerie.server.db.areas.MessageDB;
 import net.geral.essomerie.server.db.areas.PersonDB;
@@ -52,6 +53,7 @@ public class Database extends MySQL {
     private final PersonDB person = new PersonDB(this);
     private final MessageDB message = new MessageDB(this);
     private final UsersDB users = new UsersDB(this);
+    private final CatalogDB catalog = new CatalogDB(this);
 
     public Database() {
 	super();
@@ -136,6 +138,10 @@ public class Database extends MySQL {
 
     public CalendarDB calendar() {
 	return calendar;
+    }
+
+    public CatalogDB catalog() {
+	return catalog;
     }
 
     @Override

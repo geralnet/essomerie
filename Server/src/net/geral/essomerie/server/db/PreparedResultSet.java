@@ -15,6 +15,10 @@ public class PreparedResultSet implements AutoCloseable {
     }
 
     @Override
+    @Deprecated
+    /**
+     * Use 'try (...) { ... }' instead of opening/closing directly.
+     */
     public void close() throws SQLException {
 	preparedStatement.close();
     }

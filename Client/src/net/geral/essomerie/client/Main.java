@@ -17,6 +17,8 @@ import net.geral.essomerie.client.core.configuration.CoreConfiguration;
 import net.geral.essomerie.client.core.configuration.Preferences;
 import net.geral.essomerie.client.resources.IMG;
 import net.geral.essomerie.client.resources.S;
+import net.geral.essomerie.shared.catalog.CatalogGroup;
+import net.geral.essomerie.shared.catalog.CatalogItem;
 import net.geral.essomerie.shared.person.Telephone;
 import net.geral.lib.datepicker.DatePickerPanel;
 import net.geral.lib.filechooser.GNFileChooser;
@@ -254,6 +256,8 @@ public class Main {
     GNFileChooser.setTextImagesOnly(S.GNFILECHOOSER_ONLYIMAGES.s());
     Telephone.setDefaults(config.DefaultTelephoneCountryCode,
         config.DefaultTelephoneAreaCode);
+    CatalogGroup.setDefaultTitle(S.ORGANIZER_CATALOG_GROUP_DEFAULT_TITLE.s());
+    CatalogItem.setDefaultTitle(S.ORGANIZER_CATALOG_ITEM_DEFAULT_TITLE.s());
   }
 
   private static void showHelpAndExit() {

@@ -61,8 +61,9 @@ public class Server {
 	for (final Connection c : cs) {
 	    try {
 		c.comm().send(md);
-	    } catch (final Exception e) { // ensure one exception will not
-					  // prevent broadcast to continue
+	    } catch (final Exception e) {
+		// ensure one exception will not
+		// prevent broadcast to continue
 		logger.warn("Could not broadcast (" + md + ") to: " + c, e);
 	    }
 	}

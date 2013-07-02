@@ -12,6 +12,7 @@ import net.geral.essomerie._shared.exceptions.DataCorruptedException;
 import net.geral.essomerie.client.communication.controllers.BulletinBoardController;
 import net.geral.essomerie.client.communication.controllers.CalendarController;
 import net.geral.essomerie.client.communication.controllers.CallerIdController;
+import net.geral.essomerie.client.communication.controllers.CatalogController;
 import net.geral.essomerie.client.communication.controllers.InventoryController;
 import net.geral.essomerie.client.communication.controllers.MessagesController;
 import net.geral.essomerie.client.communication.controllers.PersonsController;
@@ -64,6 +65,8 @@ public class Connection extends Thread implements ICommunication {
                                                                   this);
   private final SalesController         sales                 = new SalesController(
                                                                   this);
+  private final CatalogController       catalog               = new CatalogController(
+                                                                  this);
 
   public Connection() {
     running = false;
@@ -77,6 +80,10 @@ public class Connection extends Thread implements ICommunication {
 
   public CalendarController calendar() {
     return calendar;
+  }
+
+  public CatalogController catalog() {
+    return catalog;
   }
 
   public void close() {
@@ -136,6 +143,9 @@ public class Connection extends Thread implements ICommunication {
         break;
       case Sales:
         sales.process(md);
+        break;
+      case Catalog:
+        catalog.process(md);
         break;
       default:
         logger.warn("Invalid subsystem: " + md.getSubSystem());
