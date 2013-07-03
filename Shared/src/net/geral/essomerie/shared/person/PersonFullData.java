@@ -12,7 +12,7 @@ public class PersonFullData implements Serializable {
   private final PersonData[]                                 persons;
   private final Telephone[]                                  telephones;
   private final Address[]                                    addresses;
-  private final PersonDocument[]                             documents;
+  // private final PersonDocument[] documents;
 
   private transient Hashtable<Integer, ArrayList<Telephone>> id2telephones    = null;
   private transient Hashtable<Integer, ArrayList<Address>>   id2addresses     = null;
@@ -23,7 +23,7 @@ public class PersonFullData implements Serializable {
     this.persons = persons;
     this.telephones = telephones;
     this.addresses = addresses;
-    this.documents = documents;
+    // this.documents = documents;
   }
 
   public synchronized Addresses getAddresses(final int idperson) {

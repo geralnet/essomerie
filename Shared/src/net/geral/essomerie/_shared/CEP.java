@@ -5,6 +5,8 @@ import java.io.Serializable;
 @Deprecated
 // FIXME delete it
 public class CEP implements Serializable {
+  private static final long serialVersionUID = 1L;
+
   public static CEP createOrZero(final int i) {
     return new CEP(i);
   }

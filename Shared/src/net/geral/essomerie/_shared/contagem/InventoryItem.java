@@ -4,12 +4,14 @@ import java.io.Serializable;
 
 //TODO translate & check
 public class InventoryItem implements Serializable {
-  public final int    id;
-  public final String nome;
-  public final String unidade;
-  private float       quantidade;
+  private static final long serialVersionUID = 1L;
 
-  private final int[] grupos;
+  public final int          id;
+  public final String       nome;
+  public final String       unidade;
+  private float             quantidade;
+
+  private final int[]       grupos;
 
   public InventoryItem(final int id, final String nome, final String unidade,
       final float quantidade, final int[] grupos) {

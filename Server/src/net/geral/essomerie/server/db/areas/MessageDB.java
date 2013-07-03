@@ -86,53 +86,47 @@ public class MessageDB extends DatabaseArea {
 		+ " WHERE (`to`=0 OR `to`=?) AND (`datetime_read` IS NULL) AND (`datetime_hidden` IS NULL) " // where...
 		+ " LIMIT 1" // if there is one, is enough
 	;
-	final PreparedResultSet p = db.select(sql, userid, userid);
-	final boolean has = p.rs.next();
-	p.close();
-	return has;
+	try (final PreparedResultSet p = db.select(sql, userid, userid)) {
+	    return p.rs.next();
+	}
     }
 
     public Message getMessage(final int idmessage) throws SQLException {
 	final String sql = "SELECT `id`,`from`,`to`,`message`,`sent_when` " // select
 		+ " FROM `messages` " // from
 		+ " WHERE `id`=?"; // where...
-	final PreparedResultSet p = db.select(sql, idmessage);
-	Message msg = null;
-	final ResultSet rs = p.rs;
-	if (rs.next()) {
-	    msg = new Message(rs.getInt("id"));
-	    msg.setFrom(rs.getInt("from"));
-	    msg.setTo(rs.getInt("to"));
-	    msg.setMessage(rs.getString("message"));
-	    msg.setSent(GNJoda.sqlLocalDateTime(rs.getString("sent_when"),
-		    false));
-	    final MessageStatus[] leituras = getStatus(idmessage);
-	    msg.setStatus(leituras);
+	try (final PreparedResultSet p = db.select(sql, idmessage)) {
+	    Message msg = null;
+	    final ResultSet rs = p.rs;
+	    if (rs.next()) {
+		msg = new Message(rs.getInt("id"));
+		msg.setFrom(rs.getInt("from"));
+		msg.setTo(rs.getInt("to"));
+		msg.setMessage(rs.getString("message"));
+		msg.setSent(GNJoda.sqlLocalDateTime(rs.getString("sent_when"),
+			false));
+		final MessageStatus[] leituras = getStatus(idmessage);
+		msg.setStatus(leituras);
+	    }
+	    return msg;
 	}
-	p.close();
-
-	return msg;
     }
 
-    public MessageStatus[] getStatus(final int idmessage) throws SQLException { // TODO
-										// change
-										// to
-										// private
+    private MessageStatus[] getStatus(final int idmessage) throws SQLException {
 	final String sql = "SELECT `iduser`,`datetime_read` " // select
 		+ " FROM `messages_status` " // from
 		+ " WHERE `idmessage`=?"; // where...
-	final PreparedResultSet p = db.select(sql, idmessage);
-	final MessageStatus[] mls = new MessageStatus[p.getRowCount()];
-	int i = 0;
-	final ResultSet rs = p.rs;
-	while (rs.next()) {
-	    mls[i++] = new MessageStatus(
-		    rs.getInt("iduser"),
-		    GNJoda.sqlLocalDateTime(rs.getString("datetime_read"), true));
+	try (final PreparedResultSet p = db.select(sql, idmessage)) {
+	    final MessageStatus[] mls = new MessageStatus[p.getRowCount()];
+	    int i = 0;
+	    final ResultSet rs = p.rs;
+	    while (rs.next()) {
+		mls[i++] = new MessageStatus(rs.getInt("iduser"),
+			GNJoda.sqlLocalDateTime(rs.getString("datetime_read"),
+				true));
+	    }
+	    return mls;
 	}
-	p.close();
-
-	return mls;
     }
 
     public Message[] getToUser(final int userid) throws SQLException {
@@ -141,24 +135,23 @@ public class MessageDB extends DatabaseArea {
 		+ " LEFT JOIN `messages_status` ON (`id`=`idmessage` AND `iduser`=?)" // join
 		+ " WHERE (`to`=0 OR `to`=?) AND (`datetime_hidden` IS NULL) " // where...
 		+ " ORDER BY `sent_when` DESC";
-	final PreparedResultSet p = db.select(sql, userid, userid);
-	final Message[] msgs = new Message[p.getRowCount()];
-	int i = 0;
-	final ResultSet rs = p.rs;
-	while (rs.next()) {
-	    final Message msg = new Message(rs.getInt("id"));
-	    msg.setFrom(rs.getInt("from"));
-	    msg.setTo(rs.getInt("to"));
-	    msg.setMessage(rs.getString("message"));
-	    msg.setSent(GNJoda.sqlLocalDateTime(rs.getString("sent_when"),
-		    false));
-	    final MessageStatus[] status = getStatus(rs.getInt("id"));
-	    msg.setStatus(status);
-	    msgs[i++] = msg;
+	try (final PreparedResultSet p = db.select(sql, userid, userid)) {
+	    final Message[] msgs = new Message[p.getRowCount()];
+	    int i = 0;
+	    final ResultSet rs = p.rs;
+	    while (rs.next()) {
+		final Message msg = new Message(rs.getInt("id"));
+		msg.setFrom(rs.getInt("from"));
+		msg.setTo(rs.getInt("to"));
+		msg.setMessage(rs.getString("message"));
+		msg.setSent(GNJoda.sqlLocalDateTime(rs.getString("sent_when"),
+			false));
+		final MessageStatus[] status = getStatus(rs.getInt("id"));
+		msg.setStatus(status);
+		msgs[i++] = msg;
+	    }
+	    return msgs;
 	}
-	p.close();
-
-	return msgs;
     }
 
     public boolean setMessageStatusRead(final int idmessage, final int iduser)

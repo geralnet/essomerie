@@ -3,6 +3,8 @@ package net.geral.essomerie._shared.contagem;
 import java.io.Serializable;
 
 public class InventoryLog implements Serializable {
+  private static final long         serialVersionUID = 1L;
+
   public final int                  iditem;
   private final InventoryLogEntry[] registros;
 

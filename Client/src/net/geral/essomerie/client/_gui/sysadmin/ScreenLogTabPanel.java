@@ -2,13 +2,10 @@ package net.geral.essomerie.client._gui.sysadmin;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.DefaultListModel;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -23,16 +20,20 @@ import javax.swing.event.ListSelectionListener;
 
 import net.geral.essomerie._shared.dispositivos.DispositivoMonitor;
 import net.geral.essomerie.client.gui.main.TabPanel;
-import net.geral.log4j.Log4J;
+
+import org.apache.log4j.Logger;
 
 public class ScreenLogTabPanel extends TabPanel implements
     ListSelectionListener {
   private static final long                               serialVersionUID = 1L;
+  private static final Logger                             logger           = Logger
+                                                                               .getLogger(ScreenLogTabPanel.class);
+
   private final DefaultListModel<DispositivoMonitorEntry> listDispositivosModel;
   private final JList<DispositivoMonitorEntry>            listDispositivos;
   private final DefaultListModel<DispositivoMonitor>      listDataHoraModel;
   private final JList<DispositivoMonitor>                 listDataHora;
-  private final ScreenLogCache                            cache            = new ScreenLogCache();
+  // private final ScreenLogCache cache = new ScreenLogCache();
   private final JLabel                                    lblScreen;
   private final JLabel                                    lblLegenda;
   private final JCheckBox                                 cbReduzir;
@@ -101,20 +102,20 @@ public class ScreenLogTabPanel extends TabPanel implements
     panelRightBottom.add(cbReduzir, BorderLayout.EAST);
   }
 
-  private Icon createIcon(final byte[] bytes) {
-    if (bytes == null) {
-      return null;
-    }
-    final ImageIcon icon = new ImageIcon(bytes);
-    if (cbReduzir.isSelected()) {
-      final int w = icon.getIconWidth() / 2;
-      final int h = icon.getIconHeight() / 2;
-      Image img;
-      img = icon.getImage().getScaledInstance(w, h, 1);
-      icon.setImage(img);
-    }
-    return icon;
-  }
+  // private Icon createIcon(final byte[] bytes) {
+  // if (bytes == null) {
+  // return null;
+  // }
+  // final ImageIcon icon = new ImageIcon(bytes);
+  // if (cbReduzir.isSelected()) {
+  // final int w = icon.getIconWidth() / 2;
+  // final int h = icon.getIconHeight() / 2;
+  // Image img;
+  // img = icon.getImage().getScaledInstance(w, h, 1);
+  // icon.setImage(img);
+  // }
+  // return icon;
+  // }
 
   private void datahoraValueChanged() {
     // final DispositivoMonitor m = listDataHora.getSelectedValue();
@@ -156,37 +157,37 @@ public class ScreenLogTabPanel extends TabPanel implements
     return "Screen Log";
   }
 
-  private void setDispositivoMonitor(final int iddispositivo,
-      final DispositivoMonitor[] monitor) {
-    final int n = listDispositivosModel.getSize();
-    for (int i = 0; i < n; i++) {
-      final DispositivoMonitorEntry e = listDispositivosModel.get(i);
-      if (e.checkId(iddispositivo)) {
-        e.monitor = monitor;
-        listDispositivosModel.setElementAt(e, i);// fire changed
-        return;
-      }
-    }
-  }
+  // private void setDispositivoMonitor(final int iddispositivo,
+  // final DispositivoMonitor[] monitor) {
+  // final int n = listDispositivosModel.getSize();
+  // for (int i = 0; i < n; i++) {
+  // final DispositivoMonitorEntry e = listDispositivosModel.get(i);
+  // if (e.checkId(iddispositivo)) {
+  // e.monitor = monitor;
+  // listDispositivosModel.setElementAt(e, i);// fire changed
+  // return;
+  // }
+  // }
+  // }
 
-  private void showScreen(final byte[] screen) {
-    final DispositivoMonitorEntry e = listDispositivos.getSelectedValue();
-    final DispositivoMonitor dm = listDataHora.getSelectedValue();
-    final String desc = "ScreenLog de " + e.dispositivo.nome + " ("
-        + e.dispositivo.id + ")" + " em " + dm.datahora.toString() + " ("
-        + dm.id + "), uptime: " + dm.uptime;
-    lblLegenda.setText(desc);
-    lblScreen.setIcon(createIcon(screen));
-    if (screen == null) {
-      if (dm.hasScreen) {
-        lblScreen.setText("[carregando imagem]");
-      } else {
-        lblScreen.setText("[sem imagem]");
-      }
-    } else {
-      lblScreen.setText("");
-    }
-  }
+  // private void showScreen(final byte[] screen) {
+  // final DispositivoMonitorEntry e = listDispositivos.getSelectedValue();
+  // final DispositivoMonitor dm = listDataHora.getSelectedValue();
+  // final String desc = "ScreenLog de " + e.dispositivo.nome + " ("
+  // + e.dispositivo.id + ")" + " em " + dm.datahora.toString() + " ("
+  // + dm.id + "), uptime: " + dm.uptime;
+  // lblLegenda.setText(desc);
+  // lblScreen.setIcon(createIcon(screen));
+  // if (screen == null) {
+  // if (dm.hasScreen) {
+  // lblScreen.setText("[carregando imagem]");
+  // } else {
+  // lblScreen.setText("[sem imagem]");
+  // }
+  // } else {
+  // lblScreen.setText("");
+  // }
+  // }
 
   // @Override
   // public void sysadminScreenlogDispositivoMonitor(final int iddispositivo,
@@ -248,21 +249,22 @@ public class ScreenLogTabPanel extends TabPanel implements
     // }
   }
 
-  private void updateDispositivosNext() {
-    // try {
-    // final int n = listDispositivosModel.getSize();
-    // for (int i = 0; i < n; i++) {
-    // final DispositivoMonitorEntry d = listDispositivosModel.getElementAt(i);
-    // if (!d.hasDetails()) {
-    // Client.connection().requestSysAdminDispositivosMonitor(d.dispositivo.id);
-    // return; //get one and wait
-    // }
-    // }
-    // }
-    // catch (final IOException e) {
-    // Log4J.warning(e);
-    // }
-  }
+  // private void updateDispositivosNext() {
+  // // try {
+  // // final int n = listDispositivosModel.getSize();
+  // // for (int i = 0; i < n; i++) {
+  // // final DispositivoMonitorEntry d = listDispositivosModel.getElementAt(i);
+  // // if (!d.hasDetails()) {
+  // //
+  // Client.connection().requestSysAdminDispositivosMonitor(d.dispositivo.id);
+  // // return; //get one and wait
+  // // }
+  // // }
+  // // }
+  // // catch (final IOException e) {
+  // // Log4J.warning(e);
+  // // }
+  // }
 
   @Override
   public void valueChanged(final ListSelectionEvent e) {
@@ -275,7 +277,7 @@ public class ScreenLogTabPanel extends TabPanel implements
     } else if (src == listDataHora.getSelectionModel()) {
       datahoraValueChanged();
     } else {
-      Log4J.warning(new Exception("Invalid source: " + src));
+      logger.warn("Invalid source: " + src);
     }
   }
 }

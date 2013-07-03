@@ -9,9 +9,8 @@ public class MoneyType {
     this.multiplier = multiplier;
   }
 
-  @Deprecated
-  public double getDouble() {
-    return multiplier / 100.0;
+  public Money getMoney(final long units) {
+    return Money.fromLong(units * multiplier);
   }
 
   public long getMultiplier() {
@@ -20,5 +19,9 @@ public class MoneyType {
 
   public String getName() {
     return name;
+  }
+
+  public long getQuantityOf(final Money value) {
+    return value.toLong() / multiplier;
   }
 }

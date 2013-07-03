@@ -58,15 +58,15 @@ public class InventoryController extends
 
     private void requestLogByDate(final LocalDate from, final LocalDate until)
 	    throws SQLException, IOException {
-	final InventoryLogEntry[] entries = Server.db().getContagemAcertos(
-		from, until);
+	final InventoryLogEntry[] entries = Server.db().inventory()
+		.getContagemAcertos(from, until);
 	send(InventoryMessageType.InformLogByDate, from, until, entries);
     }
 
     private void requestLogByItem(final int iditem) throws IOException,
 	    SQLException {
-	final InventoryLog historico = Server.db().obterContagemHistorico(
-		iditem);
+	final InventoryLog historico = Server.db().inventory()
+		.obterContagemHistorico(iditem);
 	send(InventoryMessageType.InformLogByItem, historico);
     }
 
@@ -74,8 +74,8 @@ public class InventoryController extends
 	    final ContagemAlteracaoQuantidade alteracao) throws SQLException,
 	    IOException {
 
-	final float novaQuantidade = Server.db().alterarContagem(
-		connection.getUserId(), alteracao);
+	final float novaQuantidade = Server.db().inventory()
+		.alterarContagem(connection.getUserId(), alteracao);
 
 	Server.broadcast(MessageSubSystem.Inventory,
 		InventoryMessageType.InformQuantityChange, alteracao.iditem,

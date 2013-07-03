@@ -4,11 +4,9 @@ import java.io.IOException;
 import java.net.Socket;
 import java.sql.SQLException;
 
-import net.geral.essomerie._shared.RunResult;
 import net.geral.essomerie._shared.communication.Communication;
 import net.geral.essomerie._shared.communication.ICommunication;
 import net.geral.essomerie._shared.communication.MessageData;
-import net.geral.essomerie._shared.exceptions.DataCorruptedException;
 import net.geral.essomerie.client.communication.controllers.BulletinBoardController;
 import net.geral.essomerie.client.communication.controllers.CalendarController;
 import net.geral.essomerie.client.communication.controllers.CallerIdController;
@@ -157,18 +155,16 @@ public class Connection extends Thread implements ICommunication {
     try {
       while (running) {
         try {
-          if (comm != null) {
-            if (comm.isWorking()) {
-              comm.loop();
-            } else {
-              tryAgain(new IOException("closed"));
-            }
+          final Communication c = comm; // comm can become null
+          if ((c != null) && c.isWorking()) {
+            c.loop();
+          } else {
+            tryAgain(new IOException("closed"));
           }
-          if (runState() != RunResult.NO_YIELD) {
-            // which one is better? ahh leave both.
+          while (runState()) {
             Thread.yield();
-            Thread.sleep(10); // FIXME any better value?
           }
+          Thread.sleep(10); // FIXME any better value?
         } catch (final IOException e) {
           tryAgain(e);
         }
@@ -178,21 +174,29 @@ public class Connection extends Thread implements ICommunication {
     }
   }
 
-  private synchronized RunResult runState() throws IOException,
-      SystemException, DataCorruptedException {
+  /**
+   * 
+   * @return true if should execute again without sleeping
+   * @throws IOException
+   * @throws SystemException
+   */
+  private boolean runState() throws IOException, SystemException {
     switch (state) {
       case DISCONNECTED:
-        return stateDisconnected();
+        stateDisconnected();
+        return true;
       case TRY_AGAIN:
-        return stateTryAgain();
+        stateTryAgain();
+        return false;
       case CONNECTING:
-        return stateConnecting();
+        stateConnecting();
+        return true;
       case CONNECTED:
         return stateConnected();
       default:
         logger.error("runState()",
             new Exception("Invalid State: " + state.toString()));
-        return RunResult.YIELD;
+        return false;
     }
   }
 
@@ -206,30 +210,33 @@ public class Connection extends Thread implements ICommunication {
     super.start();
   }
 
-  private RunResult stateConnected() throws IOException,
-      DataCorruptedException, SystemException {
+  /**
+   * @return true if message processed, false otherwise
+   * @throws IOException
+   * @throws SystemException
+   */
+  private boolean stateConnected() throws IOException, SystemException {
     try {
       // check for a message
       if (comm == null) {
-        return RunResult.YIELD;
+        return false;
       }
       comm.loop();
       final MessageData md = comm.recv();
       if (md == null) {
-        return RunResult.YIELD;
+        return false;
       }
       processMessage(md);
-      return RunResult.NO_YIELD;
+      return true;
     } catch (final Exception e) {
       logger.warn("stateConnected()", e);
       state = ConnectionState.DISCONNECTED;
       System.exit(0); // abort! TODO add message? what to do?
-      return RunResult.NO_YIELD;
+      return false;
     }
   }
 
-  private RunResult stateConnecting() throws DataCorruptedException,
-      IOException {
+  private void stateConnecting() throws IOException {
     final CoreConfiguration config = Client.config();
     Events.system().fireConnecting(config.ServerAddress, config.ServerPort);
 
@@ -245,13 +252,12 @@ public class Connection extends Thread implements ICommunication {
       Events.system().fireConnected();
       lastTryAgainCountdown = 1; // connected! reset it
       state = ConnectionState.CONNECTED;
-      return RunResult.NO_YIELD;
     } catch (final IOException e) {
-      return tryAgain(e);
+      tryAgain(e);
     }
   }
 
-  private RunResult stateDisconnected() {
+  private void stateDisconnected() {
     Client.clearCache();
     Edt.run(true, new Runnable() {
       @Override
@@ -261,10 +267,13 @@ public class Connection extends Thread implements ICommunication {
       }
     });
     state = ConnectionState.CONNECTING;
-    return RunResult.NO_YIELD;
   }
 
-  private RunResult stateTryAgain() {
+  /**
+   * 
+   * @return true if going to try again, false if still counting down
+   */
+  private void stateTryAgain() {
     Events.system().fireConnectionTryAgainCountdown(tryAgainCountdown);
     try {
       Thread.sleep(1000);
@@ -275,16 +284,14 @@ public class Connection extends Thread implements ICommunication {
     if (tryAgainCountdown <= 0) {
       Events.system().fireConnectionTryAgainCountdown(0);
       state = ConnectionState.DISCONNECTED;
-      return RunResult.NO_YIELD;
     }
-    return RunResult.YIELD;
   }
 
   public SystemController system() {
     return system;
   }
 
-  private RunResult tryAgain(final IOException failureReason) {
+  private void tryAgain(final IOException failureReason) {
     logger.debug("try again, reason: ", failureReason);
     close();
     lastTryAgainCountdown++;
@@ -294,7 +301,6 @@ public class Connection extends Thread implements ICommunication {
     tryAgainCountdown = lastTryAgainCountdown;
     Events.system().fireConnectionFailed(true);
     state = ConnectionState.TRY_AGAIN;
-    return RunResult.NO_YIELD;
   }
 
   public UsersController users() {

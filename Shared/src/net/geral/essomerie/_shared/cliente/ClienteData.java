@@ -7,13 +7,14 @@ import net.geral.lib.strings.GNStrings;
 
 //TODO remove search from here, go to clientes cache (?)
 public class ClienteData implements Comparable<ClienteData>, Serializable {
-  public static final int NOME_MAX_LENGTH = 250;
+  private static final long serialVersionUID = 1L;
+  public static final int   NOME_MAX_LENGTH  = 250;
 
-  public final int        idcliente;
-  public String           nome;
-  public final CPF        cpf;
-  public final boolean    notaPaulista;
-  public final String     observacoes;
+  public final int          idcliente;
+  public String             nome;
+  public final CPF          cpf;
+  public final boolean      notaPaulista;
+  public final String       observacoes;
 
   public ClienteData(final ClienteData cd) {
     this(cd.idcliente, cd.nome, cd.cpf, cd.notaPaulista, cd.observacoes);

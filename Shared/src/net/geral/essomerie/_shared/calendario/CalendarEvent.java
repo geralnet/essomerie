@@ -7,6 +7,8 @@ import org.joda.time.LocalDateTime;
 
 // TODO translage check
 public class CalendarEvent implements Serializable {
+  private static final long   serialVersionUID = 1L;
+
   private final int           id;
   private final LocalDate     data;
   private final String        evento;

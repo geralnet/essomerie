@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.Socket;
 
 import net.geral.essomerie._shared.communication.types.SystemMessageType;
-import net.geral.essomerie._shared.exceptions.DataCorruptedException;
 
 import org.apache.log4j.Logger;
 
@@ -54,8 +53,7 @@ public final class Communication {
     return !socket.isClosed();
   }
 
-  public void loop() throws IOException, DataCorruptedException,
-      PingTimeoutException {
+  public void loop() throws IOException, PingTimeoutException {
     final long now = System.currentTimeMillis();
     if (nextPing <= now) {
       if (!lastPongReceived) {

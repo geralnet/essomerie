@@ -163,72 +163,57 @@ public class MySQL {
     public float selectFirstField_float(final String sql,
 	    final Object... params) throws SQLException {
 	selects++;
-	final PreparedResultSet p = queryResult(sql, params);
-
-	if (!p.rs.next()) {
-	    p.close();
-	    throw new SQLException("Cannot fetch first row.");
+	try (final PreparedResultSet p = queryResult(sql, params)) {
+	    if (!p.rs.next()) {
+		throw new SQLException("Cannot fetch first row.");
+	    }
+	    return p.rs.getFloat(1);
 	}
-	final float f = p.rs.getFloat(1);
-	p.close();
-	return f;
     }
 
     public int selectFirstField_int(final String sql, final Object... params)
 	    throws SQLException {
 	selects++;
-	final PreparedResultSet p = queryResult(sql, params);
+	try (final PreparedResultSet p = queryResult(sql, params)) {
 
-	if (!p.rs.next()) {
-	    p.close();
-	    throw new SQLException("Cannot fetch first row.");
+	    if (!p.rs.next()) {
+		throw new SQLException("Cannot fetch first row.");
+	    }
+	    return p.rs.getInt(1);
 	}
-	final int i = p.rs.getInt(1);
-	p.close();
-	return i;
     }
 
     public Integer selectFirstField_IntegerOrNull(final String sql,
 	    final Object... params) throws SQLException {
 	selects++;
-	final PreparedResultSet p = queryResult(sql, params);
-
-	if (!p.rs.next()) {
-	    p.close();
-	    return null;
+	try (final PreparedResultSet p = queryResult(sql, params)) {
+	    if (!p.rs.next()) {
+		return null;
+	    }
+	    return new Integer(p.rs.getInt(1));
 	}
-	final int i = p.rs.getInt(1);
-	p.close();
-	return new Integer(i);
     }
 
     public LocalDateTime selectFirstField_LocalDateTime(final String sql,
 	    final Object... params) throws SQLException {
 	selects++;
-	final PreparedResultSet p = queryResult(sql, params);
-
-	if (!p.rs.next()) {
-	    p.close();
-	    throw new SQLException("Cannot fetch first row.");
+	try (final PreparedResultSet p = queryResult(sql, params)) {
+	    if (!p.rs.next()) {
+		throw new SQLException("Cannot fetch first row.");
+	    }
+	    return GNJoda.sqlLocalDateTime(p.rs.getString(1), false);
 	}
-	final LocalDateTime dt = GNJoda.sqlLocalDateTime(p.rs.getString(1),
-		false);
-	p.close();
-	return dt;
     }
 
     public String selectFirstField_String(final String sql,
 	    final Object... params) throws SQLException {
 	selects++;
-	final PreparedResultSet p = queryResult(sql, params);
-
-	if (!p.rs.next()) {
-	    p.close();
-	    return null;
+	try (final PreparedResultSet p = queryResult(sql, params)) {
+	    if (!p.rs.next()) {
+		return null;
+	    }
+	    return p.rs.getString(1);
 	}
-	final String s = p.rs.getString(1);
-	p.close();
-	return s;
     }
 
     private void setSqlParameters(final PreparedStatement ps,

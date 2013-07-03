@@ -12,7 +12,6 @@ import net.geral.essomerie._shared.communication.IMessageType;
 import net.geral.essomerie._shared.communication.MessageData;
 import net.geral.essomerie._shared.communication.MessageSubSystem;
 import net.geral.essomerie._shared.communication.types.SystemMessageType;
-import net.geral.essomerie._shared.exceptions.DataCorruptedException;
 import net.geral.essomerie.server.Server;
 import net.geral.essomerie.server.comm.controllers.BulletinBoardController;
 import net.geral.essomerie.server.comm.controllers.CalendarController;
@@ -104,7 +103,7 @@ public class Connection extends Thread implements ICommunication {
     }
 
     private void processMessage(final MessageData md) throws SQLException,
-	    IOException, DataCorruptedException {
+	    IOException {
 	switch (md.getSubSystem()) {
 	case BulletinBoard:
 	    bulletinBoard.process(md);
@@ -149,9 +148,9 @@ public class Connection extends Thread implements ICommunication {
 	try {
 	    logger.debug("Client run() started!");
 	    Communication c = comm;
-	    while ((c != null) && (comm.isWorking())) {
-		comm.loop();
-		final MessageData md = comm.recv();
+	    while ((c != null) && (c.isWorking())) {
+		c.loop();
+		final MessageData md = c.recv();
 		if (md == null) {
 		    Thread.sleep(Server.config().ConnectionNoMessageSleep);
 		} else {

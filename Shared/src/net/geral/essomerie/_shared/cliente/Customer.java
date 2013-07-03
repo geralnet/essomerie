@@ -1,6 +1,7 @@
 package net.geral.essomerie._shared.cliente;
 
 public class Customer extends ClienteData {
+  private static final long serialVersionUID = 1L;
 
   public Customer(final ClienteData cd) {
     super(cd);

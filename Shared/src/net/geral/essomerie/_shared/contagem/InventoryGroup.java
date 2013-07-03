@@ -4,28 +4,30 @@ import java.io.Serializable;
 
 //TODO translate & check
 public class InventoryGroup implements Serializable {
-    public final int id;
-    public final String nome;
+  private static final long      serialVersionUID = 1L;
 
-    private final InventoryGroup[] subgrupos;
+  public final int               id;
+  public final String            nome;
 
-    public InventoryGroup(final int id, final String nome,
-	    InventoryGroup[] subgrupos) {
-	if (subgrupos == null) { // nao deixar null
-	    subgrupos = new InventoryGroup[0];
-	}
+  private final InventoryGroup[] subgrupos;
 
-	this.id = id;
-	this.nome = nome;
-	this.subgrupos = subgrupos;
+  public InventoryGroup(final int id, final String nome,
+      InventoryGroup[] subgrupos) {
+    if (subgrupos == null) { // nao deixar null
+      subgrupos = new InventoryGroup[0];
     }
 
-    public InventoryGroup[] getSubGrupos() {
-	return subgrupos.clone();
-    }
+    this.id = id;
+    this.nome = nome;
+    this.subgrupos = subgrupos;
+  }
 
-    @Override
-    public String toString() {
-	return nome;
-    }
+  public InventoryGroup[] getSubGrupos() {
+    return subgrupos.clone();
+  }
+
+  @Override
+  public String toString() {
+    return nome;
+  }
 }

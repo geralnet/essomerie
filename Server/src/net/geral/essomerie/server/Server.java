@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Vector;
 
-import net.geral.essomerie._server.comm.ClientController;
 import net.geral.essomerie._shared.communication.Communication;
 import net.geral.essomerie._shared.communication.IMessageType;
 import net.geral.essomerie._shared.communication.MessageData;
@@ -38,7 +37,7 @@ public class Server {
     private static boolean running = true;
 
     private static long startTime = System.currentTimeMillis();
-    private static Vector<ClientController> clients = new Vector<ClientController>();
+    private static Vector<Connection> clients = new Vector<Connection>();
 
     private static final Configuration configuration = new Configuration();
 
@@ -49,7 +48,7 @@ public class Server {
 	    throw new IllegalArgumentException("clientSocket cannot be null");
 	}
 	logger.info("New Client: " + clientSocket.toString());
-	final ClientController client = new ClientController(clientSocket);
+	final Connection client = new Connection(clientSocket);
 	clients.add(client);
 	client.start();
     }

@@ -350,13 +350,14 @@ public class DinheiroDialog extends JDialog implements ActionListener,
     try {
       for (int i = 0; i < emReais.length; i++) {
         if (src == txtQuantidades[i]) {
-          txtValores[i].setValue(Money.fromDouble(txtQuantidades[i]
-              .getInteger() * emReais[i].getDouble()));
+          final int qtd = txtQuantidades[i].getInteger();
+          txtValores[i].setValue(emReais[i].getMoney(qtd));
           return;
         }
         if (src == txtValores[i]) {
-          txtQuantidades[i].setValue(new Integer((int) (txtValores[i].getValue(
-              false).getDouble() / emReais[i].getDouble())));
+          final long qtd = emReais[i].getQuantityOf(txtValores[i]
+              .getValue(false));
+          txtQuantidades[i].setValue(new Integer((int) qtd));
           return;
         }
       }

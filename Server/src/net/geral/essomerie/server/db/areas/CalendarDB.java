@@ -46,51 +46,47 @@ public class CalendarDB extends DatabaseArea {
 	    return null; // when getting reference for 0 (previous)
 	}
 
-	final PreparedResultSet p = db.select(
-		"SELECT * FROM `calendario` WHERE `id`=?", idevent);
-	final ResultSet rs = p.rs;
-
-	CalendarEvent ce = null;
-	if (rs.next()) {
-	    idevent = rs.getInt("id");
-	    final LocalDate data = GNJoda.sqlLocalDate(rs.getString("data"),
-		    false);
-	    final String evento = rs.getString("mensagem");
-	    final int log_iduser = rs.getInt("log_usuario");
-	    final LocalDateTime log_datahora = GNJoda.sqlLocalDateTime(
-		    rs.getString("log_datahora"), false);
-	    final CalendarEvent referencia = (withPrevious ? get(
-		    rs.getInt("idreferencia"), true) : null);
-	    ce = new CalendarEvent(idevent, data, evento, log_iduser,
-		    log_datahora, referencia);
+	try (PreparedResultSet p = db.select(
+		"SELECT * FROM `calendario` WHERE `id`=?", idevent)) {
+	    ;
+	    final ResultSet rs = p.rs;
+	    if (rs.next()) {
+		idevent = rs.getInt("id");
+		final LocalDate data = GNJoda.sqlLocalDate(
+			rs.getString("data"), false);
+		final String evento = rs.getString("mensagem");
+		final int log_iduser = rs.getInt("log_usuario");
+		final LocalDateTime log_datahora = GNJoda.sqlLocalDateTime(
+			rs.getString("log_datahora"), false);
+		final CalendarEvent referencia = (withPrevious ? get(
+			rs.getInt("idreferencia"), true) : null);
+		return new CalendarEvent(idevent, data, evento, log_iduser,
+			log_datahora, referencia);
+	    }
 	}
-	p.close();
-
-	return ce;
+	return null;
     }
 
     public CalendarEvent[] get(final LocalDate date) throws SQLException {
 	final String sql = "SELECT * FROM `calendario` WHERE `excluido`='N' AND `data`=? ORDER BY `mensagem` ASC";
-	final PreparedResultSet p = db.select(sql, date);
-
-	final CalendarEvent[] cs = new CalendarEvent[p.getRowCount()];
-	int i = 0;
-	final ResultSet rs = p.rs;
-	while (rs.next()) {
-	    final int id = rs.getInt("id");
-	    final LocalDate data = GNJoda.sqlLocalDate(rs.getString("data"),
-		    false);
-	    final String evento = rs.getString("mensagem");
-	    final int log_iduser = rs.getInt("log_usuario");
-	    final LocalDateTime log_datahora = GNJoda.sqlLocalDateTime(
-		    rs.getString("log_datahora"), false);
-	    final CalendarEvent referencia = null;
-	    cs[i++] = new CalendarEvent(id, data, evento, log_iduser,
-		    log_datahora, referencia);
+	try (PreparedResultSet p = db.select(sql, date)) {
+	    final CalendarEvent[] cs = new CalendarEvent[p.getRowCount()];
+	    int i = 0;
+	    final ResultSet rs = p.rs;
+	    while (rs.next()) {
+		final int id = rs.getInt("id");
+		final LocalDate data = GNJoda.sqlLocalDate(
+			rs.getString("data"), false);
+		final String evento = rs.getString("mensagem");
+		final int log_iduser = rs.getInt("log_usuario");
+		final LocalDateTime log_datahora = GNJoda.sqlLocalDateTime(
+			rs.getString("log_datahora"), false);
+		final CalendarEvent referencia = null;
+		cs[i++] = new CalendarEvent(id, data, evento, log_iduser,
+			log_datahora, referencia);
+	    }
+	    return cs;
 	}
-	p.close();
-
-	return cs;
     }
 
     public RosterInfo getRoster(final LocalDate date, final boolean dayShift)
@@ -100,18 +96,18 @@ public class CalendarDB extends DatabaseArea {
 		+ " WHERE `data`=? AND `turno`=? AND (`excluido` IS NULL)"// from
 		+ " ORDER BY `funcao` ASC, `funcionarios` ASC";
 
-	final PreparedResultSet p = db
-		.select(sql, date, (dayShift ? "D" : "N"));
-	final RosterInfo re = new RosterInfo(date, dayShift);
-	final ResultSet rs = p.rs;
-	while (rs.next()) {
-	    final int id = rs.getInt("id");
-	    final String funcao = rs.getString("funcao");
-	    final String funcionarios = rs.getString("funcionarios");
-	    re.addFuncaoFuncionarios(id, funcao, funcionarios);
+	try (final PreparedResultSet p = db.select(sql, date, (dayShift ? "D"
+		: "N"))) {
+	    final RosterInfo re = new RosterInfo(date, dayShift);
+	    final ResultSet rs = p.rs;
+	    while (rs.next()) {
+		final int id = rs.getInt("id");
+		final String funcao = rs.getString("funcao");
+		final String funcionarios = rs.getString("funcionarios");
+		re.addFuncaoFuncionarios(id, funcao, funcionarios);
+	    }
+	    return re;
 	}
-	p.close();
-	return re;
     }
 
     public CalendarEvent save(final int idprevious, final LocalDate date,
