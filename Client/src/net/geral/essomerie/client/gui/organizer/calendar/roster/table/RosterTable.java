@@ -1,10 +1,10 @@
 package net.geral.essomerie.client.gui.organizer.calendar.roster.table;
 
-import net.geral.essomerie._shared.roster.RosterInfo;
 import net.geral.essomerie.client.core.Client;
 import net.geral.essomerie.client.core.configuration.CoreConfiguration;
 import net.geral.essomerie.client.gui.organizer.calendar.roster.RosterPanel;
 import net.geral.essomerie.client.resources.S;
+import net.geral.essomerie.shared.roster.Roster;
 import net.geral.lib.table.GNTable;
 
 public class RosterTable extends GNTable<RosterModel> {
@@ -41,7 +41,7 @@ public class RosterTable extends GNTable<RosterModel> {
     return S.ORGANIZER_CALENDAR_ROSTER_NEW.s();
   }
 
-  public void setRoster(final RosterInfo ri) {
+  public void setRoster(final Roster ri) {
     if (isEditing()) {
       getCellEditor().cancelCellEditing();
     }

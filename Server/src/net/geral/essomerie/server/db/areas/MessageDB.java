@@ -4,11 +4,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import net.geral.essomerie._shared.mensagens.Message;
-import net.geral.essomerie._shared.mensagens.MessageStatus;
 import net.geral.essomerie.server.db.Database;
 import net.geral.essomerie.server.db.DatabaseArea;
 import net.geral.essomerie.server.db.PreparedResultSet;
+import net.geral.essomerie.shared.messages.Message;
+import net.geral.essomerie.shared.messages.MessageStatus;
 import net.geral.lib.jodatime.GNJoda;
 
 import org.apache.log4j.Logger;

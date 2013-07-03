@@ -2,7 +2,7 @@ package net.geral.essomerie.client.core.events.listeners;
 
 import java.util.EventListener;
 
-import net.geral.essomerie._shared.mensagens.Message;
+import net.geral.essomerie.shared.messages.Message;
 
 public interface MessagesListener extends EventListener {
 	public void messageCacheReloaded(boolean hasUnread);

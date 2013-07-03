@@ -2,16 +2,16 @@ package net.geral.essomerie.client.communication.controllers;
 
 import java.io.IOException;
 
-import net.geral.essomerie._shared.communication.ConnectionController;
-import net.geral.essomerie._shared.communication.ICommunication;
-import net.geral.essomerie._shared.communication.MessageData;
-import net.geral.essomerie._shared.communication.MessageSubSystem;
-import net.geral.essomerie._shared.communication.types.InventoryMessageType;
 import net.geral.essomerie._shared.contagem.ContagemAlteracaoQuantidade;
 import net.geral.essomerie._shared.contagem.Inventory;
 import net.geral.essomerie._shared.contagem.InventoryLog;
 import net.geral.essomerie._shared.contagem.InventoryLogEntry;
 import net.geral.essomerie.client.core.events.Events;
+import net.geral.essomerie.shared.communication.ConnectionController;
+import net.geral.essomerie.shared.communication.ICommunication;
+import net.geral.essomerie.shared.communication.MessageData;
+import net.geral.essomerie.shared.communication.MessageSubSystem;
+import net.geral.essomerie.shared.communication.types.InventoryMessageType;
 
 import org.apache.log4j.Logger;
 import org.joda.time.LocalDate;

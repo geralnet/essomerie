@@ -3,9 +3,9 @@ package net.geral.essomerie.client.gui.organizer.calendar.table;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import net.geral.essomerie._shared.calendario.CalendarEvent;
 import net.geral.essomerie.client.core.Client;
 import net.geral.essomerie.client.resources.S;
+import net.geral.essomerie.shared.calendar.CalendarEvent;
 import net.geral.lib.datepicker.DatePickerPanel;
 import net.geral.lib.table.GNTableModel;
 
@@ -40,7 +40,7 @@ public class CalendarModel extends GNTableModel<CalendarEvent> {
         + aValue.getClass() + " " + aValue);
     final int id = evt.getId();
     LocalDate toDate = evt.getDate();
-    String toMessage = evt.getEvent();
+    String toMessage = evt.getMessage();
     switch (columnIndex) {
       case 0:
         toDate = LocalDate.parse((String) aValue,
@@ -83,9 +83,9 @@ public class CalendarModel extends GNTableModel<CalendarEvent> {
         return evt.getDate().toString(
             DateTimeFormat.forPattern(S.FORMAT_DATE_SIMPLE.s()));
       case 1:
-        return evt.getEvent();
+        return evt.getMessage();
       case 2:
-        return Client.cache().users().get(evt.getLogUsuario()).getUsername()
+        return Client.cache().users().get(evt.getCreatedBy()).getUsername()
             .toUpperCase();
       default:
         logger.warn("Invalid column: " + columnIndex);

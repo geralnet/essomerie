@@ -8,15 +8,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Vector;
 
-import net.geral.essomerie._shared.communication.Communication;
-import net.geral.essomerie._shared.communication.IMessageType;
-import net.geral.essomerie._shared.communication.MessageData;
-import net.geral.essomerie._shared.communication.MessageSubSystem;
 import net.geral.essomerie.server.comm.CallerListener;
 import net.geral.essomerie.server.comm.Connection;
 import net.geral.essomerie.server.comm.Listener;
 import net.geral.essomerie.server.core.Configuration;
 import net.geral.essomerie.server.db.Database;
+import net.geral.essomerie.shared.communication.Communication;
+import net.geral.essomerie.shared.communication.IMessageType;
+import net.geral.essomerie.shared.communication.MessageData;
+import net.geral.essomerie.shared.communication.MessageSubSystem;
 import net.geral.lib.configuration.ConfigurationException;
 import net.geral.lib.strings.GNStrings;
 

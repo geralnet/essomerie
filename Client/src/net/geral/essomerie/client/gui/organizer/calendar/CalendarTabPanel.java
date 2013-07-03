@@ -19,8 +19,6 @@ import javax.swing.SwingUtilities;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import net.geral.essomerie._shared.calendario.CalendarEvent;
-import net.geral.essomerie._shared.roster.RosterInfo;
 import net.geral.essomerie.client._printing.CalendarioPrint;
 import net.geral.essomerie.client.core.Client;
 import net.geral.essomerie.client.core.events.Events;
@@ -31,6 +29,8 @@ import net.geral.essomerie.client.gui.organizer.calendar.roster.RosterPanel;
 import net.geral.essomerie.client.gui.organizer.calendar.table.CalendarModel;
 import net.geral.essomerie.client.gui.organizer.calendar.table.CalendarTable;
 import net.geral.essomerie.client.resources.S;
+import net.geral.essomerie.shared.calendar.CalendarEvent;
+import net.geral.essomerie.shared.roster.Roster;
 import net.geral.gui.button.ActionButton;
 import net.geral.lib.datepicker.DatePickerListener;
 import net.geral.lib.datepicker.DatePickerPanel;
@@ -180,8 +180,8 @@ public class CalendarTabPanel extends TabPanel implements CalendarListener,
   }
 
   @Override
-  public void calendarRosterReceived(final RosterInfo re) {
-    System.out.println(this + " crrecv: " + re.countAssignments());
+  public void calendarRosterReceived(final Roster re) {
+    System.out.println(this + " crrecv: " + re.countEntries());
     setRoster(re);
   }
 
@@ -247,9 +247,9 @@ public class CalendarTabPanel extends TabPanel implements CalendarListener,
     }
   }
 
-  private void setRoster(final RosterInfo re) {
+  private void setRoster(final Roster re) {
     if (re.getDate().equals(datePicker.getDate())) {
-      if (re.getDayShift() == isRosterSelectedDay()) {
+      if (re.isDayShift() == isRosterSelectedDay()) {
         rosterPanel.set(re);
       }
     }

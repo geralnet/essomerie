@@ -1,11 +1,11 @@
 package net.geral.essomerie.client.communication.controllers;
 
-import net.geral.essomerie._shared.communication.ConnectionController;
-import net.geral.essomerie._shared.communication.ICommunication;
-import net.geral.essomerie._shared.communication.MessageData;
-import net.geral.essomerie._shared.communication.MessageSubSystem;
-import net.geral.essomerie._shared.communication.types.CallerIdMessageType;
 import net.geral.essomerie.client.core.events.Events;
+import net.geral.essomerie.shared.communication.ConnectionController;
+import net.geral.essomerie.shared.communication.ICommunication;
+import net.geral.essomerie.shared.communication.MessageData;
+import net.geral.essomerie.shared.communication.MessageSubSystem;
+import net.geral.essomerie.shared.communication.types.CallerIdMessageType;
 import net.geral.essomerie.shared.person.PersonData;
 import net.geral.essomerie.shared.person.Telephone;
 

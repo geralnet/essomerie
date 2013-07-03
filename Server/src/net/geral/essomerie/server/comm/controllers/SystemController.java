@@ -3,16 +3,16 @@ package net.geral.essomerie.server.comm.controllers;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import net.geral.essomerie._shared.BuildInfo;
 import net.geral.essomerie._shared.CRUtil;
 import net.geral.essomerie._shared.User;
 import net.geral.essomerie._shared.UserPermissions;
-import net.geral.essomerie._shared.communication.ConnectionController;
-import net.geral.essomerie._shared.communication.MessageData;
-import net.geral.essomerie._shared.communication.MessageSubSystem;
-import net.geral.essomerie._shared.communication.types.SystemMessageType;
 import net.geral.essomerie.server.Server;
 import net.geral.essomerie.server.comm.Connection;
+import net.geral.essomerie.shared.BuildInfo;
+import net.geral.essomerie.shared.communication.ConnectionController;
+import net.geral.essomerie.shared.communication.MessageData;
+import net.geral.essomerie.shared.communication.MessageSubSystem;
+import net.geral.essomerie.shared.communication.types.SystemMessageType;
 
 import org.apache.log4j.Logger;
 

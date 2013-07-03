@@ -3,8 +3,8 @@ package net.geral.essomerie.client.gui.messages.table;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import net.geral.essomerie._shared.mensagens.Message;
 import net.geral.essomerie.client.core.Client;
+import net.geral.essomerie.shared.messages.Message;
 import net.geral.lib.table.GNTableModel;
 
 public class MessagesModel extends GNTableModel<Message> {

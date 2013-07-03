@@ -5,9 +5,9 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.HashMap;
 
-import net.geral.essomerie._shared.communication.IMessageType;
-import net.geral.essomerie._shared.communication.MessageData;
-import net.geral.essomerie._shared.communication.MessageSubSystem;
+import net.geral.essomerie.shared.communication.IMessageType;
+import net.geral.essomerie.shared.communication.MessageData;
+import net.geral.essomerie.shared.communication.MessageSubSystem;
 import net.geral.lib.filechooser.GNFileChooser;
 
 import org.apache.log4j.BasicConfigurator;

@@ -3,17 +3,17 @@ package net.geral.essomerie.client.communication.controllers;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import net.geral.essomerie._shared.communication.ConnectionController;
-import net.geral.essomerie._shared.communication.ICommunication;
-import net.geral.essomerie._shared.communication.MessageData;
-import net.geral.essomerie._shared.communication.MessageSubSystem;
-import net.geral.essomerie._shared.communication.types.CatalogMessageType;
 import net.geral.essomerie.client.core.Client;
 import net.geral.essomerie.client.core.events.Events;
 import net.geral.essomerie.shared.catalog.Catalog;
 import net.geral.essomerie.shared.catalog.CatalogGroup;
 import net.geral.essomerie.shared.catalog.CatalogItem;
 import net.geral.essomerie.shared.catalog.CatalogPublication;
+import net.geral.essomerie.shared.communication.ConnectionController;
+import net.geral.essomerie.shared.communication.ICommunication;
+import net.geral.essomerie.shared.communication.MessageData;
+import net.geral.essomerie.shared.communication.MessageSubSystem;
+import net.geral.essomerie.shared.communication.types.CatalogMessageType;
 
 import org.apache.log4j.Logger;
 

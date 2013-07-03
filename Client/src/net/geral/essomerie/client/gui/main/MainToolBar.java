@@ -11,12 +11,12 @@ import javax.swing.JButton;
 import javax.swing.JToolBar;
 
 import net.geral.essomerie._shared.User;
-import net.geral.essomerie._shared.mensagens.Message;
 import net.geral.essomerie.client.core.Client;
 import net.geral.essomerie.client.core.events.Events;
 import net.geral.essomerie.client.core.events.listeners.MessagesListener;
 import net.geral.essomerie.client.resources.IMG;
 import net.geral.essomerie.client.resources.S;
+import net.geral.essomerie.shared.messages.Message;
 import net.geral.lib.edt.Edt;
 
 import org.apache.log4j.Logger;

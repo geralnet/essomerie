@@ -4,14 +4,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.sql.SQLException;
 
-import net.geral.essomerie._shared.BuildInfo;
 import net.geral.essomerie._shared.UserPermissions;
-import net.geral.essomerie._shared.communication.Communication;
-import net.geral.essomerie._shared.communication.ICommunication;
-import net.geral.essomerie._shared.communication.IMessageType;
-import net.geral.essomerie._shared.communication.MessageData;
-import net.geral.essomerie._shared.communication.MessageSubSystem;
-import net.geral.essomerie._shared.communication.types.SystemMessageType;
 import net.geral.essomerie.server.Server;
 import net.geral.essomerie.server.comm.controllers.BulletinBoardController;
 import net.geral.essomerie.server.comm.controllers.CalendarController;
@@ -23,6 +16,13 @@ import net.geral.essomerie.server.comm.controllers.PersonsController;
 import net.geral.essomerie.server.comm.controllers.SalesController;
 import net.geral.essomerie.server.comm.controllers.SystemController;
 import net.geral.essomerie.server.comm.controllers.UsersController;
+import net.geral.essomerie.shared.BuildInfo;
+import net.geral.essomerie.shared.communication.Communication;
+import net.geral.essomerie.shared.communication.ICommunication;
+import net.geral.essomerie.shared.communication.IMessageType;
+import net.geral.essomerie.shared.communication.MessageData;
+import net.geral.essomerie.shared.communication.MessageSubSystem;
+import net.geral.essomerie.shared.communication.types.SystemMessageType;
 
 import org.apache.log4j.Logger;
 

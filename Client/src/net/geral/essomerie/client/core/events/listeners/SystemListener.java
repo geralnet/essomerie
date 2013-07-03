@@ -2,8 +2,8 @@ package net.geral.essomerie.client.core.events.listeners;
 
 import java.util.EventListener;
 
-import net.geral.essomerie._shared.BuildInfo;
-import net.geral.essomerie._shared.communication.MessageData;
+import net.geral.essomerie.shared.BuildInfo;
+import net.geral.essomerie.shared.communication.MessageData;
 
 public interface SystemListener extends EventListener {
   public void systemConnected();

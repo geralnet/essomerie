@@ -30,15 +30,15 @@ import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
-import net.geral.essomerie._shared.BuildInfo;
 import net.geral.essomerie._shared.User;
-import net.geral.essomerie._shared.communication.MessageData;
 import net.geral.essomerie.client.core.Client;
 import net.geral.essomerie.client.core.events.Events;
 import net.geral.essomerie.client.core.events.listeners.SystemListener;
 import net.geral.essomerie.client.core.events.listeners.UsersListener;
 import net.geral.essomerie.client.resources.IMG;
 import net.geral.essomerie.client.resources.S;
+import net.geral.essomerie.shared.BuildInfo;
+import net.geral.essomerie.shared.communication.MessageData;
 import net.geral.lib.edt.Edt;
 
 import org.apache.log4j.Logger;

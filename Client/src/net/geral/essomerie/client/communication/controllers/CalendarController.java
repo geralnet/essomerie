@@ -2,14 +2,14 @@ package net.geral.essomerie.client.communication.controllers;
 
 import java.io.IOException;
 
-import net.geral.essomerie._shared.calendario.CalendarEvent;
-import net.geral.essomerie._shared.communication.ConnectionController;
-import net.geral.essomerie._shared.communication.ICommunication;
-import net.geral.essomerie._shared.communication.MessageData;
-import net.geral.essomerie._shared.communication.MessageSubSystem;
-import net.geral.essomerie._shared.communication.types.CalendarMessageType;
-import net.geral.essomerie._shared.roster.RosterInfo;
 import net.geral.essomerie.client.core.events.Events;
+import net.geral.essomerie.shared.calendar.CalendarEvent;
+import net.geral.essomerie.shared.communication.ConnectionController;
+import net.geral.essomerie.shared.communication.ICommunication;
+import net.geral.essomerie.shared.communication.MessageData;
+import net.geral.essomerie.shared.communication.MessageSubSystem;
+import net.geral.essomerie.shared.communication.types.CalendarMessageType;
+import net.geral.essomerie.shared.roster.Roster;
 
 import org.apache.log4j.Logger;
 import org.joda.time.LocalDate;
@@ -40,7 +40,7 @@ public class CalendarController extends
             (CalendarEvent[]) md.get());
         break;
       case InformRoster:
-        Events.calendar().fireRosterReceived((RosterInfo) md.get());
+        Events.calendar().fireRosterReceived((Roster) md.get());
         break;
       default:
         logger.warn("Invalid type: " + type.name());
@@ -70,7 +70,7 @@ public class CalendarController extends
     send(CalendarMessageType.RequestRoster, date, dayShift);
   }
 
-  public void requestRosterSave(final RosterInfo roster) throws IOException {
+  public void requestRosterSave(final Roster roster) throws IOException {
     send(CalendarMessageType.RequestRosterSave, roster);
   }
 }

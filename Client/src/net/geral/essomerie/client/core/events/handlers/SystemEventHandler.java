@@ -2,10 +2,10 @@ package net.geral.essomerie.client.core.events.handlers;
 
 import javax.swing.event.EventListenerList;
 
-import net.geral.essomerie._shared.BuildInfo;
-import net.geral.essomerie._shared.communication.ConnectionControllerInformer;
-import net.geral.essomerie._shared.communication.MessageData;
 import net.geral.essomerie.client.core.events.listeners.SystemListener;
+import net.geral.essomerie.shared.BuildInfo;
+import net.geral.essomerie.shared.communication.ConnectionControllerInformer;
+import net.geral.essomerie.shared.communication.MessageData;
 import net.geral.lib.edt.Edt;
 
 import org.apache.log4j.Logger;

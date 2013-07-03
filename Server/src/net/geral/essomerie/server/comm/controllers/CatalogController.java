@@ -4,9 +4,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import net.geral.essomerie._shared.communication.MessageData;
-import net.geral.essomerie._shared.communication.MessageSubSystem;
-import net.geral.essomerie._shared.communication.types.CatalogMessageType;
 import net.geral.essomerie.server.Server;
 import net.geral.essomerie.server.comm.Connection;
 import net.geral.essomerie.server.comm.ServerConnectionController;
@@ -14,6 +11,9 @@ import net.geral.essomerie.shared.catalog.Catalog;
 import net.geral.essomerie.shared.catalog.CatalogGroup;
 import net.geral.essomerie.shared.catalog.CatalogItem;
 import net.geral.essomerie.shared.catalog.CatalogPublication;
+import net.geral.essomerie.shared.communication.MessageData;
+import net.geral.essomerie.shared.communication.MessageSubSystem;
+import net.geral.essomerie.shared.communication.types.CatalogMessageType;
 
 import org.apache.log4j.Logger;
 

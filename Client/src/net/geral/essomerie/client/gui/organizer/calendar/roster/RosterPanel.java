@@ -11,10 +11,10 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import net.geral.essomerie._shared.roster.RosterInfo;
 import net.geral.essomerie.client.core.Client;
 import net.geral.essomerie.client.gui.organizer.calendar.roster.table.RosterTable;
 import net.geral.essomerie.client.resources.S;
+import net.geral.essomerie.shared.roster.Roster;
 
 import org.apache.log4j.Logger;
 
@@ -59,10 +59,10 @@ public class RosterPanel extends JPanel implements ActionListener {
 
   private void cancel() {
     panelButtons.setVisible(false);
-    final RosterInfo ri = table.getModel().getRoster();
+    final Roster ri = table.getModel().getRoster();
     try {
       Client.connection().calendar()
-          .requestRoster(ri.getDate(), ri.getDayShift());
+          .requestRoster(ri.getDate(), ri.isDayShift());
     } catch (final IOException e) {
       logger.warn(e, e);
     }
@@ -82,7 +82,7 @@ public class RosterPanel extends JPanel implements ActionListener {
     }
   }
 
-  public void set(final RosterInfo re) {
+  public void set(final Roster re) {
     if (panelButtons.isVisible()) {
       final int i = JOptionPane.showConfirmDialog(this,
           S.ORGANIZER_CALENDAR_ROSTER_SAVE, S.TITLE_CONFIRM.s(),

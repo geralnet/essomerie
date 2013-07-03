@@ -2,8 +2,8 @@ package net.geral.essomerie.client.core.events.handlers;
 
 import javax.swing.event.EventListenerList;
 
-import net.geral.essomerie._shared.mensagens.Message;
 import net.geral.essomerie.client.core.events.listeners.MessagesListener;
+import net.geral.essomerie.shared.messages.Message;
 import net.geral.lib.edt.Edt;
 
 import org.apache.log4j.Logger;

@@ -3,14 +3,14 @@ package net.geral.essomerie.server.comm.controllers;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import net.geral.essomerie._shared.calendario.CalendarEvent;
-import net.geral.essomerie._shared.communication.ConnectionController;
-import net.geral.essomerie._shared.communication.MessageData;
-import net.geral.essomerie._shared.communication.MessageSubSystem;
-import net.geral.essomerie._shared.communication.types.CalendarMessageType;
-import net.geral.essomerie._shared.roster.RosterInfo;
 import net.geral.essomerie.server.Server;
 import net.geral.essomerie.server.comm.Connection;
+import net.geral.essomerie.shared.calendar.CalendarEvent;
+import net.geral.essomerie.shared.communication.ConnectionController;
+import net.geral.essomerie.shared.communication.MessageData;
+import net.geral.essomerie.shared.communication.MessageSubSystem;
+import net.geral.essomerie.shared.communication.types.CalendarMessageType;
+import net.geral.essomerie.shared.roster.Roster;
 
 import org.apache.log4j.Logger;
 import org.joda.time.LocalDate;
@@ -47,7 +47,7 @@ public class CalendarController extends
 	    requestRoster((LocalDate) md.get(), md.getBoolean());
 	    break;
 	case RequestRosterSave:
-	    requestRosterSave((RosterInfo) md.get());
+	    requestRosterSave((Roster) md.get());
 	    break;
 	default:
 	    logger.warn("Invalid type: " + type.name());
@@ -83,11 +83,11 @@ public class CalendarController extends
 
     private void requestRoster(final LocalDate date, final boolean dayShift)
 	    throws SQLException, IOException {
-	final RosterInfo ri = Server.db().calendar().getRoster(date, dayShift);
+	final Roster ri = Server.db().calendar().getRoster(date, dayShift);
 	send(CalendarMessageType.InformRoster, ri);
     }
 
-    private void requestRosterSave(final RosterInfo ri) throws SQLException,
+    private void requestRosterSave(final Roster ri) throws SQLException,
 	    IOException {
 	Server.db().calendar().saveRoster(ri, connection.getUserId());
 	Server.broadcast(MessageSubSystem.Calendar,

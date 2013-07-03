@@ -2,9 +2,9 @@ package net.geral.essomerie.client.core.events.handlers;
 
 import javax.swing.event.EventListenerList;
 
-import net.geral.essomerie._shared.calendario.CalendarEvent;
-import net.geral.essomerie._shared.roster.RosterInfo;
 import net.geral.essomerie.client.core.events.listeners.CalendarListener;
+import net.geral.essomerie.shared.calendar.CalendarEvent;
+import net.geral.essomerie.shared.roster.Roster;
 import net.geral.lib.edt.Edt;
 
 import org.apache.log4j.Logger;
@@ -68,7 +68,7 @@ public class CalendarEventHandler extends EventListenerList {
     });
   }
 
-  public void fireRosterReceived(final RosterInfo roster) {
+  public void fireRosterReceived(final Roster roster) {
     Edt.run(false, new Runnable() {
       @Override
       public void run() {

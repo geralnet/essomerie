@@ -2,15 +2,15 @@ package net.geral.essomerie.client.communication.controllers;
 
 import java.io.IOException;
 
-import net.geral.essomerie._shared.BuildInfo;
 import net.geral.essomerie._shared.UserPermissions;
-import net.geral.essomerie._shared.communication.ConnectionController;
-import net.geral.essomerie._shared.communication.ICommunication;
-import net.geral.essomerie._shared.communication.MessageData;
-import net.geral.essomerie._shared.communication.MessageSubSystem;
-import net.geral.essomerie._shared.communication.types.SystemMessageType;
 import net.geral.essomerie.client.core.Client;
 import net.geral.essomerie.client.core.events.Events;
+import net.geral.essomerie.shared.BuildInfo;
+import net.geral.essomerie.shared.communication.ConnectionController;
+import net.geral.essomerie.shared.communication.ICommunication;
+import net.geral.essomerie.shared.communication.MessageData;
+import net.geral.essomerie.shared.communication.MessageSubSystem;
+import net.geral.essomerie.shared.communication.types.SystemMessageType;
 
 import org.apache.log4j.Logger;
 

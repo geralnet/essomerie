@@ -2,10 +2,10 @@ package net.geral.essomerie.client.gui.organizer.calendar.table;
 
 import java.io.IOException;
 
-import net.geral.essomerie._shared.calendario.CalendarEvent;
 import net.geral.essomerie.client.core.Client;
 import net.geral.essomerie.client.core.configuration.CoreConfiguration;
 import net.geral.essomerie.client.resources.S;
+import net.geral.essomerie.shared.calendar.CalendarEvent;
 import net.geral.lib.datepicker.DatePickerPanel;
 import net.geral.lib.table.GNTable;
 

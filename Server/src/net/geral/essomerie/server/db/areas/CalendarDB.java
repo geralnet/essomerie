@@ -3,12 +3,12 @@ package net.geral.essomerie.server.db.areas;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import net.geral.essomerie._shared.calendario.CalendarEvent;
-import net.geral.essomerie._shared.roster.RosterInfo;
-import net.geral.essomerie._shared.roster.RosterInfoAssignments;
 import net.geral.essomerie.server.db.Database;
 import net.geral.essomerie.server.db.DatabaseArea;
 import net.geral.essomerie.server.db.PreparedResultSet;
+import net.geral.essomerie.shared.calendar.CalendarEvent;
+import net.geral.essomerie.shared.roster.Roster;
+import net.geral.essomerie.shared.roster.RosterEntry;
 import net.geral.lib.jodatime.GNJoda;
 
 import org.joda.time.LocalDate;
@@ -89,7 +89,7 @@ public class CalendarDB extends DatabaseArea {
 	}
     }
 
-    public RosterInfo getRoster(final LocalDate date, final boolean dayShift)
+    public Roster getRoster(final LocalDate date, final boolean dayShift)
 	    throws SQLException {
 	final String sql = "SELECT `id`,`funcao`,`funcionarios` "// select
 		+ " FROM `escala` "// from
@@ -98,13 +98,13 @@ public class CalendarDB extends DatabaseArea {
 
 	try (final PreparedResultSet p = db.select(sql, date, (dayShift ? "D"
 		: "N"))) {
-	    final RosterInfo re = new RosterInfo(date, dayShift);
+	    final Roster re = new Roster(date, dayShift);
 	    final ResultSet rs = p.rs;
 	    while (rs.next()) {
 		final int id = rs.getInt("id");
 		final String funcao = rs.getString("funcao");
 		final String funcionarios = rs.getString("funcionarios");
-		re.addFuncaoFuncionarios(id, funcao, funcionarios);
+		re.addEntry(id, funcao, funcionarios);
 	    }
 	    return re;
 	}
@@ -130,24 +130,24 @@ public class CalendarDB extends DatabaseArea {
 				  // the old
     }
 
-    public void saveRoster(final RosterInfo re, final int iduser)
+    public void saveRoster(final Roster re, final int iduser)
 	    throws SQLException {
-	deleteRoster(iduser, re.getDate(), re.getDayShift());
+	deleteRoster(iduser, re.getDate(), re.isDayShift());
 	final String date = re.getDate().toString();
-	final String shift = re.getDayShift() ? "D" : "N";
+	final String shift = re.isDayShift() ? "D" : "N";
 
-	for (final RosterInfoAssignments ref : re.getEscala()) {
+	for (final RosterEntry ref : re.getEntries()) {
 	    saveRosterAssignments(iduser, date, shift, ref);
 	}
     }
 
     private void saveRosterAssignments(final int iduser, final String date,
-	    final String shift, final RosterInfoAssignments ria)
+	    final String shift, final RosterEntry ria)
 	    throws SQLException {
 	final String sql = "INSERT INTO `escala` (`data`,`turno`,`funcao`,`funcionarios`,`criado_por`) "// insert
 		+ " VALUES (?, ?, ?, ?, ?)"// values
 	;
-	db.insert(sql, date, shift, ria.getFuncao(),
-		ria.getFuncionariosString(), iduser);
+	db.insert(sql, date, shift, ria.getAssignment(),
+		ria.getNamesString(), iduser);
     }
 }

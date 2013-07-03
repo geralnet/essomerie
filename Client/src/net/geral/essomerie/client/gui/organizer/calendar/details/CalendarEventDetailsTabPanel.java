@@ -7,14 +7,14 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 
-import net.geral.essomerie._shared.calendario.CalendarEvent;
-import net.geral.essomerie._shared.roster.RosterInfo;
 import net.geral.essomerie.client._gui.shared.label.TitleLabel;
 import net.geral.essomerie.client.core.Client;
 import net.geral.essomerie.client.core.events.Events;
 import net.geral.essomerie.client.core.events.listeners.CalendarListener;
 import net.geral.essomerie.client.gui.main.TabPanel;
 import net.geral.essomerie.client.resources.S;
+import net.geral.essomerie.shared.calendar.CalendarEvent;
+import net.geral.essomerie.shared.roster.Roster;
 
 import org.apache.log4j.Logger;
 import org.joda.time.LocalDate;
@@ -36,14 +36,14 @@ public class CalendarEventDetailsTabPanel extends TabPanel implements
     final String createdChanged = e.getPrevious() == null ? S.ORGANIZER_CALENDAR_DETAILS_CREATED
         .s() : S.ORGANIZER_CALENDAR_DETAILS_CHANGED.s();
 
-    s.append(S.ORGANIZER_CALENDAR_DETAILS_ENTRY_LINE_1.s(e.getLogDataHora()
+    s.append(S.ORGANIZER_CALENDAR_DETAILS_ENTRY_LINE_1.s(e.getCreatedWhen()
         .toString(DateTimeFormat.forPattern(S.FORMAT_DATETIME_SIMPLE.s())),
-        Client.cache().users().get(e.getLogUsuario()).getName(), Client.cache()
-            .users().get(e.getLogUsuario()).getUsername(), createdChanged, e
+        Client.cache().users().get(e.getCreatedBy()).getName(), Client.cache()
+            .users().get(e.getCreatedBy()).getUsername(), createdChanged, e
             .getId()));
     s.append(S.ORGANIZER_CALENDAR_DETAILS_ENTRY_LINE_2.s(e.getDate().toString(
         DateTimeFormat.forPattern(S.FORMAT_DATE_SIMPLE.s()))));
-    s.append(S.ORGANIZER_CALENDAR_DETAILS_ENTRY_LINE_3.s(e.getEvent()));
+    s.append(S.ORGANIZER_CALENDAR_DETAILS_ENTRY_LINE_3.s(e.getMessage()));
 
     if (e.getPrevious() != null) {
       createDetails(s, e.getPrevious());
@@ -92,7 +92,7 @@ public class CalendarEventDetailsTabPanel extends TabPanel implements
   }
 
   @Override
-  public void calendarRosterReceived(final RosterInfo roster) {
+  public void calendarRosterReceived(final Roster roster) {
   }
 
   @Override

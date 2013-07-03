@@ -18,7 +18,7 @@ import net.geral.essomerie.client._gui.caixa.panels.plantao.PlantaoLancamentos;
 import net.geral.essomerie.client._gui.caixa.panels.saidas.SaidasLancamentos;
 import net.geral.essomerie.client._gui.caixa.panels.salao.SalaoLancamentos;
 import net.geral.essomerie.client._gui.caixa.panels.viagem.ViagemLancamentos;
-import net.geral.essomerie._shared.BuildInfo;
+import net.geral.essomerie.shared.BuildInfo;
 import net.geral.essomerie._shared.CRUtil;
 
 public class Lancamentos {

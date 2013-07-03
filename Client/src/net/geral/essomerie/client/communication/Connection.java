@@ -4,9 +4,6 @@ import java.io.IOException;
 import java.net.Socket;
 import java.sql.SQLException;
 
-import net.geral.essomerie._shared.communication.Communication;
-import net.geral.essomerie._shared.communication.ICommunication;
-import net.geral.essomerie._shared.communication.MessageData;
 import net.geral.essomerie.client.communication.controllers.BulletinBoardController;
 import net.geral.essomerie.client.communication.controllers.CalendarController;
 import net.geral.essomerie.client.communication.controllers.CallerIdController;
@@ -20,6 +17,9 @@ import net.geral.essomerie.client.communication.controllers.UsersController;
 import net.geral.essomerie.client.core.Client;
 import net.geral.essomerie.client.core.configuration.CoreConfiguration;
 import net.geral.essomerie.client.core.events.Events;
+import net.geral.essomerie.shared.communication.Communication;
+import net.geral.essomerie.shared.communication.ICommunication;
+import net.geral.essomerie.shared.communication.MessageData;
 import net.geral.lib.edt.Edt;
 
 import org.apache.log4j.Logger;

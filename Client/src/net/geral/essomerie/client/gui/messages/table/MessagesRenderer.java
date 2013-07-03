@@ -6,9 +6,9 @@ import java.awt.Font;
 
 import javax.swing.JTable;
 
-import net.geral.essomerie._shared.mensagens.Message;
 import net.geral.essomerie.client.core.Client;
 import net.geral.essomerie.client.resources.S;
+import net.geral.essomerie.shared.messages.Message;
 import net.geral.lib.table.GNTableRenderer;
 
 import org.joda.time.format.DateTimeFormat;

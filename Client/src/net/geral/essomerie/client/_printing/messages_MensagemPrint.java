@@ -3,7 +3,7 @@ package net.geral.essomerie.client._printing;
 import java.awt.Font;
 
 import net.geral.essomerie.client.core.Client;
-import net.geral.essomerie._shared.mensagens.Message;
+import net.geral.essomerie.shared.messages.Message;
 
 public class messages_MensagemPrint extends CRPrintDocument {
 	private final Message	msg;

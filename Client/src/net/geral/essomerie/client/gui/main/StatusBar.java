@@ -11,13 +11,13 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 
-import net.geral.essomerie._shared.BuildInfo;
-import net.geral.essomerie._shared.communication.MessageData;
 import net.geral.essomerie.client.core.Client;
 import net.geral.essomerie.client.core.events.Events;
 import net.geral.essomerie.client.core.events.listeners.CommConfirmationListener;
 import net.geral.essomerie.client.core.events.listeners.SystemListener;
 import net.geral.essomerie.client.resources.S;
+import net.geral.essomerie.shared.BuildInfo;
+import net.geral.essomerie.shared.communication.MessageData;
 
 import org.apache.log4j.Logger;
 

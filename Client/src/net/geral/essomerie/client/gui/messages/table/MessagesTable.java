@@ -5,11 +5,11 @@ import java.util.Comparator;
 import javax.swing.ListSelectionModel;
 
 import net.geral.essomerie._shared.User;
-import net.geral.essomerie._shared.mensagens.Message;
 import net.geral.essomerie.client.core.Client;
 import net.geral.essomerie.client.core.configuration.CoreConfiguration;
 import net.geral.essomerie.client.gui.messages.MessagesTabPanel;
 import net.geral.essomerie.client.resources.S;
+import net.geral.essomerie.shared.messages.Message;
 import net.geral.lib.strings.GNStrings;
 import net.geral.lib.table.GNTable;
 

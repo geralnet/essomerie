@@ -5,8 +5,8 @@ package net.geral.essomerie.client._printing;
 import java.awt.Font;
 import java.util.ArrayList;
 
-import net.geral.essomerie._shared.calendario.CalendarEvent;
 import net.geral.essomerie.client.resources.S;
+import net.geral.essomerie.shared.calendar.CalendarEvent;
 
 import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
@@ -36,7 +36,7 @@ public class CalendarioPrint extends CRPrintDocument {
     separator();
     newline();
     for (final CalendarEvent e : eventos) {
-      writeline(e.getEvent());
+      writeline(e.getMessage());
       newline();
     }
   }
