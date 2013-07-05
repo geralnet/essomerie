@@ -1,6 +1,6 @@
 package net.geral.essomerie.client._gui.caixa.base.editor;
 
-import net.geral.gui.textfield.IntegerTextField;
+import net.geral.lib.gui.textfield.IntegerTextField;
 
 public class IntegerTableCellEditor extends BaseTableCellEditor<IntegerTextField> {
 	private static final long	serialVersionUID	= 1L;

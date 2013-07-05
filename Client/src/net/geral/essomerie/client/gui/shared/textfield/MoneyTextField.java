@@ -5,7 +5,7 @@ import java.awt.event.MouseListener;
 
 import net.geral.essomerie.client._gui.shared.textfield.DinheiroDialog;
 import net.geral.essomerie.shared.money.Money;
-import net.geral.gui.textfield.formula.FormulaTextField;
+import net.geral.lib.gui.textfield.formula.FormulaTextField;
 
 public class MoneyTextField extends FormulaTextField<Money> implements
     MouseListener {

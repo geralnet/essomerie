@@ -5,10 +5,11 @@ import java.awt.Dimension;
 
 import net.geral.essomerie._shared.User;
 import net.geral.lib.configuration.ConfigurationBase;
-import net.geral.lib.table.GNTable;
 import net.geral.lib.table.GNTableColumnWidth;
 
 public class CoreConfiguration extends ConfigurationBase {
+  private static final int  FULL_WIDTH                                          = 1000;
+
   /**
    * The name of your company (will be shown in the title bar).
    */
@@ -120,8 +121,8 @@ public class CoreConfiguration extends ConfigurationBase {
 
   public GNTableColumnWidth TableColumnWidth_Default                            = new GNTableColumnWidth(
                                                                                     0,
-                                                                                    GNTable.MAX_WIDTH,
-                                                                                    GNTable.MAX_WIDTH);
+                                                                                    FULL_WIDTH,
+                                                                                    FULL_WIDTH);
 
   public GNTableColumnWidth TableColumnWidth_Default_Date                       = new GNTableColumnWidth(
                                                                                     80);
@@ -141,7 +142,7 @@ public class CoreConfiguration extends ConfigurationBase {
   public GNTableColumnWidth TableColumnWidth_Messages_Message                   = null;
 
   public GNTableColumnWidth TableColumnWidth_Organizer_Roster_Asssignment       = TableColumnWidth_Default
-                                                                                    .withPref(GNTable.MAX_WIDTH / 2);
+                                                                                    .withPref(FULL_WIDTH / 2);
   public GNTableColumnWidth TableColumnWidth_Organizer_Roster_Employees         = null;
 
   public GNTableColumnWidth TableColumnWidth_Organizer_Calendar_Date            = null;

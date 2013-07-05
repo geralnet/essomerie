@@ -24,7 +24,7 @@ import net.geral.essomerie.client.gui.main.TabPanel;
 import net.geral.essomerie.client.resources.S;
 import net.geral.essomerie.shared.bulletinboard.BulletinBoardEntry;
 import net.geral.essomerie.shared.bulletinboard.BulletinBoardTitle;
-import net.geral.gui.button.ActionButton;
+import net.geral.lib.gui.button.ActionButton;
 
 import org.apache.log4j.Logger;
 import org.joda.time.format.DateTimeFormat;

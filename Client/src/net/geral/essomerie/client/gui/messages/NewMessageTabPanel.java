@@ -24,8 +24,8 @@ import net.geral.essomerie.client._gui.shared.label.TitleLabel;
 import net.geral.essomerie.client.core.Client;
 import net.geral.essomerie.client.gui.main.TabPanel;
 import net.geral.essomerie.client.resources.S;
-import net.geral.gui.button.ActionButton;
-import net.geral.lib.strings.GNStrings;
+import net.geral.lib.gui.button.ActionButton;
+import net.geral.lib.util.StringUtils;
 
 import org.apache.log4j.Logger;
 
@@ -186,7 +186,7 @@ public class NewMessageTabPanel extends TabPanel implements ActionListener,
   }
 
   private boolean messageIsEmpty() {
-    return (GNStrings.trim(txtMessage.getText()).length() == 0);
+    return (StringUtils.trim(txtMessage.getText()).length() == 0);
   }
 
   private boolean podeEnviar() {
@@ -207,7 +207,7 @@ public class NewMessageTabPanel extends TabPanel implements ActionListener,
   private void send() {
     try {
       final int[] to = getTos();
-      final String msg = GNStrings.trim(txtMessage.getText());
+      final String msg = StringUtils.trim(txtMessage.getText());
       Client.connection().messages().requestSend(to, msg);
     } catch (final Exception e) {
       logger.warn(e, e);

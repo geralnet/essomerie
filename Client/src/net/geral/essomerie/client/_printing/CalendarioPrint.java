@@ -30,10 +30,10 @@ public class CalendarioPrint extends CRPrintDocument {
         + " (" + data.getDayOfWeek() + ")"; // TODO
                                             // nome
                                             // semana
-    centralizar(s, new Font("SansSerif", Font.BOLD, 10));
+    writeCentralized(s, new Font("SansSerif", Font.BOLD, 10));
     s = (eventos.length > 1) ? "s" : "";
-    centralizar(eventos.length + " evento" + s + ".");
-    separator();
+    writeCentralized(eventos.length + " evento" + s + ".");
+    drawHorizontalLine();
     newline();
     for (final CalendarEvent e : eventos) {
       writeline(e.getMessage());

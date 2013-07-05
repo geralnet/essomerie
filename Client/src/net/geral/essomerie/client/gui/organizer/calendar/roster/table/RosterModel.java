@@ -13,7 +13,7 @@ public class RosterModel extends GNTableModel<RosterEntry> {
   private static final long   serialVersionUID = 1L;
   private static final Logger logger           = Logger
                                                    .getLogger(RosterModel.class);
-  private Roster          showing          = new Roster();
+  private Roster              showing          = new Roster();
 
   private final RosterPanel   rosterPanel;
 
@@ -30,8 +30,7 @@ public class RosterModel extends GNTableModel<RosterEntry> {
     rosterPanel.rosterChanged();
     switch (columnIndex) {
       case 0:
-        return new RosterEntry(0, (String) aValue,
-            ria.getNamesString());
+        return new RosterEntry(0, (String) aValue, ria.getNamesString());
       case 1:
         return new RosterEntry(0, ria.getAssignment(), (String) aValue);
       default:
@@ -45,8 +44,7 @@ public class RosterModel extends GNTableModel<RosterEntry> {
   }
 
   public Roster getRoster() {
-    final Roster ri = new Roster(showing.getDate(),
-        showing.isDayShift());
+    final Roster ri = new Roster(showing.getDate(), showing.isDayShift());
 
     final ArrayList<RosterEntry> all = getAll();
     for (final RosterEntry ria : all) {
@@ -57,9 +55,20 @@ public class RosterModel extends GNTableModel<RosterEntry> {
   }
 
   @Override
-  protected Object getValueFor(final RosterEntry ria,
-      final int columnIndex) {
+  protected Object getValueFor(final RosterEntry ria, final int columnIndex) {
     return (columnIndex == 0) ? ria.getAssignment() : ria.getNamesString();
+  }
+
+  @Override
+  public synchronized void remove(final int index) {
+    super.remove(index);
+    rosterPanel.rosterChanged();
+  }
+
+  @Override
+  public synchronized void remove(final RosterEntry entry) {
+    super.remove(entry);
+    rosterPanel.rosterChanged();
   }
 
   public void setRoster(Roster ri) {

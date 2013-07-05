@@ -30,9 +30,9 @@ import net.geral.essomerie.client.gui.main.TabPanel;
 import net.geral.essomerie.client.gui.messages.table.MessagesTable;
 import net.geral.essomerie.client.resources.S;
 import net.geral.essomerie.shared.messages.Message;
-import net.geral.gui.button.ActionButton;
-import net.geral.printing.BematechDocument;
-import net.geral.printing.PrintSupport;
+import net.geral.lib.gui.button.ActionButton;
+import net.geral.lib.printing.ContinuousPaperPrintDocument;
+import net.geral.lib.printing.PrintSupport;
 
 import org.apache.log4j.Logger;
 import org.joda.time.format.DateTimeFormat;
@@ -193,7 +193,7 @@ public class MessagesTabPanel extends TabPanel implements MessagesListener,
     if (m == null) {
       return;
     }
-    final BematechDocument mp = new messages_MensagemPrint(m);
+    final ContinuousPaperPrintDocument mp = new messages_MensagemPrint(m);
     try {
       PrintSupport.print(mp);
     } catch (final PrinterException e) {

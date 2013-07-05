@@ -34,7 +34,7 @@ import net.geral.essomerie.client._gui.shared.label.TitleLabel;
 import net.geral.essomerie.client.core.Client;
 import net.geral.essomerie.client.gui.inventory.logtable.InventoryLogTable;
 import net.geral.essomerie.client.gui.inventory.table.InventoryTable;
-import net.geral.lib.strings.GNStrings;
+import net.geral.lib.util.StringUtils;
 
 import org.apache.log4j.Logger;
 
@@ -321,7 +321,7 @@ public class InventoryChangePanel extends JPanel implements ItemListener,
     if (txtQuantidade.getValue(true) != null) {
       return true;
     }
-    if (GNStrings.trim(txtObservacoes.getText()).length() != 0) {
+    if (StringUtils.trim(txtObservacoes.getText()).length() != 0) {
       return true;
     }
     return false;
@@ -389,7 +389,7 @@ public class InventoryChangePanel extends JPanel implements ItemListener,
         final char tipo = getTipo();
         final int idmotivo = getMotivoId();
         final float quantidade = txtQuantidade.getValue(false).floatValue();
-        final String observacoes = GNStrings.trim(txtObservacoes.getText());
+        final String observacoes = StringUtils.trim(txtObservacoes.getText());
         Client
             .connection()
             .inventory()

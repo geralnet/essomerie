@@ -2,7 +2,7 @@ package net.geral.essomerie.shared.bulletinboard;
 
 import java.io.Serializable;
 
-import net.geral.lib.strings.GNStrings;
+import net.geral.lib.util.StringUtils;
 
 public class BulletinBoardTitle implements Serializable,
     Comparable<BulletinBoardTitle> {
@@ -18,7 +18,7 @@ public class BulletinBoardTitle implements Serializable,
     if (title == null) {
       throw new IllegalArgumentException("title cannot be null.");
     }
-    title = GNStrings.trim(title);
+    title = StringUtils.trim(title);
     if (title.length() == 0) {
       throw new IllegalArgumentException("title cannot be empty.");
     }

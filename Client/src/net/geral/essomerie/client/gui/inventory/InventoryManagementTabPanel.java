@@ -24,7 +24,7 @@ import net.geral.essomerie.client.gui.inventory.items.InventoryItemsPanel;
 import net.geral.essomerie.client.gui.inventory.table.InventoryTable;
 import net.geral.essomerie.client.gui.main.TabPanel;
 import net.geral.essomerie.client.resources.S;
-import net.geral.printing.PrintSupport;
+import net.geral.lib.printing.PrintSupport;
 
 import org.apache.log4j.Logger;
 import org.joda.time.LocalDate;

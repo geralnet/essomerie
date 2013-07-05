@@ -3,7 +3,7 @@ package net.geral.essomerie.shared.person;
 import java.io.Serializable;
 import java.security.InvalidParameterException;
 
-import net.geral.lib.strings.GNStrings;
+import net.geral.lib.util.StringUtils;
 
 public class Telephone implements Serializable {
   private static final long serialVersionUID   = 1L;
@@ -29,7 +29,7 @@ public class Telephone implements Serializable {
   }
 
   public static Telephone fromFormatted(final String fmt) {
-    String f = GNStrings.trim(fmt);
+    String f = StringUtils.trim(fmt);
     if (f.length() == 0) {
       return null; // nothing to parse
     }
@@ -37,8 +37,8 @@ public class Telephone implements Serializable {
     int pos;
     // check for type
     parts = f.split(":", 2);
-    final String type = (parts.length == 1) ? "" : GNStrings.trim(parts[0]);
-    f = GNStrings.trim(parts[parts.length - 1]);
+    final String type = (parts.length == 1) ? "" : StringUtils.trim(parts[0]);
+    f = StringUtils.trim(parts[parts.length - 1]);
     if (f.length() == 0) {
       return null; // invalid type without number
     }
@@ -50,8 +50,8 @@ public class Telephone implements Serializable {
       if (pos == -1) {
         return null;
       }
-      country = GNStrings.trim(f.substring(1, pos));
-      f = GNStrings.trim(f.substring(pos));
+      country = StringUtils.trim(f.substring(1, pos));
+      f = StringUtils.trim(f.substring(pos));
     } else {
       country = "";
     }
@@ -62,8 +62,8 @@ public class Telephone implements Serializable {
       if (pos == -1) {
         return null;
       }
-      area = GNStrings.trim(f.substring(1, pos));
-      f = GNStrings.trim(f.substring(pos + 1));
+      area = StringUtils.trim(f.substring(1, pos));
+      f = StringUtils.trim(f.substring(pos + 1));
     } else {
       area = "";
     }
@@ -73,11 +73,11 @@ public class Telephone implements Serializable {
     if (pos == -1) { // not found
       extension = "";
     } else {
-      extension = GNStrings.trim(f.substring(pos + 1));
-      f = GNStrings.trim(f.substring(0, pos));
+      extension = StringUtils.trim(f.substring(pos + 1));
+      f = StringUtils.trim(f.substring(0, pos));
     }
     // rest is number
-    final String number = GNStrings.trim(f);
+    final String number = StringUtils.trim(f);
     // finally its finished!
     return new Telephone(0, 0, country, area, number, extension, type);
   }
@@ -214,8 +214,8 @@ public class Telephone implements Serializable {
     this.country = country;
     this.area = area;
     this.number = number.toUpperCase().replaceAll("[^A-Z0-9]", "");
-    this.extension = GNStrings.trim(extension);
-    this.type = GNStrings.trim(type);
+    this.extension = StringUtils.trim(extension);
+    this.type = StringUtils.trim(type);
   }
 
   private String format() {

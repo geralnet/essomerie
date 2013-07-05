@@ -12,7 +12,7 @@ import javax.imageio.ImageIO;
 
 import net.geral.lib.edt.Edt;
 import net.geral.lib.image.GNImages;
-import net.geral.lib.strings.GNStrings;
+import net.geral.lib.util.StringUtils;
 
 import org.apache.log4j.Logger;
 
@@ -103,10 +103,10 @@ public class PersonDocument implements Serializable {
   }
 
   public boolean hasDocument() {
-    if (GNStrings.trim(type).length() > 0) {
+    if (StringUtils.trim(type).length() > 0) {
       return true;
     }
-    if (GNStrings.trim(number).length() > 0) {
+    if (StringUtils.trim(number).length() > 0) {
       return true;
     }
     return false;

@@ -22,8 +22,8 @@ import net.geral.essomerie.shared.catalog.CatalogItem;
 import net.geral.essomerie.shared.person.Telephone;
 import net.geral.lib.datepicker.DatePickerPanel;
 import net.geral.lib.filechooser.GNFileChooser;
-import net.geral.lib.strings.GNStrings;
 import net.geral.lib.table.GNTableRenderer;
+import net.geral.lib.util.StringUtils;
 
 import org.apache.log4j.ConsoleAppender;
 import org.apache.log4j.Level;
@@ -202,7 +202,7 @@ public class Main {
           verbose("Will load: " + s);
         }
         try {
-          configFiles.add(GNStrings.toURL(s));
+          configFiles.add(StringUtils.toURL(s));
         } catch (final MalformedURLException e) {
           System.err.println("Invalid file/url: " + s);
           e.printStackTrace();
@@ -239,8 +239,8 @@ public class Main {
       }
 
       final String[] parts = s.substring(1).split("=", 2);
-      final String name = GNStrings.trim(parts[0]);
-      final String value = GNStrings.trim(parts[1]);
+      final String name = StringUtils.trim(parts[0]);
+      final String value = StringUtils.trim(parts[1]);
       if (parts.length != 2) {
         System.err.println("Invalid config line: " + s);
         System.exit(1);

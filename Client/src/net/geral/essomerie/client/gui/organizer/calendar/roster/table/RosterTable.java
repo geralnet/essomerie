@@ -29,8 +29,7 @@ public class RosterTable extends GNTable<RosterModel> {
 
   @Override
   protected boolean deleteClicked(final int viewRow, final int tableColumn) {
-    // TODO Auto-generated method stub
-    return false;
+    return true;
   }
 
   @Override

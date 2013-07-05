@@ -24,8 +24,8 @@ import net.geral.essomerie.shared.person.Person;
 import net.geral.essomerie.shared.person.PersonData;
 import net.geral.essomerie.shared.person.PersonDocument;
 import net.geral.essomerie.shared.person.PersonDocuments;
-import net.geral.gui.button.ActionButton;
 import net.geral.lib.filechooser.GNFileChooser;
+import net.geral.lib.gui.button.ActionButton;
 import net.geral.lib.imagepanel.GNImagePanel;
 
 import org.apache.log4j.Logger;

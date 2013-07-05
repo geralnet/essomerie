@@ -32,11 +32,11 @@ public class ResumoAcertosPrint extends CRPrintDocument {
 	    final LocalDate d = new LocalDate(r.datahora);
 	    if (!d.equals(last)) {
 		if (last == null) {
-		    separator();
+		    drawHorizontalLine();
 		}
 		last = d;
 		final String s = d.toString() + " (" + d.toString() + ")";
-		centralizar(s, new Font("SansSerif", Font.BOLD, 10));
+		writeCentralized(s, new Font("SansSerif", Font.BOLD, 10));
 	    }
 
 	    final LocalTime t = new LocalTime(r.datahora);

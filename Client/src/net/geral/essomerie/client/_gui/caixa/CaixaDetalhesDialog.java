@@ -20,9 +20,9 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import net.geral.essomerie._shared.CRUtil;
-import net.geral.gui.textfield.IntegerTextField;
-import net.geral.gui.textfield.formula.FormulaTextField;
-import net.geral.gui.textfield.formula.FormulaTextFieldListener;
+import net.geral.lib.gui.textfield.IntegerTextField;
+import net.geral.lib.gui.textfield.formula.FormulaTextField;
+import net.geral.lib.gui.textfield.formula.FormulaTextFieldListener;
 
 public class CaixaDetalhesDialog extends JDialog implements ItemListener,
     FormulaTextFieldListener<Integer>, ActionListener {

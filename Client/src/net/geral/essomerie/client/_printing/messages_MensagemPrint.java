@@ -27,7 +27,7 @@ public class messages_MensagemPrint extends CRPrintDocument {
 		writeBold("Data: ");
 		writeline(msg.getSent().toString());
 
-		separator();
+		drawHorizontalLine();
 
 		g.setFont(FONTE_MENSAGEM);
 		writeline(msg.getMessage());

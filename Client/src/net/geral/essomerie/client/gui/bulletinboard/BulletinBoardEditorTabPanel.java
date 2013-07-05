@@ -23,8 +23,8 @@ import net.geral.essomerie.client.gui.main.TabPanel;
 import net.geral.essomerie.client.resources.S;
 import net.geral.essomerie.shared.bulletinboard.BulletinBoardEntry;
 import net.geral.essomerie.shared.bulletinboard.BulletinBoardTitle;
-import net.geral.gui.button.ActionButton;
-import net.geral.lib.strings.GNStrings;
+import net.geral.lib.gui.button.ActionButton;
+import net.geral.lib.util.StringUtils;
 
 import org.apache.log4j.Logger;
 
@@ -199,7 +199,7 @@ public class BulletinBoardEditorTabPanel extends TabPanel implements
     try {
       // prepare & check title
       String title = txtTitle.getText();
-      title = GNStrings.trim(title);
+      title = StringUtils.trim(title);
       txtTitle.setText(title);
       if (title.length() == 0) {
         JOptionPane.showMessageDialog(this, S.BULLETINBOARD_INVALID_TITLE,

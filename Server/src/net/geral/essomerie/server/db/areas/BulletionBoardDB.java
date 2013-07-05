@@ -9,7 +9,7 @@ import net.geral.essomerie.server.db.PreparedResultSet;
 import net.geral.essomerie.shared.bulletinboard.BulletinBoardEntry;
 import net.geral.essomerie.shared.bulletinboard.BulletinBoardTitle;
 import net.geral.lib.jodatime.GNJoda;
-import net.geral.lib.strings._Conversor;
+import net.geral.lib.util.StringUtils;
 
 import org.joda.time.LocalDateTime;
 
@@ -71,7 +71,7 @@ public class BulletionBoardDB extends DatabaseArea {
 	String sql = "INSERT INTO `bulletinboard` (`id`,`title`,`contents`,`created_by`,`created_when`) "// insert
 		+ " VALUES (NULL, ?, UNHEX(?), ?, NOW())";// values
 	final int newId = db.insertLastId(sql, bbe.getTitle(),
-		_Conversor.toHex(bbe.getRtfContents()), userid);
+		StringUtils.toHex(bbe.getRtfContents()), userid);
 
 	if (bbe.getId() > 0) {
 	    sql = "UPDATE `bulletinboard` "// update

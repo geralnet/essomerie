@@ -10,8 +10,8 @@ import net.geral.essomerie.client.core.configuration.CoreConfiguration;
 import net.geral.essomerie.client.gui.messages.MessagesTabPanel;
 import net.geral.essomerie.client.resources.S;
 import net.geral.essomerie.shared.messages.Message;
-import net.geral.lib.strings.GNStrings;
 import net.geral.lib.table.GNTable;
+import net.geral.lib.util.StringUtils;
 
 public class MessagesTable extends GNTable<MessagesModel> {
   private static final long      serialVersionUID = 1L;
@@ -55,14 +55,14 @@ public class MessagesTable extends GNTable<MessagesModel> {
           public int compare(final Message o1, final Message o2) {
             final User u1 = Client.cache().users().get(o1.getFrom());
             final User u2 = Client.cache().users().get(o2.getFrom());
-            return GNStrings.compare(u1.getUsername(), u2.getUsername());
+            return StringUtils.compare(u1.getUsername(), u2.getUsername());
           }
         };
       case 2:
         return new Comparator<Message>() {
           @Override
           public int compare(final Message o1, final Message o2) {
-            return GNStrings.compare(o1.getMessage(), o2.getMessage());
+            return StringUtils.compare(o1.getMessage(), o2.getMessage());
           }
         };
       default:

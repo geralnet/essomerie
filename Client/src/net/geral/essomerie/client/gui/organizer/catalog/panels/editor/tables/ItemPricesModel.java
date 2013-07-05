@@ -2,8 +2,8 @@ package net.geral.essomerie.client.gui.organizer.catalog.panels.editor.tables;
 
 import net.geral.essomerie.shared.catalog.CatalogItem;
 import net.geral.essomerie.shared.money.Money;
-import net.geral.lib.strings.GNStrings;
 import net.geral.lib.table.GNTableModel;
+import net.geral.lib.util.StringUtils;
 
 import org.apache.log4j.Logger;
 
@@ -20,7 +20,7 @@ public class ItemPricesModel extends GNTableModel<Object[]> {
   protected Object[] changeEntry(final Object[] t, final int columnIndex,
       final Object aValue) {
     if (columnIndex == 0) {
-      final String to = GNStrings.trim(aValue.toString());
+      final String to = StringUtils.trim(aValue.toString());
       if (t[0].equals(to)) {
         return null;
       }

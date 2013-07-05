@@ -3,8 +3,8 @@ package net.geral.essomerie.client.gui.organizer.persons.editors.tables.document
 import java.util.ArrayList;
 
 import net.geral.essomerie.shared.person.PersonDocument;
-import net.geral.lib.strings.GNStrings;
 import net.geral.lib.table.GNTableModel;
+import net.geral.lib.util.StringUtils;
 
 public class PersonDocumentModel extends GNTableModel<PersonDocument> {
   private static final long serialVersionUID = 1L;
@@ -16,7 +16,7 @@ public class PersonDocumentModel extends GNTableModel<PersonDocument> {
   @Override
   protected PersonDocument changeEntry(final PersonDocument t,
       final int columnIndex, final Object aValue) {
-    final String value = GNStrings.trim(aValue.toString());
+    final String value = StringUtils.trim(aValue.toString());
     if (columnIndex == 0) {
       return t.withType(value);
     }

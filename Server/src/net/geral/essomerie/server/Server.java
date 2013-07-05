@@ -18,7 +18,7 @@ import net.geral.essomerie.shared.communication.IMessageType;
 import net.geral.essomerie.shared.communication.MessageData;
 import net.geral.essomerie.shared.communication.MessageSubSystem;
 import net.geral.lib.configuration.ConfigurationException;
-import net.geral.lib.strings.GNStrings;
+import net.geral.lib.util.StringUtils;
 
 import org.apache.log4j.ConsoleAppender;
 import org.apache.log4j.Level;
@@ -221,7 +221,7 @@ public class Server {
 		    verbose("Will load: " + s);
 		}
 		try {
-		    configFiles.add(GNStrings.toURL(s));
+		    configFiles.add(StringUtils.toURL(s));
 		} catch (final MalformedURLException e) {
 		    System.err.println("Invalid file/url: " + s);
 		}

@@ -2,22 +2,22 @@ package net.geral.essomerie.shared.person;
 
 import java.io.Serializable;
 
-import net.geral.lib.strings.GNStrings;
+import net.geral.lib.util.StringUtils;
 
 public class Person implements Serializable, Comparable<Person> {
   private static final long serialVersionUID = 1L;
 
   public static String createComparissonName(final String name) {
-    return GNStrings.removeAccents(name).toUpperCase();
+    return StringUtils.removeAccents(name).toUpperCase();
   }
 
   public static String createComparissonName(final String name,
       final String alias) {
-    return GNStrings.removeAccents(name + " (" + alias + ")").toUpperCase();
+    return StringUtils.removeAccents(name + " (" + alias + ")").toUpperCase();
   }
 
   public static Integer getIdOrNull(final String text) {
-    final int id = GNStrings.toInt(text, 0);
+    final int id = StringUtils.toInt(text, 0);
     if (id <= 0) {
       return null;
     }

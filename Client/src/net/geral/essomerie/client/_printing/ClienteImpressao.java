@@ -1,8 +1,7 @@
-package net.geral.essomerie.client._gui.agenda.clientes.impressao;
+package net.geral.essomerie.client._printing;
 
 import java.awt.Font;
 
-import net.geral.essomerie.client._printing.CRPrintDocument;
 import net.geral.essomerie.shared.person.PersonData;
 import net.geral.essomerie.shared.person.Telephone;
 
@@ -30,9 +29,9 @@ public class ClienteImpressao extends CRPrintDocument {
 
   @Override
   protected void printBody() {
-    centralizar("C#" + cliente.getId() + " - " + via, new Font("SansSerif",
+    writeCentralized("C#" + cliente.getId() + " - " + via, new Font("SansSerif",
         Font.BOLD, 10));
-    separator();
+    drawHorizontalLine();
     g.setFont(new Font("SansSerif", Font.BOLD, 10));
     writeline(cliente.getName());
     g.setFont(new Font("SansSerif", Font.PLAIN, 8));
@@ -65,7 +64,7 @@ public class ClienteImpressao extends CRPrintDocument {
       feed(ESPACO_LINHAS_EM_BRANCO);
       for (int i = 0; i < QUANTIDADE_LINHAS_EM_BRANCO; i++) {
         feed(ESPACO_LINHAS_EM_BRANCO);
-        separator(0.5f);
+        drawHorizontalLine(0.5f);
       }
       feed(ESPACO_LINHAS_EM_BRANCO);
     }

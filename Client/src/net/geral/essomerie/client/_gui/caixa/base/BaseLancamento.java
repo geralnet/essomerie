@@ -3,7 +3,7 @@ package net.geral.essomerie.client._gui.caixa.base;
 import java.security.InvalidParameterException;
 
 import net.geral.essomerie.shared.money.Money;
-import net.geral.lib.strings.GNStrings;
+import net.geral.lib.util.StringUtils;
 
 public abstract class BaseLancamento {
   public static final String SEPARATOR = "\t";
@@ -30,7 +30,7 @@ public abstract class BaseLancamento {
     if (s == null) {
       return null;
     }
-    if (GNStrings.trim(s).length() == 0) {
+    if (StringUtils.trim(s).length() == 0) {
       return null;
     }
     return s;
@@ -137,7 +137,7 @@ public abstract class BaseLancamento {
     }
 
     if (o instanceof String) {
-      if (GNStrings.trim(((String) o)).length() == 0) {
+      if (StringUtils.trim(((String) o)).length() == 0) {
         o = null;
       }
     }

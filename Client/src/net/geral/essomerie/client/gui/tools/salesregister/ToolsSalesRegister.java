@@ -47,8 +47,8 @@ import net.geral.lib.actiondelay.ActionDelayListener;
 import net.geral.lib.datepicker.DatePickerListener;
 import net.geral.lib.datepicker.DatePickerPanel;
 import net.geral.lib.jodatime.GNJoda;
-import net.geral.lib.strings.GNStrings;
 import net.geral.lib.textfieds.ErrorFieldSetter;
+import net.geral.lib.util.StringUtils;
 
 import org.apache.log4j.Logger;
 import org.joda.time.LocalDate;
@@ -422,7 +422,7 @@ public class ToolsSalesRegister extends TabPanel implements PersonsListener,
 
   private void changedComments() {
     if (Client.config().ToolsSalesCommentsRequired) {
-      efs.set(txtComments, GNStrings.trim(txtComments.getText()).length() > 0);
+      efs.set(txtComments, StringUtils.trim(txtComments.getText()).length() > 0);
     }
   }
 
@@ -493,7 +493,7 @@ public class ToolsSalesRegister extends TabPanel implements PersonsListener,
 
   private LocalDateTime getFieldDateTime() {
     // TODO create in GeralNET Library field DateTimeTextField
-    final String txt = GNStrings.trim(txtDateTime.getText());
+    final String txt = StringUtils.trim(txtDateTime.getText());
     if (txt.length() == 0) {
       return null;
     }
@@ -716,7 +716,7 @@ public class ToolsSalesRegister extends TabPanel implements PersonsListener,
     }
     // comments
     if (Client.config().ToolsSalesCommentsRequired
-        && (GNStrings.trim(txtComments.getText()).length() == 0)) {
+        && (StringUtils.trim(txtComments.getText()).length() == 0)) {
       return false;
     }
     // all ok

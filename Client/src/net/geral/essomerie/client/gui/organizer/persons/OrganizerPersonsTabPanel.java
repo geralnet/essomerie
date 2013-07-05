@@ -21,8 +21,8 @@ import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.TreeSelectionModel;
 
-import net.geral.essomerie.client._gui.agenda.clientes.impressao.ClienteImpressao;
-import net.geral.essomerie.client._gui.agenda.clientes.impressao.ClienteImpressao.ClienteImpressaoVia;
+import net.geral.essomerie.client._printing.ClienteImpressao;
+import net.geral.essomerie.client._printing.ClienteImpressao.ClienteImpressaoVia;
 import net.geral.essomerie.client.core.Client;
 import net.geral.essomerie.client.core.events.Events;
 import net.geral.essomerie.client.core.events.listeners.CallerIdListener;
@@ -43,10 +43,10 @@ import net.geral.essomerie.shared.person.PersonSales;
 import net.geral.essomerie.shared.person.PersonType;
 import net.geral.essomerie.shared.person.Telephone;
 import net.geral.essomerie.shared.person.Telephones;
-import net.geral.gui.button.ActionButton;
 import net.geral.lib.actiondelay.ActionDelay;
 import net.geral.lib.actiondelay.ActionDelayListener;
-import net.geral.printing.PrintSupport;
+import net.geral.lib.gui.button.ActionButton;
+import net.geral.lib.printing.PrintSupport;
 
 import org.apache.log4j.Logger;
 

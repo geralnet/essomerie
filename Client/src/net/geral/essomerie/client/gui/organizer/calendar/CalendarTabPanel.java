@@ -31,10 +31,10 @@ import net.geral.essomerie.client.gui.organizer.calendar.table.CalendarTable;
 import net.geral.essomerie.client.resources.S;
 import net.geral.essomerie.shared.calendar.CalendarEvent;
 import net.geral.essomerie.shared.roster.Roster;
-import net.geral.gui.button.ActionButton;
 import net.geral.lib.datepicker.DatePickerListener;
 import net.geral.lib.datepicker.DatePickerPanel;
-import net.geral.printing.PrintSupport;
+import net.geral.lib.gui.button.ActionButton;
+import net.geral.lib.printing.PrintSupport;
 
 import org.apache.log4j.Logger;
 import org.joda.time.LocalDate;

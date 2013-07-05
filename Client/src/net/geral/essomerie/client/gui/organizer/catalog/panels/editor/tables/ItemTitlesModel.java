@@ -1,8 +1,8 @@
 package net.geral.essomerie.client.gui.organizer.catalog.panels.editor.tables;
 
 import net.geral.essomerie.shared.catalog.CatalogItem;
-import net.geral.lib.strings.GNStrings;
 import net.geral.lib.table.GNTableModel;
+import net.geral.lib.util.StringUtils;
 
 public class ItemTitlesModel extends GNTableModel<String[]> {
   private static final long serialVersionUID = 1L;
@@ -14,7 +14,7 @@ public class ItemTitlesModel extends GNTableModel<String[]> {
   @Override
   protected String[] changeEntry(final String[] s, final int columnIndex,
       final Object aValue) {
-    final String to = GNStrings.trim(aValue.toString());
+    final String to = StringUtils.trim(aValue.toString());
     if (s[columnIndex].equals(to)) {
       return null;
     }

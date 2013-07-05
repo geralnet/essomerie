@@ -1,17 +1,19 @@
 package net.geral.essomerie.client._gui.caixa;
 
 import java.awt.Component;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
 import net.geral.essomerie.shared.money.Money;
-import net.geral.math.FormatadorDecimal;
 
 public class ValorTableCellRenderer extends DefaultTableCellRenderer {
-  private static final long       serialVersionUID = 1L;
+  private static final long  serialVersionUID = 1L;
 
-  private final FormatadorDecimal inteiro          = new FormatadorDecimal(0);
+  private final NumberFormat decimalFormat    = DecimalFormat
+                                                  .getIntegerInstance();
 
   @Override
   public Component getTableCellRendererComponent(final JTable table,
@@ -25,7 +27,7 @@ public class ValorTableCellRenderer extends DefaultTableCellRenderer {
       setText(value.toString());
     } else if (value instanceof Integer) {
       setHorizontalAlignment(TRAILING);
-      setText(inteiro.formatar(((Integer) value).intValue()));
+      setText(decimalFormat.format(((Integer) value).intValue()));
     } else {
       setHorizontalAlignment(LEADING);
     }

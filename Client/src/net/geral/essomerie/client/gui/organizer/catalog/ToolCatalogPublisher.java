@@ -31,7 +31,7 @@ import net.geral.essomerie.client.resources.S;
 import net.geral.essomerie.shared.catalog.CatalogGroup;
 import net.geral.essomerie.shared.catalog.CatalogItem;
 import net.geral.essomerie.shared.catalog.CatalogPublication;
-import net.geral.lib.strings.GNStrings;
+import net.geral.lib.util.StringUtils;
 
 import org.apache.log4j.Logger;
 
@@ -191,7 +191,7 @@ public class ToolCatalogPublisher extends TabPanel implements CatalogListener,
   }
 
   private void commentsChanged() {
-    final boolean empty = (GNStrings.trim(txtComments.getText()).length() == 0);
+    final boolean empty = (StringUtils.trim(txtComments.getText()).length() == 0);
     btnPublish.setEnabled(txtComments.isEnabled() && (!empty));
   }
 
@@ -208,7 +208,7 @@ public class ToolCatalogPublisher extends TabPanel implements CatalogListener,
   private void publish() {
     try {
       Client.connection().catalog()
-          .requestPublish(GNStrings.trim(txtComments.getText()));
+          .requestPublish(StringUtils.trim(txtComments.getText()));
       txtComments.setEnabled(false);
       btnPublish.setEnabled(false);
       btnPublish.setEnabled(false);

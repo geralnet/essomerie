@@ -3,7 +3,7 @@ package net.geral.essomerie.client.gui.inventory;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import net.geral.gui.textfield.DoubleTextField;
+import net.geral.lib.gui.textfield.DoubleTextField;
 
 //TODO check & translate
 public class QuantityTextField extends DoubleTextField implements KeyListener {

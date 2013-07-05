@@ -4,7 +4,7 @@ import net.geral.essomerie.shared.person.Addresses;
 import net.geral.essomerie.shared.person.Person;
 import net.geral.essomerie.shared.person.PersonData;
 import net.geral.essomerie.shared.person.Telephones;
-import net.geral.lib.strings.GNStrings;
+import net.geral.lib.util.StringUtils;
 
 public class PersonsListFilter {
   private final String  search;
@@ -20,14 +20,14 @@ public class PersonsListFilter {
 
   public PersonsListFilter(final String text, final boolean byId,
       final boolean byName, final boolean byTelephone, final boolean byAddress) {
-    search = GNStrings.trim(text);
+    search = StringUtils.trim(text);
 
     id = byId;
     name = byName;
     telephone = byTelephone;
     address = byAddress;
 
-    idSearch = id ? GNStrings.toInt(search, 0) : 0;
+    idSearch = id ? StringUtils.toInt(search, 0) : 0;
     nameSearch = name ? Person.createComparissonName(search) : null;
     telephoneSearch = telephone ? Telephones.createComparissonNumber(search)
         : null;

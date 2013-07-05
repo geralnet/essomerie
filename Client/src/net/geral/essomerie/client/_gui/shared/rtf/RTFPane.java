@@ -9,7 +9,7 @@ import javax.swing.text.rtf.RTFEditorKit;
 
 import net.geral.essomerie._shared.ByteReader;
 import net.geral.essomerie._shared.ByteWriter;
-import net.geral.printing.PrintSupport;
+import net.geral.lib.printing.PrintSupport;
 
 import org.apache.log4j.Logger;
 

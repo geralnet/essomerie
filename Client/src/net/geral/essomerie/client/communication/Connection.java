@@ -158,8 +158,8 @@ public class Connection extends Thread implements ICommunication {
           final Communication c = comm; // comm can become null
           if ((c != null) && c.isWorking()) {
             c.loop();
-          } else {
-            tryAgain(new IOException("closed"));
+          } else if (c != null) {
+            tryAgain(new IOException("closed (null=" + (c == null) + ")"));
           }
           while (runState()) {
             Thread.yield();

@@ -11,7 +11,7 @@ public class RTFPrint extends CRPrintDocument {
 
 	public RTFPrint(final RTFPane tp) {
 		final RTFPane pane = new RTFPane(tp.getRTF());
-		final Dimension d = new Dimension((int)(PRINTING_WIDTH / ESCALA), Integer.MAX_VALUE);
+		final Dimension d = new Dimension((int)(printWidth / ESCALA), Integer.MAX_VALUE);
 		pane.setSize(d);
 		d.height = pane.getPreferredSize().height;
 		pane.setSize(d);
