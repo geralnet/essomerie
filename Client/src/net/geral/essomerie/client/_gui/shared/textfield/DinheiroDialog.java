@@ -18,7 +18,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import net.geral.essomerie.client._gui.shared.label.TitleLabel;
+import net.geral.essomerie.client.gui.shared.label.TitleLabel;
 import net.geral.essomerie.client.gui.shared.textfield.MoneyTextField;
 import net.geral.essomerie.shared.money.Money;
 import net.geral.essomerie.shared.money.MoneyType;

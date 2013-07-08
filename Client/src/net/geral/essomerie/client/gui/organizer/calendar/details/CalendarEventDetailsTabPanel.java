@@ -7,11 +7,11 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 
-import net.geral.essomerie.client._gui.shared.label.TitleLabel;
 import net.geral.essomerie.client.core.Client;
 import net.geral.essomerie.client.core.events.Events;
 import net.geral.essomerie.client.core.events.listeners.CalendarListener;
 import net.geral.essomerie.client.gui.main.TabPanel;
+import net.geral.essomerie.client.gui.shared.label.TitleLabel;
 import net.geral.essomerie.client.resources.S;
 import net.geral.essomerie.shared.calendar.CalendarEvent;
 import net.geral.essomerie.shared.roster.Roster;

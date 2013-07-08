@@ -59,7 +59,8 @@ public class Connection extends Thread implements ICommunication {
 
     private boolean checkAccess(final MessageData md) throws IOException {
 	if (remoteVersion == null) {
-	    // must receive a version, if ok allow access
+	    // must receive a version request with the remote's version
+	    // if ok allow access
 	    if ((md.getSubSystem() == MessageSubSystem.System)
 		    && (md.getType() == SystemMessageType.InformVersion)) {
 		return true;

@@ -6,16 +6,21 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+import net.geral.essomerie._shared.UserPermission;
 import net.geral.essomerie.client.core.Client;
 import net.geral.essomerie.client.core.cache.caches.BulletinBoardCache;
 import net.geral.essomerie.client.core.events.Events;
 import net.geral.essomerie.client.core.events.listeners.BulletionBoardListener;
+import net.geral.essomerie.client.core.events.listeners.SystemListener;
 import net.geral.essomerie.client.resources.S;
+import net.geral.essomerie.shared.BuildInfo;
 import net.geral.essomerie.shared.bulletinboard.BulletinBoardEntry;
 import net.geral.essomerie.shared.bulletinboard.BulletinBoardTitle;
+import net.geral.essomerie.shared.communication.MessageData;
 
 //TODO what if bulletin board changes while the bulletin board menu is open?
-public class MainMenu extends JMenuBar implements BulletionBoardListener {
+public class MainMenu extends JMenuBar implements BulletionBoardListener,
+    SystemListener {
   private static final long serialVersionUID = 1L;
 
   private static String createSpacedLabel(final String lbl) {
@@ -34,6 +39,7 @@ public class MainMenu extends JMenuBar implements BulletionBoardListener {
   private final ActionListener listener;
 
   private JMenu                mBulletinBoard;
+  private JMenu                mSysOp;
 
   public MainMenu(final ActionListener listener) {
     this.listener = listener;
@@ -45,10 +51,11 @@ public class MainMenu extends JMenuBar implements BulletionBoardListener {
     // criarCaixa();
     // createDelivery();
     // criarCardapio();
-    // mSysAdmin = criarSysAdmin();
+    createSysOp();
     // criarExibir();
 
     Events.bulletinBoard().addListener(this);
+    Events.system().addListener(this);
   }
 
   private void addItem(final JMenu menu, final S s) {
@@ -92,7 +99,6 @@ public class MainMenu extends JMenuBar implements BulletionBoardListener {
   @Override
   public void bulletinBoardSaveSuccessful(final int oldId, final int newId) {
     // TODO Auto-generated method stub
-
   }
 
   @Override
@@ -151,6 +157,12 @@ public class MainMenu extends JMenuBar implements BulletionBoardListener {
     menu.add(tools);
   }
 
+  private void createSysOp() {
+    mSysOp = createMenu(S.MENU_SYSOP);
+    addItem(mSysOp, S.MENU_SYSOP_SCREENLOG);
+    mSysOp.setVisible(false);
+  }
+
   private void createUser() {
     final JMenu menu = createMenu(S.MENU_USER);
     addItem(menu, S.MENU_USER_MESSAGES);
@@ -158,6 +170,55 @@ public class MainMenu extends JMenuBar implements BulletionBoardListener {
     addSeparator(menu);
     // TODO criarItem(mUser, "Alterar Senha", "user_alterarSenha");
     addItem(menu, S.MENU_USER_LOGOUT);
+  }
+
+  @Override
+  public void systemConnected() {
+    mSysOp.setVisible(false);
+  }
+
+  @Override
+  public void systemConnecting(final String serverAddress, final int serverPort) {
+    mSysOp.setVisible(false);
+  }
+
+  @Override
+  public void systemConnectionFailed(final boolean willTryAgain) {
+    mSysOp.setVisible(false);
+  }
+
+  @Override
+  public void systemConnectionTryAgainCountdown(final int tryAgainCountdown) {
+    mSysOp.setVisible(false);
+  }
+
+  @Override
+  public void systemInformSent(final MessageData md) {
+  }
+
+  @Override
+  public void systemLoggedOut() {
+    mSysOp.setVisible(false);
+  }
+
+  @Override
+  public void systemLoginAccepted() {
+    final boolean b = Client.cache().users()
+        .checkLoggedPermission(UserPermission.SYSOP, false);
+    mSysOp.setVisible(b);
+  }
+
+  @Override
+  public void systemLoginFailed() {
+    mSysOp.setVisible(false);
+  }
+
+  @Override
+  public void systemPongReceived(final long lag) {
+  }
+
+  @Override
+  public void systemVersionReceived(final BuildInfo version) {
   }
 }
 
@@ -189,9 +250,3 @@ public class MainMenu extends JMenuBar implements BulletionBoardListener {
 // return submenu;
 // }
 //
-// private JMenu criarSysAdmin() {
-// final JMenu menu = createMenu("SysAdmin");
-// addItem(menu, "screen log", "sysadmin_screenlog");
-// menu.setVisible(false);
-// return menu;
-// }

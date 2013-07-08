@@ -359,10 +359,18 @@ public class ConnectionDialog extends JDialog implements ActionListener,
   public void systemVersionReceived(final BuildInfo serverVersion) {
     final BuildInfo clientVersion = BuildInfo.CURRENT;
 
-    if (serverVersion.absoluteBuild > clientVersion.absoluteBuild) {
+    final int res = clientVersion.compareTo(serverVersion);
+    if (res < 0) {
       logger.error("Client (" + clientVersion + ") outdated. Server: "
           + serverVersion);
-    } else if (serverVersion.absoluteBuild < clientVersion.absoluteBuild) {
+      JOptionPane
+          .showMessageDialog(
+              this,
+              S.VERSION_ERROR.s(clientVersion.toString(),
+                  serverVersion.toString()), S.TITLE_ERROR.s(),
+              JOptionPane.ERROR_MESSAGE);
+      System.exit(1);
+    } else if (res > 0) {
       logger.debug("Server (" + serverVersion + ") outdated. Client: "
           + clientVersion);
     } else {

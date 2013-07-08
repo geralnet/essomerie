@@ -1,10 +1,12 @@
 package net.geral.essomerie.shared;
 
 import java.io.Serializable;
+import java.util.Comparator;
 
 import org.joda.time.LocalDateTime;
 
-public final class BuildInfo implements Serializable {
+public final class BuildInfo implements Serializable, Comparable<BuildInfo>,
+    Comparator<BuildInfo> {
   private static final long     serialVersionUID = 1L;
 
   public static final BuildInfo CURRENT          = new BuildInfo();
@@ -37,6 +39,16 @@ public final class BuildInfo implements Serializable {
     revision = _revision;
     build = _build;
     absoluteBuild = _absoluteBuild;
+  }
+
+  @Override
+  public int compare(final BuildInfo o1, final BuildInfo o2) {
+    return Integer.compare(o1.absoluteBuild, o2.absoluteBuild);
+  }
+
+  @Override
+  public int compareTo(final BuildInfo o) {
+    return compare(this, o);
   }
 
   public String getVersion() {

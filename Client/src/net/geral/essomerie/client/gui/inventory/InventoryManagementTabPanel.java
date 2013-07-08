@@ -15,7 +15,6 @@ import net.geral.essomerie._shared.contagem.InventoryGroup;
 import net.geral.essomerie._shared.contagem.InventoryItem;
 import net.geral.essomerie._shared.contagem.InventoryLog;
 import net.geral.essomerie._shared.contagem.InventoryLogEntry;
-import net.geral.essomerie.client._gui.shared.label.TitleLabel;
 import net.geral.essomerie.client._printing.ResumoAcertosPrint;
 import net.geral.essomerie.client.core.Client;
 import net.geral.essomerie.client.core.events.Events;
@@ -23,6 +22,7 @@ import net.geral.essomerie.client.core.events.listeners.InventoryListener;
 import net.geral.essomerie.client.gui.inventory.items.InventoryItemsPanel;
 import net.geral.essomerie.client.gui.inventory.table.InventoryTable;
 import net.geral.essomerie.client.gui.main.TabPanel;
+import net.geral.essomerie.client.gui.shared.label.TitleLabel;
 import net.geral.essomerie.client.resources.S;
 import net.geral.lib.printing.PrintSupport;
 

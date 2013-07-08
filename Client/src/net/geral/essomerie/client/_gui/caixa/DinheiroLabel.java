@@ -1,4 +1,4 @@
-package net.geral.essomerie.client._gui.shared.label;
+package net.geral.essomerie.client._gui.caixa;
 
 import java.awt.Color;
 

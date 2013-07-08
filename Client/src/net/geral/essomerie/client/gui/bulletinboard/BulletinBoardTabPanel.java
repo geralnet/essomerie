@@ -15,12 +15,12 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EtchedBorder;
 
-import net.geral.essomerie.client._gui.shared.label.TitleLabel;
-import net.geral.essomerie.client._gui.shared.rtf.RTFPane;
 import net.geral.essomerie.client.core.Client;
 import net.geral.essomerie.client.core.events.Events;
 import net.geral.essomerie.client.core.events.listeners.BulletionBoardListener;
 import net.geral.essomerie.client.gui.main.TabPanel;
+import net.geral.essomerie.client.gui.shared.label.TitleLabel;
+import net.geral.essomerie.client.gui.shared.rtf.RTFPane;
 import net.geral.essomerie.client.resources.S;
 import net.geral.essomerie.shared.bulletinboard.BulletinBoardEntry;
 import net.geral.essomerie.shared.bulletinboard.BulletinBoardTitle;

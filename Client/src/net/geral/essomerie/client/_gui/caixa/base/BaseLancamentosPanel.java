@@ -8,8 +8,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
+import net.geral.essomerie.client._gui.caixa.DinheiroLabel;
 import net.geral.essomerie.client._gui.caixa.LancamentosListener;
-import net.geral.essomerie.client._gui.shared.label.DinheiroLabel;
 import net.geral.essomerie.shared.money.Money;
 
 public abstract class BaseLancamentosPanel extends JPanel implements

@@ -8,9 +8,9 @@ public enum SystemMessageType implements IMessageType {
   Ping,
   Pong,
   Processed,
-  InformVersion,
   InformLoginAccepted,
   InformLoginFailed,
+  InformVersion,
   InformError;
 
   @Override

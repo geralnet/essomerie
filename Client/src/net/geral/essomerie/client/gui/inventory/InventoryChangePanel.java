@@ -30,10 +30,10 @@ import net.geral.essomerie._shared.contagem.ContagemMotivo;
 import net.geral.essomerie._shared.contagem.ContagemMotivos;
 import net.geral.essomerie._shared.contagem.InventoryItem;
 import net.geral.essomerie._shared.contagem.InventoryLog;
-import net.geral.essomerie.client._gui.shared.label.TitleLabel;
 import net.geral.essomerie.client.core.Client;
 import net.geral.essomerie.client.gui.inventory.logtable.InventoryLogTable;
 import net.geral.essomerie.client.gui.inventory.table.InventoryTable;
+import net.geral.essomerie.client.gui.shared.label.TitleLabel;
 import net.geral.lib.util.StringUtils;
 
 import org.apache.log4j.Logger;

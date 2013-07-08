@@ -2,95 +2,131 @@ package net.geral.essomerie.client.core.cache.caches;
 
 import java.util.HashMap;
 
-import net.geral.essomerie.client.core.events.Events;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+
 import net.geral.essomerie._shared.User;
+import net.geral.essomerie._shared.UserPermission;
 import net.geral.essomerie._shared.UserPermissions;
+import net.geral.essomerie.client.core.events.Events;
+import net.geral.essomerie.client.resources.S;
 
 import org.apache.log4j.Logger;
 
 public class UsersCache {
-	private static final Logger logger = Logger.getLogger(UsersCache.class);
-	private final HashMap<Integer, User> users = new HashMap<>();
-	private int logged = 0;
-	private UserPermissions loggedPermissions = new UserPermissions();
+  private static final Logger          logger            = Logger
+                                                             .getLogger(UsersCache.class);
+  private final HashMap<Integer, User> users             = new HashMap<>();
+  private int                          logged            = 0;
+  private UserPermissions              loggedPermissions = new UserPermissions();
 
-	public synchronized boolean contains(final int iduser) {
-		return users.containsKey(iduser);
-	}
+  public synchronized boolean checkLoggedPermission(final UserPermission p,
+      final boolean withPin) {
+    if (loggedPermissions == null) {
+      return false;
+    }
+    if (!loggedPermissions.get(p)) {
+      return false;
+    }
+    // from here on only if has the permission
+    if (!withPin) {
+      return true;
+    }
 
-	public synchronized int count() {
-		return users.size();
-	}
+    final JPanel panel = new JPanel();
+    final JLabel label = new JLabel(S.SYSOP_PIN_REQUEST.s());
+    final JPasswordField pass = new JPasswordField();
+    panel.add(label);
+    panel.add(pass);
+    final String[] options = new String[] { "OK", "Cancel" };
+    final int res = JOptionPane.showOptionDialog(null, panel,
+        S.TITLE_CONFIRM.s(), JOptionPane.OK_CANCEL_OPTION,
+        JOptionPane.QUESTION_MESSAGE, null, null, options[0]);
+    if (res != 0) {
+      // cancel
+      return false;
+    }
 
-	public synchronized User get(final int iduser) {
-		final User u = users.get(iduser);
-		if (u != null) {
-			return u;
-		}
-		return new User(iduser, "U#" + iduser, "[U#" + iduser + "]");
-	}
+    // check pin
+    final char[] password = pass.getPassword();
+    System.out.println("Your password is: " + new String(password));
+    return true;
+  }
 
-	public synchronized User[] getAll() {
-		final User[] us = new User[users.size()];
-		int i = 0;
-		for (final User u : users.values()) {
-			us[i++] = u;
-		}
-		return us;
-	}
+  public synchronized boolean contains(final int iduser) {
+    return users.containsKey(iduser);
+  }
 
-	public synchronized User getLogged() {
-		final User u = get(logged);
-		return u;
-	}
+  public synchronized int count() {
+    return users.size();
+  }
 
-	public UserPermissions getLoggedPermissions() {
-		return loggedPermissions;
-	}
+  public synchronized User get(final int iduser) {
+    final User u = users.get(iduser);
+    if (u != null) {
+      return u;
+    }
+    return new User(iduser, "U#" + iduser, "[U#" + iduser + "]");
+  }
 
-	public synchronized void informChanged(final User u) {
-		// remove
-		if (users.remove(u.getId()) == null) {
-			logger.warn("Could not remove old value when changing, id: "
-					+ u.getId());
-		}
-		// add
-		users.put(u.getId(), u);
-		// fire
-		Events.users().fireChanged(u);
-	}
+  public synchronized User[] getAll() {
+    final User[] us = new User[users.size()];
+    int i = 0;
+    for (final User u : users.values()) {
+      us[i++] = u;
+    }
+    return us;
+  }
 
-	public synchronized void informCreated(final User u) {
-		// remove (should not happen)
-		if (users.remove(u.getId()) != null) {
-			logger.warn("Removed (but not expected to) old value when adding, id: "
-					+ u.getId());
-		}
-		// add
-		users.put(u.getId(), u);
-		// fire
-		Events.users().fireCreated(u);
-	}
+  public synchronized User getLogged() {
+    final User u = get(logged);
+    return u;
+  }
 
-	public synchronized void informDeleted(final int iduser) {
-		// remove
-		if (users.remove(iduser) == null) {
-			logger.warn("Could not remove, id: " + iduser);
-		}
-		// fire
-		Events.users().fireDeleted(iduser);
-	}
+  public synchronized void informChanged(final User u) {
+    // remove
+    if (users.remove(u.getId()) == null) {
+      logger.warn("Could not remove old value when changing, id: " + u.getId());
+    }
+    // add
+    users.put(u.getId(), u);
+    // fire
+    Events.users().fireChanged(u);
+  }
 
-	public synchronized void informList(final User[] list) {
-		users.clear();
-		for (final User u : list) {
-			users.put(u.getId(), u);
-		}
-		Events.users().fireCacheReloaded();
-	}
+  public synchronized void informCreated(final User u) {
+    // remove (should not happen)
+    if (users.remove(u.getId()) != null) {
+      logger.warn("Removed (but not expected to) old value when adding, id: "
+          + u.getId());
+    }
+    // add
+    users.put(u.getId(), u);
+    // fire
+    Events.users().fireCreated(u);
+  }
 
-	public void setLogged(final int id, final UserPermissions permissions) {
-		logged = id;
-		loggedPermissions = permissions;
-	}
+  public synchronized void informDeleted(final int iduser) {
+    // remove
+    if (users.remove(iduser) == null) {
+      logger.warn("Could not remove, id: " + iduser);
+    }
+    // fire
+    Events.users().fireDeleted(iduser);
+  }
+
+  public synchronized void informList(final User[] list) {
+    users.clear();
+    for (final User u : list) {
+      users.put(u.getId(), u);
+    }
+    Events.users().fireCacheReloaded();
+  }
+
+  public void setLogged(final int id, final UserPermissions permissions) {
+    logged = id;
+    loggedPermissions = permissions;
+  }
 }

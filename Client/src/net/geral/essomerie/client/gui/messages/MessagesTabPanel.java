@@ -20,14 +20,14 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import net.geral.essomerie.client._gui.shared.label.ErroLabel;
-import net.geral.essomerie.client._gui.shared.label.TitleLabel;
 import net.geral.essomerie.client._printing.messages_MensagemPrint;
 import net.geral.essomerie.client.core.Client;
 import net.geral.essomerie.client.core.events.Events;
 import net.geral.essomerie.client.core.events.listeners.MessagesListener;
 import net.geral.essomerie.client.gui.main.TabPanel;
 import net.geral.essomerie.client.gui.messages.table.MessagesTable;
+import net.geral.essomerie.client.gui.shared.label.ErroLabel;
+import net.geral.essomerie.client.gui.shared.label.TitleLabel;
 import net.geral.essomerie.client.resources.S;
 import net.geral.essomerie.shared.messages.Message;
 import net.geral.lib.gui.button.ActionButton;

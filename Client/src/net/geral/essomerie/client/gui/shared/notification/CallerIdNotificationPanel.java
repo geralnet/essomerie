@@ -13,7 +13,7 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
-import net.geral.essomerie.client._gui.shared.label.TitleLabel;
+import net.geral.essomerie.client.gui.shared.label.TitleLabel;
 import net.geral.essomerie.client.resources.S;
 import net.geral.essomerie.shared.person.PersonData;
 import net.geral.essomerie.shared.person.Telephone;

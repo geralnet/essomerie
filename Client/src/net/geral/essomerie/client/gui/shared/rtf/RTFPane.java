@@ -1,4 +1,4 @@
-package net.geral.essomerie.client._gui.shared.rtf;
+package net.geral.essomerie.client.gui.shared.rtf;
 
 import java.awt.print.PrinterException;
 
@@ -9,11 +9,11 @@ import javax.swing.text.rtf.RTFEditorKit;
 
 import net.geral.essomerie._shared.ByteReader;
 import net.geral.essomerie._shared.ByteWriter;
+import net.geral.essomerie.client._printing.RTFPrint;
 import net.geral.lib.printing.PrintSupport;
 
 import org.apache.log4j.Logger;
 
-//TODO translate
 public class RTFPane extends JTextPane {
   private static final long   serialVersionUID = 1L;
   private static final Logger logger           = Logger

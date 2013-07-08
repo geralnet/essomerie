@@ -20,9 +20,9 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import net.geral.essomerie._shared.User;
-import net.geral.essomerie.client._gui.shared.label.TitleLabel;
 import net.geral.essomerie.client.core.Client;
 import net.geral.essomerie.client.gui.main.TabPanel;
+import net.geral.essomerie.client.gui.shared.label.TitleLabel;
 import net.geral.essomerie.client.resources.S;
 import net.geral.lib.gui.button.ActionButton;
 import net.geral.lib.util.StringUtils;

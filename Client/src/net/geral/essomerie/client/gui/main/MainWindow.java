@@ -17,6 +17,8 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.WindowConstants;
 
+import net.geral.essomerie._shared.UserPermission;
+import net.geral.essomerie.client._gui.sysadmin.ScreenLogTabPanel;
 import net.geral.essomerie.client.core.Client;
 import net.geral.essomerie.client.core.events.Events;
 import net.geral.essomerie.client.core.events.listeners.CallerIdListener;
@@ -203,6 +205,7 @@ public class MainWindow extends JFrame implements ActionListener,
   }
 
   private boolean execute(String cmd) throws IOException {
+    // TODO remove unused items
     String param = "";
     if (cmd.indexOf(':') != -1) {
       final String[] parts = cmd.split(":", 2);
@@ -242,6 +245,13 @@ public class MainWindow extends JFrame implements ActionListener,
     // openTab(OrganizerPersonsTabPanel.class); }
     if (S.MENU_INVENTORY_MANAGEMENT.name().equals(cmd)) {
       return openTab(InventoryManagementTabPanel.class);
+    }
+    if (S.MENU_SYSOP_SCREENLOG.name().equals(cmd)) {
+      if (Client.cache().users()
+          .checkLoggedPermission(UserPermission.SYSOP_SCREENLOG, true)) {
+        return openTab(ScreenLogTabPanel.class);
+      }
+      return false;
     }
     // if ("cardapio_editar".equals(cmd)) { return
     // openTab(CardapioEditorPanel.class); }

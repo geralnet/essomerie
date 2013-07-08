@@ -14,7 +14,6 @@ import javax.swing.border.MatteBorder;
 
 import net.geral.essomerie.client._gui.caixa.panels.plantao.PlantaoLancamentos;
 import net.geral.essomerie.client._gui.caixa.panels.salao.SalaoLancamentos;
-import net.geral.essomerie.client._gui.shared.label.DinheiroLabel;
 
 public class ResumoMesasPanel extends JPanel {
 	private static final long			serialVersionUID	= 1L;

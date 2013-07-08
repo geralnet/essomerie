@@ -219,7 +219,11 @@ public enum S {
   ORGANIZER_CATALOG_EDITOR_PRICES("Prices"),
   ORGANIZER_CATALOG_EDITOR_ADDITEM("Add Item"),
   ORGANIZER_CATALOG_EDITOR_ADDGROUP("Add Group"),
-  BUTTON_REMOVE("Remove");
+  BUTTON_REMOVE("Remove"),
+  MENU_SYSOP("SysOp"),
+  SYSOP_PIN_REQUEST("Please enter your SysOp PIN:"),
+  MENU_SYSOP_SCREENLOG("Screen Log Viewer"),
+  VERSION_ERROR("This software is outdated, please update!\n\nClient: v%1$s\nServer: v%2$s");
 
   private static final Logger            logger   = Logger.getLogger(S.class);
   private static HashMap<String, String> messages = new HashMap<>();

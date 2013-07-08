@@ -1,4 +1,4 @@
-package net.geral.essomerie.client._gui.shared.rtf;
+package net.geral.essomerie.client.gui.shared.rtf;
 
 import java.awt.BorderLayout;
 import java.awt.Color;

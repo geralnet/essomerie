@@ -26,7 +26,6 @@ import net.geral.essomerie.client._gui.caixa.panels.plantao.PlantaoPanel;
 import net.geral.essomerie.client._gui.caixa.panels.saidas.SaidasLancamentosPanel;
 import net.geral.essomerie.client._gui.caixa.panels.salao.SalaoPanel;
 import net.geral.essomerie.client._gui.caixa.panels.viagem.ViagemPanel;
-import net.geral.essomerie.client._gui.shared.label.DinheiroLabel;
 import net.geral.essomerie.client.gui.main.TabPanel;
 import net.geral.essomerie.shared.money.Money;
 
