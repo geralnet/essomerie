@@ -23,8 +23,8 @@ public final class BuildInfo implements Serializable, Comparable<BuildInfo>,
     debug = false; // [BUILDINFO:DEBUG]
     date = new LocalDateTime(1372870966050L); // [BUILDINFO:NOW]
     major = 0;
-    minor = 0;
-    revision = 1;
+    minor = 3;
+    revision = 0;
     build = 99; // [BUILDINFO:INCREMENT]
     absoluteBuild = 106; // [BUILDINFO:INCREMENT]
   }
@@ -43,7 +43,26 @@ public final class BuildInfo implements Serializable, Comparable<BuildInfo>,
 
   @Override
   public int compare(final BuildInfo o1, final BuildInfo o2) {
-    return Integer.compare(o1.absoluteBuild, o2.absoluteBuild);
+    int i;
+
+    i = Integer.compare(o1.major, o2.major);
+    if (i != 0) {
+      return i;
+    }
+    i = Integer.compare(o1.minor, o2.minor);
+    if (i != 0) {
+      return i;
+    }
+    i = Integer.compare(o1.revision, o2.revision);
+    if (i != 0) {
+      return i;
+    }
+    i = Integer.compare(o1.build, o2.build);
+    if (i != 0) {
+      return i;
+    }
+
+    return 0;
   }
 
   @Override
