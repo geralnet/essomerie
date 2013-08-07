@@ -9,6 +9,7 @@ import net.geral.essomerie.server.db.areas.CatalogDB;
 import net.geral.essomerie.server.db.areas.InventoryDB;
 import net.geral.essomerie.server.db.areas.MessageDB;
 import net.geral.essomerie.server.db.areas.PersonDB;
+import net.geral.essomerie.server.db.areas.SysopDB;
 import net.geral.essomerie.server.db.areas.UsersDB;
 
 import org.apache.log4j.Logger;
@@ -23,6 +24,7 @@ public class Database extends MySQL {
     private final MessageDB message = new MessageDB(this);
     private final UsersDB users = new UsersDB(this);
     private final CatalogDB catalog = new CatalogDB(this);
+    private final SysopDB sysop = new SysopDB(this);
 
     private int execution_id = 0;
 
@@ -70,6 +72,7 @@ public class Database extends MySQL {
 	if (!super.open(config)) {
 	    return false;
 	}
+	sysop.updateSystemDatabaseName();
 	try {
 	    execution_id = insertLastId("INSERT INTO `log_execution` (`started`) VALUES (NOW())");
 	    return true;
@@ -82,6 +85,10 @@ public class Database extends MySQL {
 
     public PersonDB person() {
 	return person;
+    }
+
+    public SysopDB sysop() {
+	return sysop;
     }
 
     public UsersDB users() {

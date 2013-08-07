@@ -2,16 +2,11 @@ package net.geral.essomerie.client.core.cache.caches;
 
 import java.util.HashMap;
 
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-
 import net.geral.essomerie._shared.User;
 import net.geral.essomerie._shared.UserPermission;
 import net.geral.essomerie._shared.UserPermissions;
 import net.geral.essomerie.client.core.events.Events;
-import net.geral.essomerie.client.resources.S;
+import net.geral.essomerie.client.gui.shared.PinInputDialog;
 
 import org.apache.log4j.Logger;
 
@@ -35,23 +30,21 @@ public class UsersCache {
       return true;
     }
 
-    final JPanel panel = new JPanel();
-    final JLabel label = new JLabel(S.SYSOP_PIN_REQUEST.s());
-    final JPasswordField pass = new JPasswordField();
-    panel.add(label);
-    panel.add(pass);
-    final String[] options = new String[] { "OK", "Cancel" };
-    final int res = JOptionPane.showOptionDialog(null, panel,
-        S.TITLE_CONFIRM.s(), JOptionPane.OK_CANCEL_OPTION,
-        JOptionPane.QUESTION_MESSAGE, null, null, options[0]);
-    if (res != 0) {
-      // cancel
+    if (!getLogged().hasPIN()) {
+      PinInputDialog.notPinAlert();
+      return false;
+    }
+
+    final char[] pin = PinInputDialog.check();
+    if (pin == null) {
       return false;
     }
 
     // check pin
-    final char[] password = pass.getPassword();
-    System.out.println("Your password is: " + new String(password));
+    if (!getLogged().checkPIN(pin)) {
+      PinInputDialog.wrongPinAlert();
+      return false;
+    }
     return true;
   }
 
@@ -68,7 +61,7 @@ public class UsersCache {
     if (u != null) {
       return u;
     }
-    return new User(iduser, "U#" + iduser, "[U#" + iduser + "]");
+    return new User(iduser, "U#" + iduser, "[U#" + iduser + "]", null);
   }
 
   public synchronized User[] getAll() {

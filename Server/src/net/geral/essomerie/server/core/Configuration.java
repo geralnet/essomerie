@@ -19,7 +19,12 @@ public class Configuration extends ConfigurationBase {
     public String MysqlDatabase = "essomerie";
 
     /**
-     * MySQL Username authenticate.
+     * MySQL System Database (storage of system management data).
+     */
+    public String MysqlSystemDatabase = "essomerie_system";
+
+    /**
+     * MySQL username to use.
      */
     public String MysqlUsername = "root";
 

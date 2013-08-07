@@ -383,7 +383,7 @@ public class ConnectionDialog extends JDialog implements ActionListener,
     User selected = (User) cbUsername.getSelectedItem();
     cbUsername.removeAllItems();
 
-    cbUsername.addItem(new User(-1, "", ""));
+    cbUsername.addItem(new User(-1, "", "", null));
     for (final User u : users) {
       if ((selected != null) && (selected.getId() == u.getId())) {
         selected = u;

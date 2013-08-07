@@ -222,8 +222,26 @@ public enum S {
   BUTTON_REMOVE("Remove"),
   MENU_SYSOP("SysOp"),
   SYSOP_PIN_REQUEST("Please enter your SysOp PIN:"),
-  MENU_SYSOP_SCREENLOG("Screen Log Viewer"),
-  VERSION_ERROR("This software is outdated, please update!\n\nClient: v%1$s\nServer: v%2$s");
+  MENU_SYSOP_DEVICES("Devices"),
+  VERSION_ERROR("This software is outdated, please update!\n\nClient: v%1$s\nServer: v%2$s"),
+  SYSOP_PIN_MISSING("You need a SysOp PIN to use this feature."),
+  SYSOP_PIN_WRONG("Invalid SysOp PIN."),
+  SYSOP_DEVICES("SysOp - Devices"),
+  SYSOP_DEVICES_TYPE("Type"),
+  SYSOP_DEVICES_NAME("Name"),
+  SYSOP_DEVICES_ROLE("Role"),
+  SYSOP_DEVICES_OS("OS"),
+  SYSOP_DEVICES_VERSION("Version"),
+  SYSOP_DEVICES_CPU("CPU"),
+  SYSOP_DEVICES_MEMORY("Memory"),
+  SYSOP_DEVICES_HOSTNAME("Hostname"),
+  SYSOP_DEVICES_MAC("MAC"),
+  SYSOP_DEVICES_IP("IP"),
+  SYSOP_DEVICES_INTERFACES_NAME("Name"),
+  SYSOP_DEVICES_INTERFACES_MAC("MAC"),
+  SYSOP_DEVICES_INTERFACES_TYPE("Type"),
+  SYSOP_DEVICES_INTERFACES_IP("IP"),
+  SYSOP_DEVICES_INTERFACES_HOSTNAMES("Hostnames");
 
   private static final Logger            logger   = Logger.getLogger(S.class);
   private static HashMap<String, String> messages = new HashMap<>();

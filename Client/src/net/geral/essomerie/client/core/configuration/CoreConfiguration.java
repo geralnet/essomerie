@@ -240,4 +240,34 @@ public class CoreConfiguration extends ConfigurationBase {
   public GNTableColumnWidth TableColumnWidth_Catalog_ItemPrice_Code             = null;
 
   public GNTableColumnWidth TableColumnWidth_Catalog_ItemPrice_Price            = null;
+
+  public GNTableColumnWidth TableColumnWidth_SysOp_Devices_Type                 = null;
+
+  public GNTableColumnWidth TableColumnWidth_SysOp_Devices_Name                 = null;
+
+  public GNTableColumnWidth TableColumnWidth_SysOp_Devices_Role                 = null;
+
+  public GNTableColumnWidth TableColumnWidth_SysOp_Devices_OS                   = null;
+
+  public GNTableColumnWidth TableColumnWidth_SysOp_Devices_Version              = null;
+
+  public GNTableColumnWidth TableColumnWidth_SysOp_Devices_CPU                  = null;
+
+  public GNTableColumnWidth TableColumnWidth_SysOp_Devices_Memory               = null;
+
+  public GNTableColumnWidth TableColumnWidth_SysOp_Devices_Hostname             = null;
+
+  public GNTableColumnWidth TableColumnWidth_SysOp_Devices_MAC                  = null;
+
+  public GNTableColumnWidth TableColumnWidth_SysOp_Devices_IP                   = null;
+
+  public GNTableColumnWidth TableColumnWidth_SysOp_Devices_Interfaces_Name      = null;
+
+  public GNTableColumnWidth TableColumnWidth_SysOp_Devices_Interfaces_MAC       = null;
+
+  public GNTableColumnWidth TableColumnWidth_SysOp_Devices_Interfaces_Type      = null;
+
+  public GNTableColumnWidth TableColumnWidth_SysOp_Devices_Interfaces_IP        = null;
+
+  public GNTableColumnWidth TableColumnWidth_SysOp_Devices_Interfaces_Hostnames = null;
 }

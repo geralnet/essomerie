@@ -18,7 +18,6 @@ import javax.swing.JTabbedPane;
 import javax.swing.WindowConstants;
 
 import net.geral.essomerie._shared.UserPermission;
-import net.geral.essomerie.client._gui.sysadmin.ScreenLogTabPanel;
 import net.geral.essomerie.client.core.Client;
 import net.geral.essomerie.client.core.events.Events;
 import net.geral.essomerie.client.core.events.listeners.CallerIdListener;
@@ -33,6 +32,7 @@ import net.geral.essomerie.client.gui.organizer.catalog.ToolCatalogPublisher;
 import net.geral.essomerie.client.gui.organizer.persons.OrganizerPersonsTabPanel;
 import net.geral.essomerie.client.gui.shared.notification.CallerIdNotificationPanel;
 import net.geral.essomerie.client.gui.shared.notification.NotificationWindow;
+import net.geral.essomerie.client.gui.sysop.devices.DevicesTabPanel;
 import net.geral.essomerie.client.gui.tools.salesregister.ToolsSalesRegister;
 import net.geral.essomerie.client.resources.IMG;
 import net.geral.essomerie.client.resources.S;
@@ -246,10 +246,10 @@ public class MainWindow extends JFrame implements ActionListener,
     if (S.MENU_INVENTORY_MANAGEMENT.name().equals(cmd)) {
       return openTab(InventoryManagementTabPanel.class);
     }
-    if (S.MENU_SYSOP_SCREENLOG.name().equals(cmd)) {
+    if (S.MENU_SYSOP_DEVICES.name().equals(cmd)) {
       if (Client.cache().users()
-          .checkLoggedPermission(UserPermission.SYSOP_SCREENLOG, true)) {
-        return openTab(ScreenLogTabPanel.class);
+          .checkLoggedPermission(UserPermission.SYSOP_DEVICES, true)) {
+        return openTab(DevicesTabPanel.class);
       }
       return false;
     }

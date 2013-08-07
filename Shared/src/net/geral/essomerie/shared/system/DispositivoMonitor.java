@@ -1,7 +1,9 @@
-package net.geral.essomerie._shared.dispositivos;
+package net.geral.essomerie.shared.system;
 
 import org.joda.time.LocalDateTime;
 
+//FIXME rename or fix or delete
+@Deprecated
 public class DispositivoMonitor {
   public final int           id;
   public final LocalDateTime datahora;

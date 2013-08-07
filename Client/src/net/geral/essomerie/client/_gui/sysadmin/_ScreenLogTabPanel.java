@@ -18,16 +18,17 @@ import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import net.geral.essomerie._shared.dispositivos.DispositivoMonitor;
 import net.geral.essomerie.client.gui.main.TabPanel;
+import net.geral.essomerie.shared.system.DispositivoMonitor;
 
 import org.apache.log4j.Logger;
 
-public class ScreenLogTabPanel extends TabPanel implements
+@Deprecated
+public class _ScreenLogTabPanel extends TabPanel implements
     ListSelectionListener {
   private static final long                               serialVersionUID = 1L;
   private static final Logger                             logger           = Logger
-                                                                               .getLogger(ScreenLogTabPanel.class);
+                                                                               .getLogger(_ScreenLogTabPanel.class);
 
   private final DefaultListModel<DispositivoMonitorEntry> listDispositivosModel;
   private final JList<DispositivoMonitorEntry>            listDispositivos;
@@ -38,7 +39,7 @@ public class ScreenLogTabPanel extends TabPanel implements
   private final JLabel                                    lblLegenda;
   private final JCheckBox                                 cbReduzir;
 
-  public ScreenLogTabPanel() {
+  public _ScreenLogTabPanel() {
     setLayout(new BorderLayout(0, 0));
 
     final JSplitPane splitRight = new JSplitPane();

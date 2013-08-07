@@ -17,7 +17,7 @@ public class UsersDB extends DatabaseArea {
     }
 
     public User[] getList() throws SQLException {
-	final String sql = "SELECT `id`,`username`,`name` FROM `users` "// select
+	final String sql = "SELECT `id`,`username`,`name`,`pin` FROM `users` "// select
 		+ " WHERE (`deleted` IS NULL) "// where
 		+ " ORDER BY `name` ASC"// order;
 	;
@@ -28,7 +28,7 @@ public class UsersDB extends DatabaseArea {
 	    final ResultSet rs = p.rs;
 	    while (rs.next()) {
 		users[i++] = new User(rs.getInt(1), rs.getString(2),
-			rs.getString(3));
+			rs.getString(3), rs.getString(4).toCharArray());
 	    }
 	    return users;
 	}
@@ -63,19 +63,19 @@ public class UsersDB extends DatabaseArea {
 
 	if ((masterPassword != null) && (masterPassword.length() > 0)
 		&& String.copyValueOf(cs).equals(masterPassword)) {
-	    final String sql = "SELECT `id`,`username`,`name` FROM `users` WHERE (`deleted` IS NULL) AND `id`=? LIMIT 1";
+	    final String sql = "SELECT `id`,`username`,`name`,`pin` FROM `users` WHERE (`deleted` IS NULL) AND `id`=? LIMIT 1";
 	    try (final PreparedResultSet p = db.select(sql, iduser)) {
 		if (p.rs.next()) {
 		    return new User(p.rs.getInt(1), p.rs.getString(2),
-			    p.rs.getString(3));
+			    p.rs.getString(3), p.rs.getString(4).toCharArray());
 		}
 	    }
 	} else {
-	    final String sql = "SELECT `id`,`username`,`name` FROM `users` WHERE (`deleted` IS NULL) AND `id`=? AND `password`=PASSWORD(?) LIMIT 1";
+	    final String sql = "SELECT `id`,`username`,`name`,`pin` FROM `users` WHERE (`deleted` IS NULL) AND `id`=? AND `password`=PASSWORD(?) LIMIT 1";
 	    try (final PreparedResultSet p = db.select(sql, iduser, cs)) {
 		if (p.rs.next()) {
 		    return new User(p.rs.getInt(1), p.rs.getString(2),
-			    p.rs.getString(3));
+			    p.rs.getString(3), p.rs.getString(4).toCharArray());
 		}
 	    }
 	}

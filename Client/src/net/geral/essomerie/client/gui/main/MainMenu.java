@@ -159,7 +159,7 @@ public class MainMenu extends JMenuBar implements BulletionBoardListener,
 
   private void createSysOp() {
     mSysOp = createMenu(S.MENU_SYSOP);
-    addItem(mSysOp, S.MENU_SYSOP_SCREENLOG);
+    addItem(mSysOp, S.MENU_SYSOP_DEVICES);
     mSysOp.setVisible(false);
   }
 

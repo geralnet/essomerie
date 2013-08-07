@@ -4,5 +4,5 @@ public enum UserPermission {
   MESSAGING,
   USER_MANAGEMENT,
   SYSOP,
-  SYSOP_SCREENLOG;
+  SYSOP_DEVICES;
 }

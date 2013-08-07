@@ -14,6 +14,7 @@ import net.geral.essomerie.server.comm.controllers.InventoryController;
 import net.geral.essomerie.server.comm.controllers.MessagesController;
 import net.geral.essomerie.server.comm.controllers.PersonsController;
 import net.geral.essomerie.server.comm.controllers.SalesController;
+import net.geral.essomerie.server.comm.controllers.SysopController;
 import net.geral.essomerie.server.comm.controllers.SystemController;
 import net.geral.essomerie.server.comm.controllers.UsersController;
 import net.geral.essomerie.shared.BuildInfo;
@@ -49,6 +50,7 @@ public class Connection extends Thread implements ICommunication {
     private final CallerIdController callerid = new CallerIdController(this);
     private final SalesController sales = new SalesController(this);
     private final CatalogController catalog = new CatalogController(this);
+    private final SysopController sysop = new SysopController(this);
 
     public Connection(final Socket socket) throws IOException {
 	id = ++lastId;
@@ -135,6 +137,9 @@ public class Connection extends Thread implements ICommunication {
 	    break;
 	case Catalog:
 	    catalog.process(md);
+	    break;
+	case Sysop:
+	    sysop.process(md);
 	    break;
 	default:
 	    logger.warn("Invalid subsystem: " + md.getSubSystem());
