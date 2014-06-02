@@ -13,7 +13,7 @@ public class ItemTitlesTable extends GNTable<ItemTitlesModel> {
   }
 
   @Override
-  protected void createColumns() {
+  protected void createColumns(final Object... params) {
     final CoreConfiguration c = Client.config();
     createColumn(S.ORGANIZER_CATALOG_ITEM_LANGUAGE.s(),
         c.TableColumnWidth_Catalog_ItemTitle_Language,

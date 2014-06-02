@@ -15,7 +15,7 @@ public class InventoryTable extends GNTable<InventoryModel> {
   }
 
   @Override
-  protected void createColumns() {
+  protected void createColumns(final Object... params) {
     final CoreConfiguration c = Client.config();
     createColumn("Produto", c.TableColumnWidth_Inventory_Product,
         c.TableColumnWidth_Default);
@@ -36,6 +36,7 @@ public class InventoryTable extends GNTable<InventoryModel> {
     return null;
   }
 
+  @Override
   public InventoryItem getSelected() {
     final int s = getSelectedRow();
     if (s == -1) {

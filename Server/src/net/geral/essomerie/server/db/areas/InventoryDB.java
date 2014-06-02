@@ -9,6 +9,7 @@ import net.geral.essomerie._shared.contagem.ContagemMotivos;
 import net.geral.essomerie._shared.contagem.Inventory;
 import net.geral.essomerie._shared.contagem.InventoryGroup;
 import net.geral.essomerie._shared.contagem.InventoryItem;
+import net.geral.essomerie._shared.contagem.InventoryItemReport;
 import net.geral.essomerie._shared.contagem.InventoryLog;
 import net.geral.essomerie._shared.contagem.InventoryLogEntry;
 import net.geral.essomerie.server.db.Database;
@@ -166,6 +167,52 @@ public class InventoryDB extends DatabaseArea {
 	c.setGrupos(getContagemGrupos());
 	c.setItens(getContagemItens());
 	return c;
+    }
+
+    public InventoryItem getItem(final int iditem) throws SQLException {
+	final String sql = "SELECT `id`,`nome`,`unidade`,`quantidade` "// select
+		+ "FROM `contagem_itens` "// from
+		+ " WHERE `id`=? "// where
+	;
+	try (final PreparedResultSet p = db.select(sql, iditem)) {
+	    if (!p.rs.next()) {
+		return null;
+	    }
+	    final int id = p.rs.getInt("id");
+	    final String nome = p.rs.getString("nome");
+	    final String unidade = p.rs.getString("unidade");
+	    final float quantidade = p.rs.getFloat("quantidade");
+	    final int[] grupos = getContagemItensGrupos(id);
+	    return new InventoryItem(id, nome, unidade, quantidade, grupos);
+	}
+    }
+
+    public InventoryItemReport getItemReport(final int iditem)
+	    throws SQLException {
+	final InventoryItem item = getItem(iditem);
+	final String sql = "SELECT "// select
+		+ " CONCAT(`m`.`motivo`,' (',`m`.`tipo`,')') AS `reason`, " // reason
+		+ " `l`.`quantidade_inicial`, " // month started with
+		+ " DATE(`l`.`datahora`) AS `date`," // date
+		+ " IF(`l`.`tipo`='-',-1,1)*SUM(IF(`l`.`tipo`='=',ROUND(`l`.`variacao`-`l`.`quantidade_inicial`,2),`l`.`variacao`)) AS `delta`" // delta
+		+ " FROM `contagem_log` AS `l` " // from
+		+ " INNER JOIN `contagem_motivos` AS `m` ON (`m`.`id`=`l`.`idmotivo`) AND (`l`.`tipo`=`m`.`tipo`) " // join
+		+ " WHERE `l`.`produto`=?" // where
+		+ " GROUP BY YEAR(`l`.`datahora`) DESC, MONTH(`l`.`datahora`) DESC, `l`.`tipo` ASC, `m`.`motivo` ASC" // group
+		+ " ORDER BY `l`.`datahora` ASC"; // order
+	final InventoryItemReport r = new InventoryItemReport(item);
+	final PreparedResultSet p = db.select(sql, iditem);
+	final ResultSet rs = p.rs;
+	while (rs.next()) {
+	    final LocalDate date = GNJoda.sqlLocalDate(rs.getString("date"),
+		    false).withDayOfMonth(1);
+	    final String reason = rs.getString("reason");
+	    final float delta = rs.getFloat("delta");
+	    final float initial = rs.getFloat("quantidade_inicial");
+	    r.addEntry(date, initial, reason, delta);
+	}
+	r.block();
+	return r;
     }
 
     public InventoryLog obterContagemHistorico(final int iditem)

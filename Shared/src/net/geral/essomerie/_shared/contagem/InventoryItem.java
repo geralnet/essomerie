@@ -42,4 +42,10 @@ public class InventoryItem implements Serializable {
   public void setQuantidade(final float novaQuantidade) {
     quantidade = novaQuantidade;
   }
+
+  @Override
+  public String toString() {
+    return "InventoryItem[" + id + ";" + nome + ";" + quantidade + ";"
+        + unidade + "]";
+  }
 }

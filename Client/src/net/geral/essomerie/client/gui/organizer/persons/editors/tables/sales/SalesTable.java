@@ -18,7 +18,7 @@ public class SalesTable extends GNTable<SalesModel> {
   }
 
   @Override
-  protected void createColumns() {
+  protected void createColumns(final Object... params) {
     final CoreConfiguration c = Client.config();
     createColumn(S.ORGANIZER_PERSONS_SALES_WHEN.s(),
         c.TableColumnWidth_Organizer_Persons_Sales_DateTime,
@@ -56,6 +56,7 @@ public class SalesTable extends GNTable<SalesModel> {
     return S.ORGANIZER_PERSONS_DOCUMENTS_NUMBER_NEW.s();
   }
 
+  @Override
   public PersonSale getSelected() {
     final int s = getSelectedRow();
     if (s == -1) {

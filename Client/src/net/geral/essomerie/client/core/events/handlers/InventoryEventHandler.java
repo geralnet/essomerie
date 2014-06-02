@@ -3,6 +3,7 @@ package net.geral.essomerie.client.core.events.handlers;
 import javax.swing.event.EventListenerList;
 
 import net.geral.essomerie._shared.contagem.Inventory;
+import net.geral.essomerie._shared.contagem.InventoryItemReport;
 import net.geral.essomerie._shared.contagem.InventoryLog;
 import net.geral.essomerie._shared.contagem.InventoryLogEntry;
 import net.geral.essomerie.client.core.events.listeners.InventoryListener;
@@ -27,6 +28,18 @@ public class InventoryEventHandler extends EventListenerList {
         logger.debug("Fired: fireFullDataReceived");
         for (final InventoryListener l : getListeners(InventoryListener.class)) {
           l.inventoryFullDataReceived(inventory);
+        }
+      }
+    });
+  }
+
+  public void fireItemReportReceived(final InventoryItemReport report) {
+    Edt.run(false, new Runnable() {
+      @Override
+      public void run() {
+        logger.debug("Fired: fireItemReportReceived");
+        for (final InventoryListener l : getListeners(InventoryListener.class)) {
+          l.inventoryItemReportReceived(report);
         }
       }
     });

@@ -13,7 +13,7 @@ public class TelephonesTable extends GNTable<TelephonesModel> {
   }
 
   @Override
-  protected void createColumns() {
+  protected void createColumns(final Object... params) {
     CoreConfiguration c;
     try {
       c = Client.config();

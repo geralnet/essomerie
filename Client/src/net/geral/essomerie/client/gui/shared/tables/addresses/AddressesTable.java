@@ -15,7 +15,7 @@ public class AddressesTable extends GNTable<AddressesModel> {
   }
 
   @Override
-  protected void createColumns() {
+  protected void createColumns(final Object... params) {
     final CoreConfiguration c = Client.config();
     createColumn(S.ORGANIZER_PERSONS_ADDRESS_POSTALCODE.s(),
         c.TableColumnWidth_Addresses_PostalCode, c.TableColumnWidth_Default);

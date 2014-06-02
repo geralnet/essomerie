@@ -48,7 +48,17 @@ public class InventoryItemsPanel extends JPanel {
         inventoryManagement.printLog();
       }
     });
+    panelButtons.setLayout(new GridLayout(0, 1, 0, 0));
     panelButtons.add(btnPrintAdjustments);
+
+    final JButton btnPrintChecklist = new JButton("Imprimir Checklist");
+    btnPrintChecklist.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(final ActionEvent e) {
+        inventoryManagement.printChecklist();
+      }
+    });
+    panelButtons.add(btnPrintChecklist);
   }
 
   public InventoryGroup getSelectedGroup() {

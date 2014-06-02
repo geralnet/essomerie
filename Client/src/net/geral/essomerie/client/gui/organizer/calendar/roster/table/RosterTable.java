@@ -17,7 +17,7 @@ public class RosterTable extends GNTable<RosterModel> {
   }
 
   @Override
-  protected void createColumns() {
+  protected void createColumns(final Object... params) {
     final CoreConfiguration c = Client.config();
     createColumn(S.ORGANIZER_CALENDAR_ROSTER_HEADER_ASSIGNMENT.s(),
         c.TableColumnWidth_Organizer_Roster_Asssignment,

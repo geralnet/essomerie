@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import net.geral.essomerie._shared.contagem.ContagemAlteracaoQuantidade;
 import net.geral.essomerie._shared.contagem.Inventory;
+import net.geral.essomerie._shared.contagem.InventoryItemReport;
 import net.geral.essomerie._shared.contagem.InventoryLog;
 import net.geral.essomerie._shared.contagem.InventoryLogEntry;
 import net.geral.essomerie.client.core.events.Events;
@@ -41,6 +42,10 @@ public class InventoryController extends
       case InformQuantityChange:
         Events.inventory().fireQuantityChanged(md.getInt(), md.getFloat());
         break;
+      case InformItemReport:
+        Events.inventory().fireItemReportReceived(
+            (InventoryItemReport) md.get());
+        break;
       default:
         logger.warn("Invalid type: " + type.name());
     }
@@ -57,6 +62,10 @@ public class InventoryController extends
 
   public void requestInventoryData() throws IOException {
     send(InventoryMessageType.RequestFullData);
+  }
+
+  public void requestItemReport(final int iditem) throws IOException {
+    send(InventoryMessageType.RequestItemReport, iditem);
   }
 
   public void requestQuantityChange(final ContagemAlteracaoQuantidade quantity)

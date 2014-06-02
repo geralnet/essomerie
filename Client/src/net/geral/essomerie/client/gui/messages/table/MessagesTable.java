@@ -26,7 +26,7 @@ public class MessagesTable extends GNTable<MessagesModel> {
   }
 
   @Override
-  protected void createColumns() {
+  protected void createColumns(final Object... params) {
     final CoreConfiguration c = Client.config();
     createColumn(S.MESSAGES_HEADER_DATETIME.s(),
         c.TableColumnWidth_Messages_DateTime,
@@ -86,6 +86,7 @@ public class MessagesTable extends GNTable<MessagesModel> {
     return null;
   }
 
+  @Override
   public Message getSelected() {
     final int selected = getSelectedRow();
     if (selected == -1) {

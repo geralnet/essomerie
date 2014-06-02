@@ -270,4 +270,8 @@ public class CoreConfiguration extends ConfigurationBase {
   public GNTableColumnWidth TableColumnWidth_SysOp_Devices_Interfaces_IP        = null;
 
   public GNTableColumnWidth TableColumnWidth_SysOp_Devices_Interfaces_Hostnames = null;
+
+  public GNTableColumnWidth TableColumnWidth_Inventory_ItemReport_Date          = null;
+
+  public GNTableColumnWidth TableColumnWidth_Inventory_ItemReport_Ammount       = null;
 }

@@ -23,7 +23,7 @@ public class LogTable extends GNTable<LogModel> {
   }
 
   @Override
-  protected void createColumns() {
+  protected void createColumns(final Object... params) {
     final CoreConfiguration c = Client.config();
     createColumn(S.TOOLS_SALESREGISTER_LOG_REGISTERED.s(),
         c.TableColumnWidth_Tools_SalesRegister_Log_Registered,

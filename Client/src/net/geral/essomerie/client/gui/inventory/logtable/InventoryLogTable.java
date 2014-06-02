@@ -15,7 +15,7 @@ public class InventoryLogTable extends GNTable<InventoryLogModel> {
   }
 
   @Override
-  protected void createColumns() {
+  protected void createColumns(final Object... params) {
     final CoreConfiguration c = Client.config();
     createColumn("Data", c.TableColumnWidth_Inventory_Log_Date,
         c.TableColumnWidth_Default_DateTimeNoSeconds);

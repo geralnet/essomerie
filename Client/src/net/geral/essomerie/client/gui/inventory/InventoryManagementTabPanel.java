@@ -13,13 +13,16 @@ import javax.swing.event.ListSelectionListener;
 import net.geral.essomerie._shared.contagem.Inventory;
 import net.geral.essomerie._shared.contagem.InventoryGroup;
 import net.geral.essomerie._shared.contagem.InventoryItem;
+import net.geral.essomerie._shared.contagem.InventoryItemReport;
 import net.geral.essomerie._shared.contagem.InventoryLog;
 import net.geral.essomerie._shared.contagem.InventoryLogEntry;
+import net.geral.essomerie.client._printing.InventoryChecklistPrint;
 import net.geral.essomerie.client._printing.ResumoAcertosPrint;
 import net.geral.essomerie.client.core.Client;
 import net.geral.essomerie.client.core.events.Events;
 import net.geral.essomerie.client.core.events.listeners.InventoryListener;
 import net.geral.essomerie.client.gui.inventory.items.InventoryItemsPanel;
+import net.geral.essomerie.client.gui.inventory.report.item.InventoryItemReportTabPanel;
 import net.geral.essomerie.client.gui.inventory.table.InventoryTable;
 import net.geral.essomerie.client.gui.main.TabPanel;
 import net.geral.essomerie.client.gui.shared.label.TitleLabel;
@@ -60,7 +63,7 @@ public class InventoryManagementTabPanel extends TabPanel implements
 
     final JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
         inventoryTable.getScroll(), changePanel);
-    splitPane.setResizeWeight(1.0);
+    splitPane.setResizeWeight(0.5);
     mainPanel.add(splitPane, BorderLayout.CENTER);
   }
 
@@ -101,6 +104,11 @@ public class InventoryManagementTabPanel extends TabPanel implements
   }
 
   @Override
+  public void inventoryItemReportReceived(final InventoryItemReport report) {
+    Client.window().openTab(new InventoryItemReportTabPanel(report));
+  }
+
+  @Override
   public void inventoryLogByDateReceived(final LocalDate from,
       final LocalDate until, final InventoryLogEntry[] entries) {
     final ResumoAcertosPrint p = new ResumoAcertosPrint(entries, inventory);
@@ -126,6 +134,16 @@ public class InventoryManagementTabPanel extends TabPanel implements
   public void inventoryQuantityChanged(final int iditem, final float newQuantity) {
     inventory.setNovaQuantidade(iditem, newQuantity);
     inventoryTable.getModel().refreshItem(iditem);
+  }
+
+  public void printChecklist() {
+    final InventoryChecklistPrint p = new InventoryChecklistPrint(
+        inventory.getItens(itemsPanel.getSelectedGroup()));
+    try {
+      PrintSupport.print(p);
+    } catch (final PrinterException e) {
+      logger.warn(e, e);
+    }
   }
 
   public void printLog() {

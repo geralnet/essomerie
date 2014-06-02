@@ -18,7 +18,7 @@ public class InterfacesTable extends GNTable<InterfacesModel> {
   }
 
   @Override
-  protected void createColumns() {
+  protected void createColumns(final Object... params) {
     final CoreConfiguration c = Client.config();
     createColumn(S.SYSOP_DEVICES_INTERFACES_NAME.s(),
         c.TableColumnWidth_SysOp_Devices_Interfaces_Name,

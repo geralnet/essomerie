@@ -14,7 +14,7 @@ public class DevicesTable extends GNTable<DevicesModel> {
   }
 
   @Override
-  protected void createColumns() {
+  protected void createColumns(final Object... params) {
     final CoreConfiguration c = Client.config();
     createColumn(S.SYSOP_DEVICES_TYPE.s(),
         c.TableColumnWidth_SysOp_Devices_Type, c.TableColumnWidth_Default);

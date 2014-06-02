@@ -32,7 +32,7 @@ public class ItemPricesTable extends GNTable<ItemPricesModel> {
   }
 
   @Override
-  protected void createColumns() {
+  protected void createColumns(final Object... params) {
     final CoreConfiguration c = Client.config();
     createColumn(S.ORGANIZER_CATALOG_ITEM_PRICECODE.s(),
         c.TableColumnWidth_Catalog_ItemPrice_Code, c.TableColumnWidth_Default);

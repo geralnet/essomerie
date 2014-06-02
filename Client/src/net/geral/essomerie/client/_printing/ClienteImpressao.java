@@ -2,8 +2,12 @@ package net.geral.essomerie.client._printing;
 
 import java.awt.Font;
 
+import net.geral.essomerie.client.resources.S;
 import net.geral.essomerie.shared.person.PersonData;
 import net.geral.essomerie.shared.person.Telephone;
+
+import org.joda.time.LocalDateTime;
+import org.joda.time.format.DateTimeFormat;
 
 public class ClienteImpressao extends CRPrintDocument {
   public static enum ClienteImpressaoVia {
@@ -29,8 +33,12 @@ public class ClienteImpressao extends CRPrintDocument {
 
   @Override
   protected void printBody() {
-    writeCentralized("C#" + cliente.getId() + " - " + via, new Font("SansSerif",
-        Font.BOLD, 10));
+    writeCentralized("C#" + cliente.getId() + " - " + via, new Font(
+        "SansSerif", Font.BOLD, 10));
+    drawHorizontalLine();
+    g.setFont(new Font("SansSerif", Font.BOLD, 10));
+    writeCentralized(LocalDateTime.now().toString(
+        DateTimeFormat.forPattern(S.FORMAT_DATETIME_SIMPLE_NO_SECONDS.s())));
     drawHorizontalLine();
     g.setFont(new Font("SansSerif", Font.BOLD, 10));
     writeline(cliente.getName());
@@ -64,6 +72,7 @@ public class ClienteImpressao extends CRPrintDocument {
       feed(ESPACO_LINHAS_EM_BRANCO);
       for (int i = 0; i < QUANTIDADE_LINHAS_EM_BRANCO; i++) {
         feed(ESPACO_LINHAS_EM_BRANCO);
+        writeline("|");
         drawHorizontalLine(0.5f);
       }
       feed(ESPACO_LINHAS_EM_BRANCO);

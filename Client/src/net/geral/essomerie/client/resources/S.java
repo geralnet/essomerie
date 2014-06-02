@@ -241,7 +241,10 @@ public enum S {
   SYSOP_DEVICES_INTERFACES_MAC("MAC"),
   SYSOP_DEVICES_INTERFACES_TYPE("Type"),
   SYSOP_DEVICES_INTERFACES_IP("IP"),
-  SYSOP_DEVICES_INTERFACES_HOSTNAMES("Hostnames");
+  SYSOP_DEVICES_INTERFACES_HOSTNAMES("Hostnames"),
+  INVENTORY_ITEM_REPORT_DATE("Date"),
+  INVENTORY_ITEM_REPORT_INITIAL("Initial"),
+  INVENTORY_ITEM_REPORT_DELTA("Delta");
 
   private static final Logger            logger   = Logger.getLogger(S.class);
   private static HashMap<String, String> messages = new HashMap<>();

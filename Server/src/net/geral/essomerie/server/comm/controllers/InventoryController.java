@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 import net.geral.essomerie._shared.contagem.ContagemAlteracaoQuantidade;
 import net.geral.essomerie._shared.contagem.Inventory;
+import net.geral.essomerie._shared.contagem.InventoryItemReport;
 import net.geral.essomerie._shared.contagem.InventoryLog;
 import net.geral.essomerie._shared.contagem.InventoryLogEntry;
 import net.geral.essomerie.server.Server;
@@ -46,6 +47,9 @@ public class InventoryController extends
 	case RequestLogByDate:
 	    requestLogByDate((LocalDate) md.get(), (LocalDate) md.get());
 	    break;
+	case RequestItemReport:
+	    requestItemReport(md.getInt());
+	    break;
 	default:
 	    logger.warn("Invalid type: " + type.name());
 	}
@@ -54,6 +58,13 @@ public class InventoryController extends
     private void requestFullData() throws SQLException, IOException {
 	final Inventory i = Server.db().inventory().getFullData();
 	send(InventoryMessageType.InformFullData, i);
+    }
+
+    private void requestItemReport(final int iditem) throws SQLException,
+	    IOException {
+	final InventoryItemReport r = Server.db().inventory()
+		.getItemReport(iditem);
+	send(InventoryMessageType.InformItemReport, r);
     }
 
     private void requestLogByDate(final LocalDate from, final LocalDate until)

@@ -74,7 +74,7 @@ public class InventoryChangePanel extends JPanel implements ItemListener,
     contagemTable = table;
     setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
     setMinimumSize(tamanho_alterar);
-    setPreferredSize(tamanho_alterar);
+    setPreferredSize(new Dimension(655, 468));
 
     final SpringLayout sl_panelAlterar = new SpringLayout();
     setLayout(sl_panelAlterar);
@@ -229,6 +229,10 @@ public class InventoryChangePanel extends JPanel implements ItemListener,
     txtObservacoes.addKeyListener(this);
 
     final JButton btnUp = new JButton("Anterior ( \u2191 )");
+    sl_panelAlterar.putConstraint(SpringLayout.WEST, btnUp, 5,
+        SpringLayout.WEST, this);
+    sl_panelAlterar.putConstraint(SpringLayout.EAST, btnUp, 125,
+        SpringLayout.WEST, this);
     btnUp.addActionListener(this);
     btnUp.setActionCommand("up");
     sl_panelAlterar.putConstraint(SpringLayout.NORTH, btnUp, 7,
@@ -236,45 +240,39 @@ public class InventoryChangePanel extends JPanel implements ItemListener,
     add(btnUp);
 
     final JButton btnDown = new JButton("Próximo ( \u2193 )");
-    sl_panelAlterar.putConstraint(SpringLayout.WEST, btnUp, -125,
-        SpringLayout.WEST, btnDown);
-    sl_panelAlterar.putConstraint(SpringLayout.EAST, btnUp, -5,
-        SpringLayout.WEST, btnDown);
-    sl_panelAlterar.putConstraint(SpringLayout.WEST, btnDown, -120,
-        SpringLayout.EAST, this);
+    sl_panelAlterar.putConstraint(SpringLayout.WEST, btnDown, 5,
+        SpringLayout.EAST, btnUp);
+    sl_panelAlterar.putConstraint(SpringLayout.EAST, btnDown, 125,
+        SpringLayout.EAST, btnUp);
     btnDown.addActionListener(this);
     btnDown.setActionCommand("down");
     sl_panelAlterar.putConstraint(SpringLayout.NORTH, btnDown, 0,
         SpringLayout.NORTH, btnUp);
-    sl_panelAlterar.putConstraint(SpringLayout.EAST, btnDown, 0,
-        SpringLayout.EAST, panelAlterarMotivo);
     add(btnDown);
 
     final JButton btnCommit = new JButton("Salvar (Enter)");
+    sl_panelAlterar.putConstraint(SpringLayout.NORTH, btnCommit, 0,
+        SpringLayout.NORTH, btnUp);
+    sl_panelAlterar.putConstraint(SpringLayout.WEST, btnCommit, 5,
+        SpringLayout.EAST, btnDown);
+    sl_panelAlterar.putConstraint(SpringLayout.EAST, btnCommit, 125,
+        SpringLayout.EAST, btnDown);
     btnCommit.addActionListener(this);
-    sl_panelAlterar.putConstraint(SpringLayout.NORTH, btnCommit, 5,
-        SpringLayout.SOUTH, btnUp);
-    sl_panelAlterar.putConstraint(SpringLayout.WEST, btnCommit, 0,
-        SpringLayout.WEST, btnUp);
-    sl_panelAlterar.putConstraint(SpringLayout.EAST, btnCommit, 0,
-        SpringLayout.EAST, btnUp);
     btnCommit.setActionCommand("commit");
     add(btnCommit);
 
     final JButton btnCancel = new JButton("Cancelar (Esc)");
-    btnCancel.addActionListener(this);
     sl_panelAlterar.putConstraint(SpringLayout.NORTH, btnCancel, 0,
-        SpringLayout.NORTH, btnCommit);
-    sl_panelAlterar.putConstraint(SpringLayout.WEST, btnCancel, 0,
-        SpringLayout.WEST, btnDown);
-    sl_panelAlterar.putConstraint(SpringLayout.EAST, btnCancel, 0,
-        SpringLayout.EAST, btnDown);
+        SpringLayout.NORTH, btnUp);
+    sl_panelAlterar.putConstraint(SpringLayout.WEST, btnCancel, 5,
+        SpringLayout.EAST, btnCommit);
+    sl_panelAlterar.putConstraint(SpringLayout.EAST, btnCancel, 125,
+        SpringLayout.EAST, btnCommit);
+    btnCancel.addActionListener(this);
     btnCancel.setActionCommand("cancel");
     add(btnCancel);
 
     final JPanel panelHistorico = new JPanel();
-    sl_panelAlterar.putConstraint(SpringLayout.NORTH, panelHistorico, 14,
-        SpringLayout.SOUTH, btnCommit);
     sl_panelAlterar.putConstraint(SpringLayout.WEST, panelHistorico, 0,
         SpringLayout.WEST, lblTitulo);
     sl_panelAlterar.putConstraint(SpringLayout.SOUTH, panelHistorico, -5,
@@ -295,6 +293,19 @@ public class InventoryChangePanel extends JPanel implements ItemListener,
     tableHistorico = new InventoryLogTable(this);
     scrollPane.setViewportView(tableHistorico);
 
+    final JButton btnReport = new JButton("Relat\u00F3rio");
+    sl_panelAlterar.putConstraint(SpringLayout.NORTH, panelHistorico, 14,
+        SpringLayout.SOUTH, btnReport);
+    sl_panelAlterar.putConstraint(SpringLayout.NORTH, btnReport, 4,
+        SpringLayout.SOUTH, btnUp);
+    sl_panelAlterar.putConstraint(SpringLayout.WEST, btnReport, 0,
+        SpringLayout.WEST, btnUp);
+    sl_panelAlterar.putConstraint(SpringLayout.EAST, btnReport, 0,
+        SpringLayout.EAST, btnUp);
+    btnReport.setActionCommand("report");
+    btnReport.addActionListener(this);
+    add(btnReport);
+
     setItem(null);
     final Thread t = new Thread(this);
     t.setName("InventoryLogFetcher");
@@ -312,6 +323,8 @@ public class InventoryChangePanel extends JPanel implements ItemListener,
       cancelEditing();
     } else if ("commit".equals(cmd)) {
       commitEditing();
+    } else if ("report".equals(cmd)) {
+      report();
     } else {
       logger.warn("Invalid action command: " + cmd);
     }
@@ -467,6 +480,15 @@ public class InventoryChangePanel extends JPanel implements ItemListener,
     final boolean negativo = (qtd_item - qtd) < 0;
     panelErroNegativo.setVisible(negativo);
     return !negativo;
+  }
+
+  private void report() {
+    try {
+      Client.connection().inventory()
+          .requestItemReport(contagemTable.getSelected().id);
+    } catch (final IOException e) {
+      logger.warn(e, e);
+    }
   }
 
   @Override

@@ -13,7 +13,7 @@ public class GroupTitlesTable extends GNTable<GroupTitlesModel> {
   }
 
   @Override
-  protected void createColumns() {
+  protected void createColumns(final Object... params) {
     final CoreConfiguration c = Client.config();
     createColumn(S.ORGANIZER_CATALOG_GROUP_LANGUAGE.s(),
         c.TableColumnWidth_Catalog_GroupTitle_Language,

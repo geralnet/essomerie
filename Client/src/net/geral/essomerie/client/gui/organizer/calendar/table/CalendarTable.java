@@ -23,7 +23,7 @@ public class CalendarTable extends GNTable<CalendarModel> {
   }
 
   @Override
-  protected void createColumns() {
+  protected void createColumns(final Object... params) {
     final CoreConfiguration c = Client.config();
     createColumn(S.ORGANIZER_CALENDAR_HEADER_DATE.s(),
         c.TableColumnWidth_Organizer_Calendar_Date,
@@ -61,6 +61,7 @@ public class CalendarTable extends GNTable<CalendarModel> {
     }
   }
 
+  @Override
   public CalendarEvent getSelected() {
     final int s = getSelectedRow();
     if (s == -1) {

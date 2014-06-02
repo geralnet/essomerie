@@ -23,7 +23,7 @@ public class PersonDocumentTable extends GNTable<PersonDocumentModel> {
   }
 
   @Override
-  protected void createColumns() {
+  protected void createColumns(final Object... params) {
     final CoreConfiguration c = Client.config();
     createColumn(S.ORGANIZER_PERSONS_DOCUMENTS_TYPE.s(),
         c.TableColumnWidth_Organizer_Persons_Documents_Type,
@@ -46,6 +46,7 @@ public class PersonDocumentTable extends GNTable<PersonDocumentModel> {
     return S.ORGANIZER_PERSONS_DOCUMENTS_NUMBER_NEW.s();
   }
 
+  @Override
   public PersonDocument getSelected() {
     final int s = getSelectedRow();
     if (s == -1) {
