@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import net.geral.essomerie._shared.contagem.ContagemAlteracaoQuantidade;
 import net.geral.essomerie._shared.contagem.Inventory;
+import net.geral.essomerie._shared.contagem.InventoryGroup;
 import net.geral.essomerie._shared.contagem.InventoryItemReport;
 import net.geral.essomerie._shared.contagem.InventoryLog;
 import net.geral.essomerie._shared.contagem.InventoryLogEntry;
@@ -46,6 +47,9 @@ public class InventoryController extends
         Events.inventory().fireItemReportReceived(
             (InventoryItemReport) md.get());
         break;
+      case InformGroups:
+        Events.inventory().fireGroupsReceived((InventoryGroup[]) md.get());
+        break;
       default:
         logger.warn("Invalid type: " + type.name());
     }
@@ -58,6 +62,26 @@ public class InventoryController extends
 
   public void requestChangeLogByItem(final int iditem) throws IOException {
     send(InventoryMessageType.RequestLogByItem, iditem);
+  }
+
+  public void requestGroupAdd(final int parent, final String name)
+      throws IOException {
+    send(InventoryMessageType.RequestGroupAdd, parent, name);
+  }
+
+  public void requestGroupDelete(final int idgroup) throws IOException {
+    send(InventoryMessageType.RequestGroupDelete, idgroup);
+  }
+
+  public void requestGroupParentOrderChange(final int idgroup,
+      final int idparent, final int order) throws IOException {
+    send(InventoryMessageType.RequestGroupParentOrderChange, idgroup, idparent,
+        order);
+  }
+
+  public void requestGroupRename(final int idgroup, final String newName)
+      throws IOException {
+    send(InventoryMessageType.RequestGroupRename, idgroup, newName);
   }
 
   public void requestInventoryData() throws IOException {

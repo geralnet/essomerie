@@ -21,7 +21,7 @@ import net.geral.essomerie.client._printing.ResumoAcertosPrint;
 import net.geral.essomerie.client.core.Client;
 import net.geral.essomerie.client.core.events.Events;
 import net.geral.essomerie.client.core.events.listeners.InventoryListener;
-import net.geral.essomerie.client.gui.inventory.items.InventoryItemsPanel;
+import net.geral.essomerie.client.gui.inventory.groups.InventoryGroupsPanel;
 import net.geral.essomerie.client.gui.inventory.report.item.InventoryItemReportTabPanel;
 import net.geral.essomerie.client.gui.inventory.table.InventoryTable;
 import net.geral.essomerie.client.gui.main.TabPanel;
@@ -41,7 +41,7 @@ public class InventoryManagementTabPanel extends TabPanel implements
 
   private final InventoryTable       inventoryTable   = new InventoryTable();
   private final InventoryChangePanel changePanel;
-  private final InventoryItemsPanel  itemsPanel;
+  private final InventoryGroupsPanel  itemsPanel;
   private Inventory                  inventory        = new Inventory();
   private InventoryGroup             lastGroup        = null;
 
@@ -55,7 +55,7 @@ public class InventoryManagementTabPanel extends TabPanel implements
     add(mainPanel, BorderLayout.CENTER);
     mainPanel.setLayout(new BorderLayout(0, 0));
 
-    itemsPanel = new InventoryItemsPanel(this);
+    itemsPanel = new InventoryGroupsPanel(this);
     mainPanel.add(itemsPanel, BorderLayout.WEST);
 
     changePanel = new InventoryChangePanel(inventoryTable);
@@ -101,6 +101,11 @@ public class InventoryManagementTabPanel extends TabPanel implements
   @Override
   public void inventoryFullDataReceived(final Inventory c) {
     setInventory(c);
+  }
+
+  @Override
+  public void inventoryGroupsReceived(final InventoryGroup[] groups) {
+    itemsPanel.updateGroups(groups);
   }
 
   @Override
@@ -157,10 +162,10 @@ public class InventoryManagementTabPanel extends TabPanel implements
     }
   }
 
-  public void setInventory(final Inventory c) {
-    inventory = c;
-    itemsPanel.updateGroups();
-    changePanel.setMotivos(c.getMotivos());
+  public void setInventory(final Inventory i) {
+    inventory = i;
+    itemsPanel.updateGroups(i.getGrupos());
+    changePanel.setMotivos(i.getMotivos());
   }
 
   @Override

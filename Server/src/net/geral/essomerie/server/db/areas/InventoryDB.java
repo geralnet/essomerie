@@ -22,16 +22,28 @@ import org.joda.time.LocalDateTime;
 
 //TODO translate & check
 public class InventoryDB extends DatabaseArea {
+
     public InventoryDB(final Database database) {
 	super(database);
+    }
+
+    public void addGroup(final int iduser, final int idparent, final String name)
+	    throws SQLException {
+	final Integer res = db
+		.selectFirstField_IntegerOrNull(
+			"SELECT MAX(`ordem`) FROM `contagem_grupos` WHERE `subgrupo_de`=?",
+			idparent);
+	final int order = (res == null) ? 0 : res.intValue() + 1;
+	final String sql = "INSERT INTO `contagem_grupos` (`nome`,`subgrupo_de`,`ordem`,`log_criado_por`,`log_criado_datahora`) "
+		+ " VALUES(?,?,?,?,NOW())";
+	db.insert(sql, name, idparent, order, iduser);
     }
 
     public float alterarContagem(final int userid,
 	    final ContagemAlteracaoQuantidade alteracao) throws SQLException {
 
 	String sql = "INSERT INTO `contagem_log` "// insert
-		+ " (`idusuario`,`tipo`,`idmotivo`,`produto`,`quantidade_inicial`,`variacao`,`datahora`,`observacoes`) "// field
-															// list
+		+ " (`idusuario`,`tipo`,`idmotivo`,`produto`,`quantidade_inicial`,`variacao`,`datahora`,`observacoes`) "// fields
 		+ " VALUES (?,?,?,?,(" // v1
 		+ "    SELECT `quantidade` FROM `contagem_itens` WHERE `id`=?" // subquery
 		+ "),?,NOW(),?)"; // v2
@@ -61,6 +73,12 @@ public class InventoryDB extends DatabaseArea {
 	return novaQuantidade;
     }
 
+    public void deleteGroup(final int iduser, final int idgroup)
+	    throws SQLException {
+	final String sql = "UPDATE `contagem_grupos` SET `excluido`='Y', log_excluido_por=?, log_excluido_datahora=NOW() WHERE `id`=? LIMIT 1";
+	db.update(sql, iduser, idgroup);
+    }
+
     public InventoryLogEntry[] getContagemAcertos(final LocalDate de,
 	    final LocalDate ate) throws SQLException {
 	final String sql = "SELECT * FROM `contagem_log` WHERE datahora>=? AND datahora <? ORDER BY datahora ASC";
@@ -85,30 +103,6 @@ public class InventoryDB extends DatabaseArea {
 		    observacoes);
 	}
 	return res;
-    }
-
-    private InventoryGroup[] getContagemGrupos() throws SQLException {
-	return getContagemGrupos(0);
-    }
-
-    private InventoryGroup[] getContagemGrupos(final int pai)
-	    throws SQLException {
-	final String sql = "SELECT `id`,`nome` "// select
-		+ "FROM `contagem_grupos` "// from
-		+ " WHERE `subgrupo_de`=? AND `excluido`='N' "// where
-		+ " ORDER BY `ordem` ASC, `nome` ASC";
-	try (final PreparedResultSet p = db.select(sql, pai)) {
-	    final InventoryGroup[] cg = new InventoryGroup[p.getRowCount()];
-	    for (int i = 0; i < cg.length; i++) {
-		p.rs.next();
-		final int id = p.rs.getInt("id");
-		final String nome = p.rs.getString("nome");
-		final InventoryGroup[] subgrupos = (pai == 0) ? getContagemGrupos(id)
-			: null; // apenas um nivel de subgrupos
-		cg[i] = new InventoryGroup(id, nome, subgrupos);
-	    }
-	    return cg;
-	}
     }
 
     private InventoryItem[] getContagemItens() throws SQLException {
@@ -164,9 +158,31 @@ public class InventoryDB extends DatabaseArea {
     public Inventory getFullData() throws SQLException {
 	final Inventory c = new Inventory();
 	c.setMotivos(getContagemMotivos());
-	c.setGrupos(getContagemGrupos());
+	c.setGrupos(getGroups());
 	c.setItens(getContagemItens());
 	return c;
+    }
+
+    public InventoryGroup[] getGroups() throws SQLException {
+	return getGroups(0);
+    }
+
+    private InventoryGroup[] getGroups(final int pai) throws SQLException {
+	final String sql = "SELECT `id`,`nome` "// select
+		+ "FROM `contagem_grupos` "// from
+		+ " WHERE `subgrupo_de`=? AND `excluido`='N' "// where
+		+ " ORDER BY `ordem` ASC, `nome` ASC";
+	try (final PreparedResultSet p = db.select(sql, pai)) {
+	    final InventoryGroup[] cg = new InventoryGroup[p.getRowCount()];
+	    for (int i = 0; i < cg.length; i++) {
+		p.rs.next();
+		final int id = p.rs.getInt("id");
+		final String nome = p.rs.getString("nome");
+		final InventoryGroup[] subgrupos = getGroups(id);
+		cg[i] = new InventoryGroup(id, nome, subgrupos);
+	    }
+	    return cg;
+	}
     }
 
     public InventoryItem getItem(final int iditem) throws SQLException {
@@ -240,5 +256,44 @@ public class InventoryDB extends DatabaseArea {
 	    h.set(i++, hr);
 	}
 	return h;
+    }
+
+    public void renameGroup(final int iduser, final int idgroup, String newName)
+	    throws SQLException {
+	if (newName.length() > 30) {
+	    newName = newName.substring(0, 30);
+	}
+	final String sql = "UPDATE `contagem_grupos` SET `nome`=?, `log_criado_por`=?, log_criado_datahora=NOW() WHERE `id`=? LIMIT 1";
+	db.update(sql, newName, iduser, idgroup);
+    }
+
+    public void updateGroupOrder(final int idgroup, final int order)
+	    throws SQLException {
+	final String select = "SELECT `id` " // select
+		+ " FROM `contagem_grupos` " // from
+		+ " WHERE `subgrupo_de`=(" // where
+		+ "   SELECT `subgrupo_de` " // sub-select
+		+ "   FROM `contagem_grupos` " // sub-from
+		+ "   WHERE `id`=?" // sub-where
+		+ " ) AND `id`<>? AND `excluido`='N'" // end of where
+		+ " ORDER BY `ordem` ASC";
+	final String update = "UPDATE `contagem_grupos` SET `ordem`=? WHERE `id`=? LIMIT 1";
+	final PreparedResultSet p = db.select(select, idgroup, idgroup);
+	int i = 0;
+	while (p.rs.next()) {
+	    final int id = p.rs.getInt("id");
+	    if (order == i) {
+		i++;
+	    }
+	    db.update(update, i, id);
+	    i++;
+	}
+	db.update(update, (order == -1 ? i : order), idgroup);
+    }
+
+    public void updateGroupParent(final int idgroup, final int idparent)
+	    throws SQLException {
+	final String sql = "UPDATE `contagem_grupos` SET `subgrupo_de`=? WHERE `id`=? LIMIT 1";
+	db.update(sql, idparent, idgroup);
     }
 }

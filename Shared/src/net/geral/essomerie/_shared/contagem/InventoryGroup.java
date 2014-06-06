@@ -22,6 +22,18 @@ public class InventoryGroup implements Serializable {
     this.subgrupos = subgrupos;
   }
 
+  public boolean contains(final InventoryGroup other) {
+    if (id == other.id) {
+      return true;
+    }
+    for (final InventoryGroup g : subgrupos) {
+      if (g.contains(other)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   public InventoryGroup[] getSubGrupos() {
     return subgrupos.clone();
   }

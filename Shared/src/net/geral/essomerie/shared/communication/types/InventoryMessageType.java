@@ -9,12 +9,17 @@ public enum InventoryMessageType implements IMessageType {
   RequestLogByDate,
   RequestQuantityChange,
   RequestItemReport,
+  RequestGroupParentOrderChange,
 
+  InformGroups,
   InformFullData,
   InformLogByItem,
   InformLogByDate,
   InformQuantityChange,
-  InformItemReport;
+  InformItemReport,
+  RequestGroupDelete,
+  RequestGroupRename,
+  RequestGroupAdd;
 
   @Override
   public UserPermission requires() {

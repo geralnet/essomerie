@@ -3,6 +3,7 @@ package net.geral.essomerie.client.core.events.listeners;
 import java.util.EventListener;
 
 import net.geral.essomerie._shared.contagem.Inventory;
+import net.geral.essomerie._shared.contagem.InventoryGroup;
 import net.geral.essomerie._shared.contagem.InventoryItemReport;
 import net.geral.essomerie._shared.contagem.InventoryLog;
 import net.geral.essomerie._shared.contagem.InventoryLogEntry;
@@ -11,6 +12,8 @@ import org.joda.time.LocalDate;
 
 public interface InventoryListener extends EventListener {
   public void inventoryFullDataReceived(Inventory c);
+
+  public void inventoryGroupsReceived(InventoryGroup[] groups);
 
   public void inventoryItemReportReceived(InventoryItemReport report);
 

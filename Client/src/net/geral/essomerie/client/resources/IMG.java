@@ -32,7 +32,9 @@ public enum IMG {
   ICON__CATALOG__DOCUMENT,
   ICON__CATALOG__FOLDER_CLOSED,
   ICON__CATALOG__FOLDER_DETAILS,
-  ICON__CATALOG__FOLDER_OPEN;
+  ICON__CATALOG__FOLDER_OPEN,
+  ICON__INVENTORY__CLOSED,
+  ICON__INVENTORY__OPEN;
 
   public static void preload() {
     for (final IMG img : values()) {

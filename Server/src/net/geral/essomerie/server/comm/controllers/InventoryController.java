@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 import net.geral.essomerie._shared.contagem.ContagemAlteracaoQuantidade;
 import net.geral.essomerie._shared.contagem.Inventory;
+import net.geral.essomerie._shared.contagem.InventoryGroup;
 import net.geral.essomerie._shared.contagem.InventoryItemReport;
 import net.geral.essomerie._shared.contagem.InventoryLog;
 import net.geral.essomerie._shared.contagem.InventoryLogEntry;
@@ -50,6 +51,18 @@ public class InventoryController extends
 	case RequestItemReport:
 	    requestItemReport(md.getInt());
 	    break;
+	case RequestGroupParentOrderChange:
+	    requestGroupParentOrderChange(md.getInt(), md.getInt(), md.getInt());
+	    break;
+	case RequestGroupDelete:
+	    requestGroupDelete(md.getInt());
+	    break;
+	case RequestGroupRename:
+	    requestGroupRename(md.getInt(), md.getString());
+	    break;
+	case RequestGroupAdd:
+	    requestGroupAdd(md.getInt(), md.getString());
+	    break;
 	default:
 	    logger.warn("Invalid type: " + type.name());
 	}
@@ -58,6 +71,41 @@ public class InventoryController extends
     private void requestFullData() throws SQLException, IOException {
 	final Inventory i = Server.db().inventory().getFullData();
 	send(InventoryMessageType.InformFullData, i);
+    }
+
+    private void requestGroupAdd(final int idparent, final String newName)
+	    throws SQLException {
+	Server.db().inventory()
+		.addGroup(connection.getUserId(), idparent, newName);
+	final InventoryGroup[] groups = Server.db().inventory().getGroups();
+	Server.broadcast(MessageSubSystem.Inventory,
+		InventoryMessageType.InformGroups, (Object) groups);
+    }
+
+    private void requestGroupDelete(final int idgroup) throws SQLException {
+	Server.db().inventory().deleteGroup(connection.getUserId(), idgroup);
+	final InventoryGroup[] groups = Server.db().inventory().getGroups();
+	Server.broadcast(MessageSubSystem.Inventory,
+		InventoryMessageType.InformGroups, (Object) groups);
+    }
+
+    private void requestGroupParentOrderChange(final int idgroup,
+	    final int idparent, final int order) throws IOException,
+	    SQLException {
+	Server.db().inventory().updateGroupParent(idgroup, idparent);
+	Server.db().inventory().updateGroupOrder(idgroup, order);
+	final InventoryGroup[] groups = Server.db().inventory().getGroups();
+	Server.broadcast(MessageSubSystem.Inventory,
+		InventoryMessageType.InformGroups, (Object) groups);
+    }
+
+    private void requestGroupRename(final int idgroup, final String newName)
+	    throws SQLException {
+	Server.db().inventory()
+		.renameGroup(connection.getUserId(), idgroup, newName);
+	final InventoryGroup[] groups = Server.db().inventory().getGroups();
+	Server.broadcast(MessageSubSystem.Inventory,
+		InventoryMessageType.InformGroups, (Object) groups);
     }
 
     private void requestItemReport(final int iditem) throws SQLException,

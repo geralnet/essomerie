@@ -244,7 +244,17 @@ public enum S {
   SYSOP_DEVICES_INTERFACES_HOSTNAMES("Hostnames"),
   INVENTORY_ITEM_REPORT_DATE("Date"),
   INVENTORY_ITEM_REPORT_INITIAL("Initial"),
-  INVENTORY_ITEM_REPORT_DELTA("Delta");
+  INVENTORY_ITEM_REPORT_DELTA("Delta"),
+  INVENTORY_ALLOW_ITEM_ADMIN("Allow Item Administration"),
+  INVENTORY_ALLOW_ITEM_ADMIN_CONFIRM("This option allows you to change the groups and items of the inventory.\nMany changes cannot be undone.\n\nContinue?"),
+  INVENTORY_GROUP_POPUP_ADD("Add Group"),
+  INVENTORY_GROUP_POPUP_REMOVE("Remove Group"),
+  INVENTORY_GROUP_POPUP_RENAME("Rename Group"),
+  INVENTORY_GROUP_POPUP_REMOVE_CONFIRM("*** This action cannot be undone. ***\n\nRemove the group \"%1$s\"?"),
+  INVENTORY_GROUP_POPUP_RENAME_TEXT("Rename \"%1$s\" to:"),
+  TITLE_RENAME("Rename"),
+  INVENTORY_GROUP_POPUP_ADD_TEXT("New group name:"),
+  INVENTORY_GROUP_POPUP_ADD_TITLE("New Group");
 
   private static final Logger            logger   = Logger.getLogger(S.class);
   private static HashMap<String, String> messages = new HashMap<>();
