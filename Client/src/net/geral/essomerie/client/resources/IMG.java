@@ -10,6 +10,7 @@ import java.util.Hashtable;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
+import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 
 public enum IMG {
@@ -20,7 +21,7 @@ public enum IMG {
   ICON__TOOLBAR__MESSAGE,
   ICON__TOOLBAR__MESSAGE_HASUNREAD,
   ICON__TOOLBAR__ORGANIZER_CALENDAR,
-  ICON__TOOLBAR__INVENTORY,
+  ICON__TOOLBAR__WAREHOUSE,
   ICON__UP,
   ICON__DOWN,
   ICON__DELETE,
@@ -33,8 +34,27 @@ public enum IMG {
   ICON__CATALOG__FOLDER_CLOSED,
   ICON__CATALOG__FOLDER_DETAILS,
   ICON__CATALOG__FOLDER_OPEN,
-  ICON__INVENTORY__CLOSED,
-  ICON__INVENTORY__OPEN;
+  ICON__WAREHOUSE__CLOSED,
+  ICON__WAREHOUSE__OPEN;
+
+  private static URL createURL(final IMG img) {
+    final String file = "/res/img/"
+        + img.name().toLowerCase().replaceAll("__", "/").replaceAll("_", "-")
+        + ".png";
+    final URL url = img.getClass().getResource(file);
+    if (url == null) {
+      Logger.getLogger(IMG.class).warn("Cannot find image resource: " + file);
+    }
+    return url;
+  }
+
+  public static void main(final String[] args) {
+    BasicConfigurator.configure();
+    for (final IMG img : values()) {
+      IMG.createURL(img);
+      img.image();
+    }
+  }
 
   public static void preload() {
     for (final IMG img : values()) {
@@ -44,19 +64,15 @@ public enum IMG {
 
   private final URL                               url;
   private final Hashtable<Integer, BufferedImage> images    = new Hashtable<>();
+
   private final Hashtable<Integer, ImageIcon>     icons     = new Hashtable<>();
+
   private BufferedImage                           baseImage = null;
 
   private ImageIcon                               baseIcon  = null;
 
   private IMG() {
-    final String file = "/res/img/"
-        + name().toLowerCase().replaceAll("__", "/").replaceAll("_", "-")
-        + ".png";
-    url = getClass().getResource(file);
-    if (url == null) {
-      Logger.getLogger(IMG.class).warn("Cannot find image resource: " + file);
-    }
+    url = createURL(this);
   }
 
   private void createEmptyImage() {

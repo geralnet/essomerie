@@ -6,7 +6,7 @@ import net.geral.essomerie.server.core.Configuration;
 import net.geral.essomerie.server.db.areas.BulletionBoardDB;
 import net.geral.essomerie.server.db.areas.CalendarDB;
 import net.geral.essomerie.server.db.areas.CatalogDB;
-import net.geral.essomerie.server.db.areas.InventoryDB;
+import net.geral.essomerie.server.db.areas.WarehouseDB;
 import net.geral.essomerie.server.db.areas.MessageDB;
 import net.geral.essomerie.server.db.areas.PersonDB;
 import net.geral.essomerie.server.db.areas.SysopDB;
@@ -19,7 +19,7 @@ public class Database extends MySQL {
 
     private final BulletionBoardDB bulletinBoard = new BulletionBoardDB(this);
     private final CalendarDB calendar = new CalendarDB(this);
-    private final InventoryDB inventory = new InventoryDB(this);
+    private final WarehouseDB warehouse = new WarehouseDB(this);
     private final PersonDB person = new PersonDB(this);
     private final MessageDB message = new MessageDB(this);
     private final UsersDB users = new UsersDB(this);
@@ -54,8 +54,8 @@ public class Database extends MySQL {
 	super.close();
     }
 
-    public InventoryDB inventory() {
-	return inventory;
+    public WarehouseDB warehouse() {
+	return warehouse;
     }
 
     public void keepAlive() throws SQLException {

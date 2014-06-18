@@ -50,7 +50,6 @@ public class MoneyTextField extends FormulaTextField<Money> implements
         d = Money.sum(d, Money.fromString(p));
       }
       // check number
-      System.err.println(d);
       if (((!allowNegative) && d.isNegative()) || ((!allowZero) && d.isZero())
           || ((!allowPositive) && d.isPositive())) {
         return false;

@@ -47,7 +47,7 @@ public class MainMenu extends JMenuBar implements BulletionBoardListener,
     createUser();
     createBulletinBoard();
     createOrganizer();
-    createInventory();
+    createWarehouse();
     // criarCaixa();
     // createDelivery();
     // criarCardapio();
@@ -123,9 +123,9 @@ public class MainMenu extends JMenuBar implements BulletionBoardListener,
     addItem(mBulletinBoard, S.MENU_BULLETINBOARD_ADD);
   }
 
-  private void createInventory() {
-    final JMenu menu = createMenu(S.MENU_INVENTORY);
-    addItem(menu, S.MENU_INVENTORY_MANAGEMENT);
+  private void createWarehouse() {
+    final JMenu menu = createMenu(S.MENU_WAREHOUSE);
+    addItem(menu, S.MENU_WAREHOUSE_MANAGEMENT);
     // criarItem(menu, "Relatório", "contagem_relatorio");
     // criarItem(menu, "Cadastro", "contagem_cadastro");
   }

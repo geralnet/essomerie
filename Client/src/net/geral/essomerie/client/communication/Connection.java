@@ -8,7 +8,7 @@ import net.geral.essomerie.client.communication.controllers.BulletinBoardControl
 import net.geral.essomerie.client.communication.controllers.CalendarController;
 import net.geral.essomerie.client.communication.controllers.CallerIdController;
 import net.geral.essomerie.client.communication.controllers.CatalogController;
-import net.geral.essomerie.client.communication.controllers.InventoryController;
+import net.geral.essomerie.client.communication.controllers.WarehouseController;
 import net.geral.essomerie.client.communication.controllers.MessagesController;
 import net.geral.essomerie.client.communication.controllers.PersonsController;
 import net.geral.essomerie.client.communication.controllers.SalesController;
@@ -50,7 +50,7 @@ public class Connection extends Thread implements ICommunication {
                                                                   this);
   private final CalendarController      calendar              = new CalendarController(
                                                                   this);
-  private final InventoryController     inventory             = new InventoryController(
+  private final WarehouseController     warehouse             = new WarehouseController(
                                                                   this);
   private final MessagesController      messages              = new MessagesController(
                                                                   this);
@@ -103,8 +103,8 @@ public class Connection extends Thread implements ICommunication {
     running = false;
   }
 
-  public InventoryController inventory() {
-    return inventory;
+  public WarehouseController warehouse() {
+    return warehouse;
   }
 
   public MessagesController messages() {
@@ -124,8 +124,8 @@ public class Connection extends Thread implements ICommunication {
       case Calendar:
         calendar.process(md);
         break;
-      case Inventory:
-        inventory.process(md);
+      case Warehouse:
+        warehouse.process(md);
         break;
       case Messages:
         messages.process(md);

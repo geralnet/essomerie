@@ -17,7 +17,6 @@ public class LogTable extends GNTable<LogModel> {
     getModel().add(sale);
     final int row = getModel().getRowCount() - 1;
     final int n = convertRowIndexToView(row);
-    System.err.println(row + "//" + n);
     getSelectionModel().setSelectionInterval(n, n);
     scrollToSelected();
   }

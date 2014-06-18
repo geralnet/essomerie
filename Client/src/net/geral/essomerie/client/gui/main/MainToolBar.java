@@ -44,8 +44,8 @@ public class MainToolBar extends JToolBar implements Runnable,
     add(createButton(S.MENU_ORGANIZER_CALENDAR,
         IMG.ICON__TOOLBAR__ORGANIZER_CALENDAR.icon(ICON_SIZE), listener));
 
-    add(createButton(S.MENU_INVENTORY_MANAGEMENT,
-        IMG.ICON__TOOLBAR__INVENTORY.icon(ICON_SIZE), listener));
+    add(createButton(S.MENU_WAREHOUSE_MANAGEMENT,
+        IMG.ICON__TOOLBAR__WAREHOUSE.icon(ICON_SIZE), listener));
 
     add(createButton(S.MENU_ORGANIZER_PERSONS,
         IMG.ICON__TOOLBAR__ORGANIZER_PERSONS.icon(ICON_SIZE), listener));

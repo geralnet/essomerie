@@ -24,7 +24,6 @@ import net.geral.essomerie.client.core.events.listeners.CallerIdListener;
 import net.geral.essomerie.client.gui.bulletinboard.BulletinBoardEditorTabPanel;
 import net.geral.essomerie.client.gui.bulletinboard.BulletinBoardTabPanel;
 import net.geral.essomerie.client.gui.connection.ConnectionDialog;
-import net.geral.essomerie.client.gui.inventory.InventoryManagementTabPanel;
 import net.geral.essomerie.client.gui.messages.MessagesTabPanel;
 import net.geral.essomerie.client.gui.organizer.calendar.CalendarTabPanel;
 import net.geral.essomerie.client.gui.organizer.catalog.CatalogTabPanel;
@@ -34,6 +33,7 @@ import net.geral.essomerie.client.gui.shared.notification.CallerIdNotificationPa
 import net.geral.essomerie.client.gui.shared.notification.NotificationWindow;
 import net.geral.essomerie.client.gui.sysop.devices.DevicesTabPanel;
 import net.geral.essomerie.client.gui.tools.salesregister.ToolsSalesRegister;
+import net.geral.essomerie.client.gui.warehouse.WarehouseManagementTabPanel;
 import net.geral.essomerie.client.resources.IMG;
 import net.geral.essomerie.client.resources.S;
 import net.geral.essomerie.shared.person.PersonData;
@@ -243,8 +243,8 @@ public class MainWindow extends JFrame implements ActionListener,
     }
     // if ("agenda_funcionarios".equals(cmd)) { return
     // openTab(OrganizerPersonsTabPanel.class); }
-    if (S.MENU_INVENTORY_MANAGEMENT.name().equals(cmd)) {
-      return openTab(InventoryManagementTabPanel.class);
+    if (S.MENU_WAREHOUSE_MANAGEMENT.name().equals(cmd)) {
+      return openTab(WarehouseManagementTabPanel.class);
     }
     if (S.MENU_SYSOP_DEVICES.name().equals(cmd)) {
       if (Client.cache().users()

@@ -10,7 +10,7 @@ import net.geral.essomerie.server.comm.controllers.BulletinBoardController;
 import net.geral.essomerie.server.comm.controllers.CalendarController;
 import net.geral.essomerie.server.comm.controllers.CallerIdController;
 import net.geral.essomerie.server.comm.controllers.CatalogController;
-import net.geral.essomerie.server.comm.controllers.InventoryController;
+import net.geral.essomerie.server.comm.controllers.WarehouseController;
 import net.geral.essomerie.server.comm.controllers.MessagesController;
 import net.geral.essomerie.server.comm.controllers.PersonsController;
 import net.geral.essomerie.server.comm.controllers.SalesController;
@@ -42,7 +42,7 @@ public class Connection extends Thread implements ICommunication {
     private final BulletinBoardController bulletinBoard = new BulletinBoardController(
 	    this);
     private final CalendarController calendar = new CalendarController(this);
-    private final InventoryController inventory = new InventoryController(this);
+    private final WarehouseController warehouse = new WarehouseController(this);
     private final MessagesController messages = new MessagesController(this);
     private final PersonsController persons = new PersonsController(this);
     private final SystemController system = new SystemController(this);
@@ -114,8 +114,8 @@ public class Connection extends Thread implements ICommunication {
 	case Calendar:
 	    calendar.process(md);
 	    break;
-	case Inventory:
-	    inventory.process(md);
+	case Warehouse:
+	    warehouse.process(md);
 	    break;
 	case Messages:
 	    messages.process(md);

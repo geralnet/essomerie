@@ -151,19 +151,19 @@ public class CoreConfiguration extends ConfigurationBase {
 
   public GNTableColumnWidth TableColumnWidth_Organizer_Calendar_Username        = null;
 
-  public GNTableColumnWidth TableColumnWidth_Inventory_Product                  = null;
+  public GNTableColumnWidth TableColumnWidth_Warehouse_Product                  = null;
 
-  public GNTableColumnWidth TableColumnWidth_Inventory_Quantity                 = new GNTableColumnWidth(
+  public GNTableColumnWidth TableColumnWidth_Warehouse_Quantity                 = new GNTableColumnWidth(
                                                                                     80);
-  public GNTableColumnWidth TableColumnWidth_Inventory_Unit                     = new GNTableColumnWidth(
+  public GNTableColumnWidth TableColumnWidth_Warehouse_Unit                     = new GNTableColumnWidth(
                                                                                     70);
-  public GNTableColumnWidth TableColumnWidth_Inventory_Log_Date                 = null;
+  public GNTableColumnWidth TableColumnWidth_Warehouse_Log_Date                 = null;
 
-  public GNTableColumnWidth TableColumnWidth_Inventory_Log_By                   = null;
+  public GNTableColumnWidth TableColumnWidth_Warehouse_Log_By                   = null;
 
-  public GNTableColumnWidth TableColumnWidth_Inventory_Log_Change               = null;
+  public GNTableColumnWidth TableColumnWidth_Warehouse_Log_Change               = null;
 
-  public GNTableColumnWidth TableColumnWidth_Inventory_Log_Comments             = null;
+  public GNTableColumnWidth TableColumnWidth_Warehouse_Log_Comments             = null;
 
   public GNTableColumnWidth TableColumnWidth_Telephones_Type                    = null;
 
@@ -271,7 +271,11 @@ public class CoreConfiguration extends ConfigurationBase {
 
   public GNTableColumnWidth TableColumnWidth_SysOp_Devices_Interfaces_Hostnames = null;
 
-  public GNTableColumnWidth TableColumnWidth_Inventory_ItemReport_Date          = null;
+  public GNTableColumnWidth TableColumnWidth_Warehouse_ItemReport_Date          = null;
 
-  public GNTableColumnWidth TableColumnWidth_Inventory_ItemReport_Ammount       = null;
+  public GNTableColumnWidth TableColumnWidth_Warehouse_ItemReport_Ammount       = null;
+
+  public GNTableColumnWidth TableColumnWidth_Warehouse_Minimum                  = null;
+
+  public GNTableColumnWidth TableColumnWidth_Warehouse_Maximum                  = null;
 }

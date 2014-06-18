@@ -5,7 +5,7 @@ import net.geral.essomerie.client.core.events.handlers.CalendarEventHandler;
 import net.geral.essomerie.client.core.events.handlers.CallerIdEventHandler;
 import net.geral.essomerie.client.core.events.handlers.CatalogEventHandler;
 import net.geral.essomerie.client.core.events.handlers.CommConfirmationEventHandler;
-import net.geral.essomerie.client.core.events.handlers.InventoryEventHandler;
+import net.geral.essomerie.client.core.events.handlers.WarehouseEventHandler;
 import net.geral.essomerie.client.core.events.handlers.MessagesEventHandler;
 import net.geral.essomerie.client.core.events.handlers.PersonsEventHandler;
 import net.geral.essomerie.client.core.events.handlers.SalesEventHandler;
@@ -16,7 +16,7 @@ import net.geral.essomerie.client.core.events.handlers.UsersEventHandler;
 public class Events {
   private static final BulletinBoardEventHandler    bulletinBoard = new BulletinBoardEventHandler();
   private static final CalendarEventHandler         calendar      = new CalendarEventHandler();
-  private static final InventoryEventHandler        inventory     = new InventoryEventHandler();
+  private static final WarehouseEventHandler        warehouse     = new WarehouseEventHandler();
   private static final MessagesEventHandler         messages      = new MessagesEventHandler();
   private static final PersonsEventHandler          persons       = new PersonsEventHandler();
   private static final SystemEventHandler           system        = new SystemEventHandler();
@@ -47,8 +47,8 @@ public class Events {
     return comm;
   }
 
-  public static InventoryEventHandler inventory() {
-    return inventory;
+  public static WarehouseEventHandler warehouse() {
+    return warehouse;
   }
 
   public static MessagesEventHandler messages() {
