@@ -45,6 +45,11 @@ public class WarehouseItem implements Serializable {
         maximum);
   }
 
+  public WarehouseItem withIdGroup(final int newIdGroup) {
+    return new WarehouseItem(id, newIdGroup, name, unit, quantity, minimum,
+        maximum);
+  }
+
   public WarehouseItem withMaximum(final float newMaximum) {
     return new WarehouseItem(id, idgroup, name, unit, quantity, minimum,
         newMaximum);

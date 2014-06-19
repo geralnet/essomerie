@@ -13,14 +13,16 @@ import net.geral.lib.table.GNTable;
 
 import org.apache.log4j.Logger;
 
-public class WarehouseTable extends GNTable<WarehouseModel> {
+public class WarehouseItemTable extends GNTable<WarehouseItemTableModel> {
   private static final long serialVersionUID = 1L;
   private final Logger      logger           = Logger
-                                                 .getLogger(WarehouseTable.class);
+                                                 .getLogger(WarehouseItemTable.class);
 
-  public WarehouseTable() {
-    super(new WarehouseModel(), new WarehouseRenderer());
+  public WarehouseItemTable() {
+    super(new WarehouseItemTableModel(), new WarehouseItemTableRenderer());
     initialSort(0, false);
+    setDragEnabled(false);
+    setTransferHandler(new WarehouseItemTableTransferHandle());
   }
 
   @Override

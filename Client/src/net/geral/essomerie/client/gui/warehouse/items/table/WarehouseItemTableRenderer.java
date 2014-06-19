@@ -10,10 +10,10 @@ import net.geral.essomerie.shared.warehouse.WarehouseChangeLogEntry;
 import net.geral.essomerie.shared.warehouse.WarehouseItem;
 import net.geral.lib.table.GNTableRenderer;
 
-public class WarehouseRenderer extends GNTableRenderer {
+public class WarehouseItemTableRenderer extends GNTableRenderer {
   private static final long serialVersionUID = 1L;
 
-  public WarehouseRenderer() {
+  public WarehouseItemTableRenderer() {
   }
 
   @Override

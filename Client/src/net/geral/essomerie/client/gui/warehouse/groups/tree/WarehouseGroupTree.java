@@ -14,10 +14,10 @@ public class WarehouseGroupTree extends JTree {
   public WarehouseGroupTree() {
     super(new WarehouseGroupTreeModel());
     setRootVisible(false);
-    setDragEnabled(false);
     setCellRenderer(new WarehouseGroupTreeRenderer());
+    setDragEnabled(false);
     setDropMode(DropMode.ON_OR_INSERT);
-    setTransferHandler(new WarehouseGroupTreeTransferHandle());
+    setTransferHandler(new WarehouseGroupTreeTransferHandler());
     getSelectionModel().setSelectionMode(
         TreeSelectionModel.SINGLE_TREE_SELECTION);
     popup = new WarehouseGroupTreePopup(this);

@@ -10,13 +10,13 @@ import net.geral.lib.table.GNTableModel;
 
 import org.apache.log4j.Logger;
 
-public class WarehouseModel extends GNTableModel<WarehouseItem> {
+public class WarehouseItemTableModel extends GNTableModel<WarehouseItem> {
   private static final long serialVersionUID = 1L;
   private int               idgroup          = 0;
   private static Logger     logger           = Logger
-                                                 .getLogger(WarehouseModel.class);
+                                                 .getLogger(WarehouseItemTableModel.class);
 
-  public WarehouseModel() {
+  public WarehouseItemTableModel() {
     super(true, true, true);
   }
 

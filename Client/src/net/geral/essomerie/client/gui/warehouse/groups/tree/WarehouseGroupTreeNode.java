@@ -1,18 +1,12 @@
 package net.geral.essomerie.client.gui.warehouse.groups.tree;
 
-import java.awt.datatransfer.DataFlavor;
-import java.awt.datatransfer.Transferable;
-import java.awt.datatransfer.UnsupportedFlavorException;
-import java.io.IOException;
-
 import javax.swing.Icon;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 import net.geral.essomerie.client.resources.IMG;
 import net.geral.essomerie.shared.warehouse.WarehouseGroup;
 
-public class WarehouseGroupTreeNode extends DefaultMutableTreeNode implements
-    Transferable {
+public class WarehouseGroupTreeNode extends DefaultMutableTreeNode {
   private static final long serialVersionUID = 1L;
   public static final int   ICON_SIZE        = 16;
 
@@ -47,24 +41,5 @@ public class WarehouseGroupTreeNode extends DefaultMutableTreeNode implements
       return IMG.ICON__WAREHOUSE__CLOSED.icon(ICON_SIZE);
     }
     return IMG.ICON__WAREHOUSE__OPEN.icon(ICON_SIZE);
-  }
-
-  @Override
-  public Object getTransferData(final DataFlavor flavor)
-      throws UnsupportedFlavorException, IOException {
-    if (!isDataFlavorSupported(flavor)) {
-      throw new UnsupportedFlavorException(flavor);
-    }
-    return getGroup();
-  }
-
-  @Override
-  public DataFlavor[] getTransferDataFlavors() {
-    return WarehouseGroupTreeTransferHandle.getDataFlavors();
-  }
-
-  @Override
-  public boolean isDataFlavorSupported(final DataFlavor flavor) {
-    return WarehouseGroupTreeTransferHandle.getDataFlavor().equals(flavor);
   }
 }

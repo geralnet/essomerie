@@ -28,7 +28,7 @@ import javax.swing.border.LineBorder;
 
 import net.geral.essomerie.client.core.Client;
 import net.geral.essomerie.client.gui.shared.label.TitleLabel;
-import net.geral.essomerie.client.gui.warehouse.items.table.WarehouseTable;
+import net.geral.essomerie.client.gui.warehouse.items.table.WarehouseItemTable;
 import net.geral.essomerie.client.gui.warehouse.logtable.WarehouseLogTable;
 import net.geral.essomerie.client.resources.S;
 import net.geral.essomerie.shared.warehouse.WarehouseChangeLog;
@@ -61,7 +61,7 @@ public class WarehouseItemsPanel extends JPanel implements ItemListener,
   private final JRadioButton[]             rdReasons;
   private final ButtonGroup                buttonGroupChange = new ButtonGroup();
   private final ButtonGroup                buttonGroupReason = new ButtonGroup();
-  private final WarehouseTable             warehouseTable;
+  private final WarehouseItemTable             warehouseTable;
   private final JPanel                     panelNegativeError;
   private final WarehouseLogTable          changeLogTable;
   private WarehouseChangeReasons           reasons           = new WarehouseChangeReasons();
@@ -74,7 +74,7 @@ public class WarehouseItemsPanel extends JPanel implements ItemListener,
     this(null);
   }
 
-  public WarehouseItemsPanel(final WarehouseTable table) {
+  public WarehouseItemsPanel(final WarehouseItemTable table) {
     warehouseTable = table;
     setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
     setMinimumSize(change_size);

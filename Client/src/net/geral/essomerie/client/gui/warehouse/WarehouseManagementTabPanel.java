@@ -19,7 +19,7 @@ import net.geral.essomerie.client.gui.main.TabPanel;
 import net.geral.essomerie.client.gui.shared.label.TitleLabel;
 import net.geral.essomerie.client.gui.warehouse.groups.WarehouseGroupsPanel;
 import net.geral.essomerie.client.gui.warehouse.items.WarehouseItemsPanel;
-import net.geral.essomerie.client.gui.warehouse.items.table.WarehouseTable;
+import net.geral.essomerie.client.gui.warehouse.items.table.WarehouseItemTable;
 import net.geral.essomerie.client.gui.warehouse.report.item.WarehouseItemReportTabPanel;
 import net.geral.essomerie.client.resources.S;
 import net.geral.essomerie.shared.warehouse.Warehouse;
@@ -36,15 +36,15 @@ import org.joda.time.LocalDate;
 public class WarehouseManagementTabPanel extends TabPanel implements
     WarehouseListener, ListSelectionListener {
 
-  private static final Logger        logger           = Logger
-                                                          .getLogger(WarehouseManagementTabPanel.class);
-  private static final long          serialVersionUID = 1L;
+  private static final Logger        logger             = Logger
+                                                            .getLogger(WarehouseManagementTabPanel.class);
+  private static final long          serialVersionUID   = 1L;
 
-  private final WarehouseTable       warehouseTable   = new WarehouseTable();
+  private final WarehouseItemTable   warehouseItemTable = new WarehouseItemTable();
   private final WarehouseItemsPanel  itemsPanel;
   private final WarehouseGroupsPanel groupsPanel;
-  private Warehouse                  warehouse        = new Warehouse();
-  private WarehouseGroup             lastGroup        = null;
+  private Warehouse                  warehouse          = new Warehouse();
+  private WarehouseGroup             lastGroup          = null;
 
   public WarehouseManagementTabPanel() {
     setLayout(new BorderLayout(0, 0));
@@ -59,11 +59,12 @@ public class WarehouseManagementTabPanel extends TabPanel implements
     groupsPanel = new WarehouseGroupsPanel(this);
     mainPanel.add(groupsPanel, BorderLayout.WEST);
 
-    itemsPanel = new WarehouseItemsPanel(warehouseTable);
-    warehouseTable.getSelectionModel().addListSelectionListener(this);
+    itemsPanel = new WarehouseItemsPanel(warehouseItemTable);
+    warehouseItemTable.getSelectionModel().addListSelectionListener(this);
     final JPanel warehouseTablePanel = new JPanel();
     warehouseTablePanel.setLayout(new BorderLayout());
-    warehouseTablePanel.add(warehouseTable.getScroll(), BorderLayout.CENTER);
+    warehouseTablePanel
+        .add(warehouseItemTable.getScroll(), BorderLayout.CENTER);
 
     final JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT,
         warehouseTablePanel, itemsPanel);
@@ -97,9 +98,10 @@ public class WarehouseManagementTabPanel extends TabPanel implements
     }
     lastGroup = group;
 
-    final int selected = warehouseTable.getSelectedRow();
-    warehouseTable.getSelectionModel().setSelectionInterval(selected, selected);
-    warehouseTable.getModel().setData(group.id, warehouse.getItems(group));
+    final int selected = warehouseItemTable.getSelectedRow();
+    warehouseItemTable.getSelectionModel().setSelectionInterval(selected,
+        selected);
+    warehouseItemTable.getModel().setData(group.id, warehouse.getItems(group));
   }
 
   public void printChecklist() {
@@ -124,7 +126,8 @@ public class WarehouseManagementTabPanel extends TabPanel implements
   }
 
   public void setAllowChanges(final boolean allow) {
-    warehouseTable.setEditable(allow);
+    warehouseItemTable.setEditable(allow);
+    warehouseItemTable.setDragEnabled(allow);
   }
 
   public void setWarehouse(final Warehouse i) {
@@ -159,8 +162,8 @@ public class WarehouseManagementTabPanel extends TabPanel implements
     if (e.getValueIsAdjusting()) {
       return;
     }
-    itemsPanel.setItem(warehouseTable.getSelected());
-    warehouseTable.scrollToSelected();
+    itemsPanel.setItem(warehouseItemTable.getSelected());
+    warehouseItemTable.scrollToSelected();
   }
 
   @Override
@@ -210,7 +213,7 @@ public class WarehouseManagementTabPanel extends TabPanel implements
 
   @Override
   public void warehouseLogByItemReceived(final WarehouseChangeLog log) {
-    final WarehouseItem ii = warehouseTable.getSelected();
+    final WarehouseItem ii = warehouseItemTable.getSelected();
     if (ii == null) {
       return;
     }
@@ -222,6 +225,6 @@ public class WarehouseManagementTabPanel extends TabPanel implements
   @Override
   public void warehouseQuantityChanged(final int iditem, final float newQuantity) {
     warehouse.setNewQuantity(iditem, newQuantity);
-    warehouseTable.getModel().refreshItem(iditem);
+    warehouseItemTable.getModel().refreshItem(iditem);
   }
 }
