@@ -166,7 +166,7 @@ public class BulletinBoardTabPanel extends TabPanel implements ActionListener,
 
   @Override
   public String getTabText() {
-    return Client.cache().bulletinBoard().getTitle(showingId);
+    return Client.cache().bulletinBoard().getTitleArrow(showingId);
   }
 
   private void print() {
@@ -179,8 +179,8 @@ public class BulletinBoardTabPanel extends TabPanel implements ActionListener,
     }
     showingId = bbe.getId();
     showing = bbe;
-    Client.window().setTabTitle(this, showing.getTitle());
-    lblTitle.setText(showing.getTitle());
+    Client.window().setTabTitle(this, getTabText());
+    lblTitle.setText(getTabText());
     rtfPane.setRTF(showing.getRtfContents());
     lblCreatedBy.setText(" "
         + S.BULLETINBOARD_CREATED_BY.s(

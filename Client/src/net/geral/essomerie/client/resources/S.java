@@ -288,7 +288,8 @@ public enum S {
   WAREHOUSE_TABLE_MINIMUM("Min"),
   WAREHOUSE_TABLE_MAXIMUM("Max"),
   WAREHOUSE_ADMIN_DELETE_CONFIRM("*** This action cannot be undone! ***\n\nDelete '%s'?"),
-  WAREHOUSE_ADMIN_SAVING("[Saving '%s' ...]");
+  WAREHOUSE_ADMIN_SAVING("[Saving '%s' ...]"),
+  BULLETINBOARD_EDIT_TITLE_INSTRUCTIONS("Use the character '%s' to create a new submenu.");
 
   private static final Logger            logger   = Logger.getLogger(S.class);
   private static HashMap<String, String> messages = new HashMap<>();

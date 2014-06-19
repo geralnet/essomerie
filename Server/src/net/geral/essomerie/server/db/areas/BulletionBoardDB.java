@@ -70,7 +70,7 @@ public class BulletionBoardDB extends DatabaseArea {
 	    final BulletinBoardEntry bbe) throws SQLException {
 	String sql = "INSERT INTO `bulletinboard` (`id`,`title`,`contents`,`created_by`,`created_when`) "// insert
 		+ " VALUES (NULL, ?, UNHEX(?), ?, NOW())";// values
-	final int newId = db.insertLastId(sql, bbe.getTitle(),
+	final int newId = db.insertLastId(sql, bbe.getFullTitle(),
 		StringUtils.toHex(bbe.getRtfContents()), userid);
 
 	if (bbe.getId() > 0) {

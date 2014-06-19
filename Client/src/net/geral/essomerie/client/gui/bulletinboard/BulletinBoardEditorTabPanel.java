@@ -1,6 +1,7 @@
 package net.geral.essomerie.client.gui.bulletinboard;
 
 import java.awt.BorderLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -52,13 +53,23 @@ public class BulletinBoardEditorTabPanel extends TabPanel implements
     add(panelN, BorderLayout.NORTH);
     panelN.setLayout(new BorderLayout(0, 0));
 
-    final JLabel lblTitle = new JLabel(S.BULLETINBOARD_EDIT_TITLE.s());
-    panelN.add(lblTitle, BorderLayout.NORTH);
-
     txtTitle = new JTextField();
     txtTitle.addKeyListener(this);
+
+    final JPanel panelNTitle = new JPanel();
+    panelN.add(panelNTitle, BorderLayout.NORTH);
+    panelNTitle.setLayout(new BorderLayout(0, 0));
+
+    final JLabel lblTitle = new JLabel(S.BULLETINBOARD_EDIT_TITLE.s());
+    panelNTitle.add(lblTitle, BorderLayout.WEST);
+    lblTitle.setFont(lblTitle.getFont().deriveFont(
+        lblTitle.getFont().getStyle() | Font.BOLD));
+
+    final JLabel lblTitleInstructions = new JLabel(
+        S.BULLETINBOARD_EDIT_TITLE_INSTRUCTIONS.s(String
+            .valueOf(BulletinBoardTitle.PATH_SEPARATOR)));
+    panelNTitle.add(lblTitleInstructions, BorderLayout.EAST);
     panelN.add(txtTitle, BorderLayout.CENTER);
-    txtTitle.setColumns(20);
 
     editor = new RTFEditorPanel();
     add(editor, BorderLayout.CENTER);
@@ -171,7 +182,7 @@ public class BulletinBoardEditorTabPanel extends TabPanel implements
       return false;
     }
     // edit
-    if (!editing.getTitle().equals(txtTitle.getText())) {
+    if (!editing.getFullTitle().equals(txtTitle.getText())) {
       return true;
     }
     if (editor.hasChanged()) {
@@ -244,7 +255,7 @@ public class BulletinBoardEditorTabPanel extends TabPanel implements
     lblErrorLabel.setVisible(false);
     Events.bulletinBoard().addListener(this);
     if (editing != null) {
-      txtTitle.setText(editing.getTitle());
+      txtTitle.setText(editing.getFullTitle().substring(1));
       editor.setRTF(editing.getRtfContents());
     }
     txtTitle.requestFocus();

@@ -112,22 +112,21 @@ public class MainMenu extends JMenuBar implements BulletionBoardListener,
       mBulletinBoard = createMenu(S.MENU_BULLETINBOARD);
     }
     mBulletinBoard.removeAll();
-
-    final BulletinBoardCache cache = Client.cache().bulletinBoard();
-    final BulletinBoardTitle[] es = cache.getTitles();
-    for (final BulletinBoardTitle e : es) {
-      addItem(mBulletinBoard, e.getTitle(), "bulletinboard_show:" + e.getId());
-    }
-
+    createBulletinBoard_path(mBulletinBoard, "/");
     addSeparator(mBulletinBoard);
     addItem(mBulletinBoard, S.MENU_BULLETINBOARD_ADD);
   }
 
-  private void createWarehouse() {
-    final JMenu menu = createMenu(S.MENU_WAREHOUSE);
-    addItem(menu, S.MENU_WAREHOUSE_MANAGEMENT);
-    // criarItem(menu, "Relatório", "contagem_relatorio");
-    // criarItem(menu, "Cadastro", "contagem_cadastro");
+  private void createBulletinBoard_path(final JMenu menu, final String path) {
+    final BulletinBoardCache cache = Client.cache().bulletinBoard();
+    for (final BulletinBoardTitle e : cache.getTitles(path)) {
+      addItem(menu, e.getTitle(), "bulletinboard_show:" + e.getId());
+    }
+    for (final String s : cache.getSubPaths(path)) {
+      final JMenu sub = new JMenu(s.substring(0, s.length() - 1));
+      createBulletinBoard_path(sub, path + s);
+      menu.add(sub);
+    }
   }
 
   private JMenu createMenu(final S s) {
@@ -170,6 +169,13 @@ public class MainMenu extends JMenuBar implements BulletionBoardListener,
     addSeparator(menu);
     // TODO criarItem(mUser, "Alterar Senha", "user_alterarSenha");
     addItem(menu, S.MENU_USER_LOGOUT);
+  }
+
+  private void createWarehouse() {
+    final JMenu menu = createMenu(S.MENU_WAREHOUSE);
+    addItem(menu, S.MENU_WAREHOUSE_MANAGEMENT);
+    // criarItem(menu, "Relatório", "contagem_relatorio");
+    // criarItem(menu, "Cadastro", "contagem_cadastro");
   }
 
   @Override
