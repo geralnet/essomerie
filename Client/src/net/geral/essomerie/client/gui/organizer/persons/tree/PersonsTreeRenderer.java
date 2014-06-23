@@ -21,7 +21,7 @@ public class PersonsTreeRenderer extends DefaultTreeCellRenderer {
     super.getTreeCellRendererComponent(tree, value, sel, expanded, leaf, row,
         hasFocus);
 
-    setIcon(IMG.ICON__PERSONS__TYPE_UNKNOWN.icon(ICON_SIZE));
+    setIcon(null);
     if (value instanceof PersonsTreeNode) {
       setIcon(((PersonsTreeNode) value).getIcon());
     } else if (value instanceof DefaultMutableTreeNode) {

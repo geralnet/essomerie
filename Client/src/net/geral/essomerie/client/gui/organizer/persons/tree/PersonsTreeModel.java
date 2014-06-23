@@ -26,8 +26,6 @@ public class PersonsTreeModel extends DefaultTreeModel {
                                                             S.ORGANIZER_PERSONS_NATURAL);
   private final DefaultMutableTreeNode typeLegal        = new DefaultMutableTreeNode(
                                                             S.ORGANIZER_PERSONS_LEGAL);
-  private final DefaultMutableTreeNode typeUnknown      = new DefaultMutableTreeNode(
-                                                            S.ORGANIZER_PERSONS_GENERAL_UNKNOWN);
 
   private ArrayList<Person>            persons          = new ArrayList<>();
   private PersonsListFilter            currentFilter    = null;
@@ -116,7 +114,7 @@ public class PersonsTreeModel extends DefaultTreeModel {
           typeNatural.add(node);
           break;
         default:
-          typeUnknown.add(node);
+          logger.warn("Invalid type: " + p.getType());
           break;
       }
     }
@@ -129,7 +127,8 @@ public class PersonsTreeModel extends DefaultTreeModel {
       case Natural:
         return typeNatural;
       default:
-        return typeUnknown;
+        logger.warn("Invalid type: " + type);
+        return null;
     }
   }
 
@@ -160,8 +159,7 @@ public class PersonsTreeModel extends DefaultTreeModel {
   public Person getSinglePersonFound() {
     final int legal = typeLegal.getChildCount();
     final int natural = typeNatural.getChildCount();
-    final int unknown = typeUnknown.getChildCount();
-    final int sum = legal + natural + unknown;
+    final int sum = legal + natural;
     if (sum != 1) {
       return null;// not only one
     }
@@ -170,9 +168,6 @@ public class PersonsTreeModel extends DefaultTreeModel {
     }
     if (natural == 1) {
       return ((PersonsTreeNode) typeNatural.getChildAt(0)).getPerson();
-    }
-    if (unknown == 1) {
-      return ((PersonsTreeNode) typeUnknown.getChildAt(0)).getPerson();
     }
     return null;
   }
@@ -202,7 +197,6 @@ public class PersonsTreeModel extends DefaultTreeModel {
     root.removeAllChildren();
     typeNatural.removeAllChildren();
     typeLegal.removeAllChildren();
-    typeUnknown.removeAllChildren();
   }
 
   private boolean removeById(final DefaultMutableTreeNode node,
@@ -242,7 +236,6 @@ public class PersonsTreeModel extends DefaultTreeModel {
     // TODO add other options (for now is type)
     root.add(typeNatural);
     root.add(typeLegal);
-    root.add(typeUnknown);
   }
 
   public void setPersons(final Person[] ps) {

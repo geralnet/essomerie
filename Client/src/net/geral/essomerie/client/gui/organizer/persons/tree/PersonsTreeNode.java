@@ -16,7 +16,7 @@ public class PersonsTreeNode extends DefaultMutableTreeNode {
 
   public Icon getIcon() {
     if (getPerson().getType() == null) {
-      return IMG.ICON__PERSONS__TYPE_UNKNOWN.icon(ICON_SIZE);
+      return null;
     }
     switch (getPerson().getType()) {
       case Natural:
@@ -24,7 +24,7 @@ public class PersonsTreeNode extends DefaultMutableTreeNode {
       case Legal:
         return IMG.ICON__PERSONS__TYPE_LEGAL.icon(ICON_SIZE);
       default:
-        return IMG.ICON__PERSONS__TYPE_UNKNOWN.icon(ICON_SIZE);
+        return null;
     }
   }
 

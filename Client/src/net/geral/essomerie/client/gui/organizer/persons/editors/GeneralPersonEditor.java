@@ -268,7 +268,7 @@ public class GeneralPersonEditor extends PersonEditorPanel implements
     if (rdbtnNaturalPerson.isSelected()) {
       return PersonType.Natural;
     }
-    return PersonType.Unknown;
+    return PersonType.Natural;
   }
 
   @Override
@@ -361,7 +361,7 @@ public class GeneralPersonEditor extends PersonEditorPanel implements
 
   private void setType(PersonType type) {
     if (type == null) {
-      type = PersonType.Unknown;
+      type = PersonType.Natural;
     }
     switch (type) {
       case Natural:
@@ -369,9 +369,6 @@ public class GeneralPersonEditor extends PersonEditorPanel implements
         break;
       case Legal:
         rdbtnLegalPerson.setSelected(true);
-        break;
-      case Unknown:
-        buttonGroup.clearSelection();
         break;
       default:
         logger.warn("Invalid type: " + type);
