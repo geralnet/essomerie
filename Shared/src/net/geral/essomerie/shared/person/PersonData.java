@@ -11,7 +11,7 @@ public class PersonData extends Person {
   private final PersonSales      sales;
 
   public PersonData() {
-    this(0, PersonType.Unknown, "", "", false, "", null, null, null, null, null);
+    this(0, PersonType.Natural, "", "", false, "", null, null, null, null, null);
   }
 
   public PersonData(final int id, final PersonType type, final String name,

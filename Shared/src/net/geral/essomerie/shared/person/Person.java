@@ -34,7 +34,7 @@ public class Person implements Serializable, Comparable<Person> {
   transient private String comparissonNameAlias = null;
 
   public Person() {
-    this(0, PersonType.Unknown, "name", "alias", false);
+    this(0, PersonType.Natural, "name", "alias", false);
   }
 
   public Person(final int id, final PersonType type, final String name,
