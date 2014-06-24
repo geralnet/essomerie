@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
 
-import javax.swing.JComponent;
 import javax.swing.JWindow;
 
 import net.geral.lib.edt.Edt;
@@ -18,13 +17,18 @@ public class NotificationWindow extends JWindow implements Runnable {
   private static NotificationWindow showing          = null;
   private final int                 delay;
 
-  public NotificationWindow(final JComponent component, final int timer) {
+  public NotificationWindow(final NotificationWindowPanel panel, final int timer) {
     setType(Type.UTILITY);
     setAlwaysOnTop(true);
-    getContentPane().add(component, BorderLayout.CENTER);
+    getContentPane().add(panel, BorderLayout.CENTER);
+    panel.setCloseListener(this);
     pack();
     delay = timer * 1000;
     new Thread(this).start();
+  }
+
+  public void closePressed() {
+    setVisible(false);
   }
 
   @Override

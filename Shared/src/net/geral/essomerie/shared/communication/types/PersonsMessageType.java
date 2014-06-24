@@ -7,12 +7,13 @@ public enum PersonsMessageType implements IMessageType {
   RequestList,
   RequestSave,
   RequestDelete,
+  RequestPersonData,
+  RequestFullData,
+
   InformList,
   InformSaved,
   InformDeleted,
-  RequestPersonData,
   InformPersonData,
-  RequestFullData,
   InformFullData,
   InformIdNotFound;
 

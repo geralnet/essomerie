@@ -20,6 +20,7 @@ public enum S {
   BULLETINBOARD_DELETED("This entry was deleted."),
   BULLETINBOARD_EDIT_TAB_TITLE("Edit: %1$s"),
   BULLETINBOARD_EDIT_TITLE("Title:"),
+  BULLETINBOARD_EDIT_TITLE_INSTRUCTIONS("Use the character '%s' to create a new submenu."),
   BULLETINBOARD_INVALID_TITLE("Invalid title."),
   BULLETINBOARD_LOADING("Load Bulletin Board Entry #%1$d..."),
   BULLETINBOARD_NEW("Bulletin Board Entry"),
@@ -41,34 +42,16 @@ public enum S {
   CALLERID_PERSON("Person"),
   CALLERID_TELEPHONE("Telephone:"),
   CALLERID_TITLE("Caller ID"),
-  ERROR_INVALID_FIELD("A field contains invalid data."),
-  ERROR_SAVING_FILE("Error saving file:"), // FIXME create DateTimeFormat field
-                                           // instead
+  ERROR_INVALID_FIELD("A field contains invalid data."), // FIXME create DateTimeFormat field
+                                           ERROR_SAVING_FILE("Error saving file:"),
+  // instead
   FORMAT_DATE_SIMPLE("dd/MM/yyyy"),
   FORMAT_DATETIME_SIMPLE("dd/MM/yyyy HH:mm:ss"),
   FORMAT_DATETIME_SIMPLE_NO_SECONDS("dd/MM/yyyy HH:mm"),
   FORMAT_TIME_NO_SECONDS("HH:mm"),
   GNFILECHOOSER_ONLYIMAGES(GNFileChooser.getTextOnlyImages()),
-  WAREHOUSE_ADJUSTMENT_TITLE("Warehouse Management"),
-  WAREHOUSE_ALLOW_ITEM_ADMIN("Allow Item Administration"),
-  WAREHOUSE_ALLOW_ITEM_ADMIN_CONFIRM("This option allows you to change the groups and items of the WAREHOUSE.\nMany changes cannot be undone.\n\nContinue?"),
-  WAREHOUSE_GROUP("Group:"),
-  WAREHOUSE_GROUP_POPUP_ADD("Add Group"),
-  WAREHOUSE_GROUP_POPUP_ADD_TEXT("New group name:"),
-  WAREHOUSE_GROUP_POPUP_ADD_TITLE("New Group"),
-  WAREHOUSE_GROUP_POPUP_REMOVE("Remove Group"),
-  WAREHOUSE_GROUP_POPUP_REMOVE_CONFIRM("*** This action cannot be undone. ***\n\nRemove the group \"%1$s\"?"),
-  WAREHOUSE_GROUP_POPUP_RENAME("Rename Group"),
-  WAREHOUSE_GROUP_POPUP_RENAME_TEXT("Rename \"%1$s\" to:"),
-  WAREHOUSE_ITEM_REPORT_DATE("Date"),
-  WAREHOUSE_ITEM_REPORT_DELTA("Delta"),
-  WAREHOUSE_ITEM_REPORT_INITIAL("Initial"),
-  WAREHOUSE_SUBGROUP("Subgroup:"),
-  WAREHOUSE_TITLE("Warehouse"),
   MENU_BULLETINBOARD("Bulletin Board"),
   MENU_BULLETINBOARD_ADD("Create New Entry..."),
-  MENU_WAREHOUSE("WAREHOUSE"),
-  MENU_WAREHOUSE_MANAGEMENT("Management"),
   MENU_ORGANIZER("Organizer"),
   MENU_ORGANIZER_CALENDAR("Calendar"),
   MENU_ORGANIZER_CATALOG("Catalog"),
@@ -81,6 +64,8 @@ public enum S {
   MENU_USER("User"),
   MENU_USER_LOGOUT("Logout"),
   MENU_USER_MESSAGES("Messages"),
+  MENU_WAREHOUSE("Warehouse"),
+  MENU_WAREHOUSE_MANAGEMENT("Management"),
   MESSAGE_FULL("Inbox Full: %1$d of %2$d"),
   MESSAGE_N_MESSAGES("%1$d Messages"),
   MESSAGE_SELECTED_N("%1$d messages selected."),
@@ -220,6 +205,7 @@ public enum S {
   SYSOP_PIN_WRONG("Invalid SysOp PIN."),
   TITLE_CONFIRM("Confirm"),
   TITLE_ERROR("Error"),
+  TITLE_FATAL_ERROR("Fatal Error"),
   TITLE_RENAME("Rename"),
   TITLE_SAVE("Save"),
   TITLE_SUCCESS("Success!"),
@@ -242,6 +228,55 @@ public enum S {
   TOOLS_SALESREGISTER_TIME_DAY("Day"),
   TOOLS_SALESREGISTER_TIME_NIGHT("Night"),
   VERSION_ERROR("This software is outdated, please update!\n\nClient: v%1$s\nServer: v%2$s"),
+  WAREHOUSE_ADJUSTMENT_TITLE("Warehouse Management"),
+  WAREHOUSE_ADMIN_DELETE_CONFIRM("*** This action cannot be undone! ***\n\nDelete '%s'?"),
+  WAREHOUSE_ADMIN_NEWITEM_NAME("New Warehouse Item"),
+  WAREHOUSE_ADMIN_NEWITEM_TEXT("[add new item]"),
+  WAREHOUSE_ADMIN_SAVING("[Saving '%s' ...]"),
+  WAREHOUSE_ALLOW_ITEM_ADMIN("Allow Item Administration"),
+  WAREHOUSE_ALLOW_ITEM_ADMIN_CONFIRM("This option allows you to change the groups and items of the WAREHOUSE.\nMany changes cannot be undone.\n\nContinue?"),
+  WAREHOUSE_CHANGE_BUTTON_CANCEL("Cancel (Esc)"),
+  WAREHOUSE_CHANGE_BUTTON_DOWN("Down ( \u2193 )"),
+  WAREHOUSE_CHANGE_BUTTON_SAVE("Save (Enter)"),
+  WAREHOUSE_CHANGE_BUTTON_UP("Up ( \u2191 )"),
+  WAREHOUSE_CHANGE_COMMENTS("Comments"),
+  WAREHOUSE_CHANGE_ERROR_NEGATIVE_1("Quantity is negative!"),
+  WAREHOUSE_CHANGE_ERROR_NEGATIVE_2("Will be set to 0 (zero)."),
+  WAREHOUSE_CHANGE_MODE_DECREASE("Decrease"),
+  WAREHOUSE_CHANGE_MODE_INCREASE("Increase"),
+  WAREHOUSE_CHANGE_MODE_SET("Set"),
+  WAREHOUSE_CHANGE_MODE_TITLE("Mode:"),
+  WAREHOUSE_CHANGE_QUANTITY("Quantity"),
+  WAREHOUSE_CHANGE_REASON("Reason:"),
+  WAREHOUSE_GROUP("Group:"),
+  WAREHOUSE_GROUP_POPUP_ADD("Add Group"),
+  WAREHOUSE_GROUP_POPUP_ADD_TEXT("New group name:"),
+  WAREHOUSE_GROUP_POPUP_ADD_TITLE("New Group"),
+  WAREHOUSE_GROUP_POPUP_REMOVE("Remove Group"),
+  WAREHOUSE_GROUP_POPUP_REMOVE_CONFIRM("*** This action cannot be undone. ***\n\nRemove the group \"%1$s\"?"),
+  WAREHOUSE_GROUP_POPUP_RENAME("Rename Group"),
+  WAREHOUSE_GROUP_POPUP_RENAME_TEXT("Rename \"%1$s\" to:"),
+  WAREHOUSE_HISTORY("History Log"),
+  WAREHOUSE_ITEM_REPORT_DATE("Date"),
+  WAREHOUSE_ITEM_REPORT_DELTA("Delta"),
+  WAREHOUSE_ITEM_REPORT_INITIAL("Initial"),
+  WAREHOUSE_LOGTABLE_BY("By"),
+  WAREHOUSE_LOGTABLE_CHANGE("Change"),
+  WAREHOUSE_LOGTABLE_COMMENTS("Comments"),
+  WAREHOUSE_LOGTABLE_WHEN("When"),
+  WAREHOUSE_PRINT_ADJUSTMENTS("Print Adjustments"),
+  WAREHOUSE_PRINT_CHECKLIST("Imprimir Checklist"),
+  WAREHOUSE_REPORT("Report"),
+  WAREHOUSE_REPORT_ITEM_TAB("Report: %s"),
+  WAREHOUSE_REPORT_ITEM_TITLE("Item Report: %1$s (%2$s)"),
+  WAREHOUSE_SELECT_ITEM("[select an item]"),
+  WAREHOUSE_SUBGROUP("Subgroup:"),
+  WAREHOUSE_TABLE_MAXIMUM("Max"),
+  WAREHOUSE_TABLE_MINIMUM("Min"),
+  WAREHOUSE_TABLE_PRODUCT("Product"),
+  WAREHOUSE_TABLE_QUANTITY("Qty"),
+  WAREHOUSE_TABLE_UNIT("Un"),
+  WAREHOUSE_TITLE("Warehouse"),
   WINDOW_AUTH_CONNECTED("connected!"),
   WINDOW_AUTH_CONNECTING("Connecting to %1$s:%2$d..."),
   WINDOW_AUTH_CONNECTION_FAILED("failed!"),
@@ -254,41 +289,7 @@ public enum S {
   WINDOW_AUTH_WRONG_PASSWORD("Incorrect Password!"),
   WINDOW_MAIN_CLOSE_PROMPT("Do you want to close the application?"),
   YOUR_NAME("Your Name:"),
-  YOUR_PASSWORD("Your Password:"),
-  WAREHOUSE_CHANGE_MODE_TITLE("Mode:"),
-  WAREHOUSE_CHANGE_MODE_INCREASE("Increase"),
-  WAREHOUSE_CHANGE_MODE_DECREASE("Decrease"),
-  WAREHOUSE_CHANGE_MODE_SET("Set"),
-  WAREHOUSE_TABLE_PRODUCT("Product"),
-  WAREHOUSE_TABLE_QUANTITY("Qty"),
-  WAREHOUSE_TABLE_UNIT("Un"),
-  WAREHOUSE_PRINT_ADJUSTMENTS("Print Adjustments"),
-  WAREHOUSE_PRINT_CHECKLIST("Imprimir Checklist"),
-  WAREHOUSE_LOGTABLE_WHEN("When"),
-  WAREHOUSE_LOGTABLE_BY("By"),
-  WAREHOUSE_LOGTABLE_CHANGE("Change"),
-  WAREHOUSE_LOGTABLE_COMMENTS("Comments"),
-  WAREHOUSE_REPORT_ITEM_TITLE("Item Report: %1$s (%2$s)"),
-  WAREHOUSE_REPORT_ITEM_TAB("Report: %s"),
-  WAREHOUSE_CHANGE_REASON("Reason:"),
-  WAREHOUSE_CHANGE_QUANTITY("Quantity"),
-  WAREHOUSE_CHANGE_ERROR_NEGATIVE_1("Quantity is negative!"),
-  WAREHOUSE_CHANGE_ERROR_NEGATIVE_2("Will be set to 0 (zero)."),
-  WAREHOUSE_CHANGE_COMMENTS("Comments"),
-  WAREHOUSE_CHANGE_BUTTON_UP("Up ( \u2191 )"),
-  WAREHOUSE_CHANGE_BUTTON_DOWN("Down ( \u2193 )"),
-  WAREHOUSE_CHANGE_BUTTON_SAVE("Save (Enter)"),
-  WAREHOUSE_CHANGE_BUTTON_CANCEL("Cancel (Esc)"),
-  WAREHOUSE_HISTORY("History Log"),
-  WAREHOUSE_REPORT("Report"),
-  WAREHOUSE_SELECT_ITEM("[select an item]"),
-  WAREHOUSE_ADMIN_NEWITEM_TEXT("[add new item]"),
-  WAREHOUSE_ADMIN_NEWITEM_NAME("New Warehouse Item"),
-  WAREHOUSE_TABLE_MINIMUM("Min"),
-  WAREHOUSE_TABLE_MAXIMUM("Max"),
-  WAREHOUSE_ADMIN_DELETE_CONFIRM("*** This action cannot be undone! ***\n\nDelete '%s'?"),
-  WAREHOUSE_ADMIN_SAVING("[Saving '%s' ...]"),
-  BULLETINBOARD_EDIT_TITLE_INSTRUCTIONS("Use the character '%s' to create a new submenu.");
+  YOUR_PASSWORD("Your Password:");
 
   private static final Logger            logger   = Logger.getLogger(S.class);
   private static HashMap<String, String> messages = new HashMap<>();
@@ -437,6 +438,11 @@ public enum S {
     return s;
   }
 
+  private static String prepareText(String s) {
+    s = s.replaceAll("\\n", "\n");
+    return s;
+  }
+
   private static void reset() {
     for (final S s : values()) {
       s.text = null;
@@ -453,12 +459,13 @@ public enum S {
       return;
     }
     try {
+      final String text = prepareText(parts[1]);
       if (parts[0].contains(":")) {
         // translation for message
-        messages.put(parts[0], parts[1]);
+        messages.put(parts[0], text);
       } else {
         final S s = valueOf(parts[0]);
-        s.text = parts[1];
+        s.text = text;
       }
     } catch (final IllegalArgumentException e) {
       logger.warn("Invalid language expression: " + parts[0]);

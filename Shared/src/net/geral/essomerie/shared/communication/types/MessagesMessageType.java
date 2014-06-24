@@ -8,6 +8,7 @@ public enum MessagesMessageType implements IMessageType {
   RequestSend,
   RequestRead,
   RequestDelete,
+
   InformMessagesToUser,
   InformSent,
   InformReceived,

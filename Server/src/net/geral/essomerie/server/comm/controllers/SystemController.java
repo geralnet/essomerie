@@ -26,6 +26,11 @@ public class SystemController extends ConnectionController<SystemMessageType> {
 	connection = c;
     }
 
+    public void informError(final boolean fatal, final String msg)
+	    throws IOException {
+	send(SystemMessageType.InformError, fatal, msg);
+    }
+
     @Override
     protected void process(final SystemMessageType type, final MessageData md)
 	    throws IOException, SQLException {
@@ -51,11 +56,6 @@ public class SystemController extends ConnectionController<SystemMessageType> {
 	    throws IOException {
 	connection.setRemoteVersion(version);
 	send(SystemMessageType.InformVersion, BuildInfo.CURRENT);
-	if (BuildInfo.CURRENT.compareTo(version) > 0) {
-	    connection.comm().send(MessageSubSystem.System,
-		    SystemMessageType.InformError, "Incorrect version");
-	    connection.close();
-	}
     }
 
     private void requestLogin(final int informedUserId, final char[] cs)

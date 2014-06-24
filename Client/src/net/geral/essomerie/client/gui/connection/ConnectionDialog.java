@@ -365,7 +365,7 @@ public class ConnectionDialog extends JDialog implements ActionListener,
           + serverVersion);
       JOptionPane
           .showMessageDialog(
-              this,
+              Client.window(),
               S.VERSION_ERROR.s(clientVersion.toString(),
                   serverVersion.toString()), S.TITLE_ERROR.s(),
               JOptionPane.ERROR_MESSAGE);

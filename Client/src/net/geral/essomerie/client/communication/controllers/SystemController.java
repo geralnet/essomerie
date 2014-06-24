@@ -2,9 +2,12 @@ package net.geral.essomerie.client.communication.controllers;
 
 import java.io.IOException;
 
+import javax.swing.JOptionPane;
+
 import net.geral.essomerie._shared.UserPermissions;
 import net.geral.essomerie.client.core.Client;
 import net.geral.essomerie.client.core.events.Events;
+import net.geral.essomerie.client.resources.S;
 import net.geral.essomerie.shared.BuildInfo;
 import net.geral.essomerie.shared.communication.ConnectionController;
 import net.geral.essomerie.shared.communication.ICommunication;
@@ -22,8 +25,15 @@ public class SystemController extends ConnectionController<SystemMessageType> {
   }
 
   private void errorReceived(final boolean fatal, final String message) {
-    // TODO any better way to handle it?
     logger.error("Error (fatal=" + fatal + "): " + message);
+    if (fatal) {
+      JOptionPane.showMessageDialog(Client.window(), message,
+          S.TITLE_FATAL_ERROR.s(), JOptionPane.ERROR_MESSAGE);
+      System.exit(1);
+    } else {
+      JOptionPane.showMessageDialog(Client.window(), message,
+          S.TITLE_ERROR.s(), JOptionPane.WARNING_MESSAGE);
+    }
   }
 
   public void informVersion() throws IOException {

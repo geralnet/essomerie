@@ -8,6 +8,7 @@ public enum UsersMessageType implements IMessageType {
   RequestChange,
   RequestCreate,
   RequestDelete,
+
   InformList,
   InformCreated,
   InformChanged,

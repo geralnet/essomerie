@@ -21,12 +21,12 @@ public final class BuildInfo implements Serializable, Comparable<BuildInfo>,
 
   private BuildInfo() {
     debug =false; // [BUILDINFO:DEBUG]
-    date =new LocalDateTime(1403013951835L); // [BUILDINFO:NOW]
+    date =new LocalDateTime(1403616712605L); // [BUILDINFO:NOW]
     major = 0;
     minor = 3;
     revision = 0;
-    build =104; // [BUILDINFO:INCREMENT]
-    absoluteBuild =111; // [BUILDINFO:INCREMENT]
+    build =108; // [BUILDINFO:INCREMENT]
+    absoluteBuild =116; // [BUILDINFO:INCREMENT]
   }
 
   public BuildInfo(final boolean _debug, final LocalDateTime _date,

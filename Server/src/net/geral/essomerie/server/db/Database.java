@@ -5,12 +5,13 @@ import java.sql.SQLException;
 import net.geral.essomerie.server.core.Configuration;
 import net.geral.essomerie.server.db.areas.BulletionBoardDB;
 import net.geral.essomerie.server.db.areas.CalendarDB;
+import net.geral.essomerie.server.db.areas.CallerDB;
 import net.geral.essomerie.server.db.areas.CatalogDB;
-import net.geral.essomerie.server.db.areas.WarehouseDB;
 import net.geral.essomerie.server.db.areas.MessageDB;
 import net.geral.essomerie.server.db.areas.PersonDB;
 import net.geral.essomerie.server.db.areas.SysopDB;
 import net.geral.essomerie.server.db.areas.UsersDB;
+import net.geral.essomerie.server.db.areas.WarehouseDB;
 
 import org.apache.log4j.Logger;
 
@@ -25,6 +26,7 @@ public class Database extends MySQL {
     private final UsersDB users = new UsersDB(this);
     private final CatalogDB catalog = new CatalogDB(this);
     private final SysopDB sysop = new SysopDB(this);
+    private final CallerDB caller = new CallerDB(this);
 
     private int execution_id = 0;
 
@@ -34,6 +36,10 @@ public class Database extends MySQL {
 
     public CalendarDB calendar() {
 	return calendar;
+    }
+
+    public CallerDB caller() {
+	return caller;
     }
 
     public CatalogDB catalog() {
@@ -52,10 +58,6 @@ public class Database extends MySQL {
 	    execution_id = 0;
 	}
 	super.close();
-    }
-
-    public WarehouseDB warehouse() {
-	return warehouse;
     }
 
     public void keepAlive() throws SQLException {
@@ -93,5 +95,9 @@ public class Database extends MySQL {
 
     public UsersDB users() {
 	return users;
+    }
+
+    public WarehouseDB warehouse() {
+	return warehouse;
     }
 }

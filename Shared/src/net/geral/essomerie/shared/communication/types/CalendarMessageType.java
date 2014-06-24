@@ -8,13 +8,13 @@ public enum CalendarMessageType implements IMessageType {
   RequestEventAddChange,
   RequestEventDelete,
   RequestEventDetails,
+  RequestRoster,
+  RequestRosterSave,
+
   InformEvents,
   InformEventAddedChanged,
   InformEventDeleted,
   InformEventDetails,
-
-  RequestRoster,
-  RequestRosterSave,
   InformRoster;
 
   @Override

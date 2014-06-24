@@ -28,6 +28,8 @@ public class CallerIdController {
 	}
 	final Telephone t = Telephone.fromFormatted(number);
 	final Person p = Server.db().person().getForTelephone(t);
+	final int pid = (p == null) ? 0 : p.getId();
+	Server.db().caller().register(line, message, number, pid);
 	Server.broadcast(MessageSubSystem.CallerId, message, line, t, p);
     }
 

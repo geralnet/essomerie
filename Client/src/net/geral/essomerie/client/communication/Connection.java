@@ -8,13 +8,13 @@ import net.geral.essomerie.client.communication.controllers.BulletinBoardControl
 import net.geral.essomerie.client.communication.controllers.CalendarController;
 import net.geral.essomerie.client.communication.controllers.CallerIdController;
 import net.geral.essomerie.client.communication.controllers.CatalogController;
-import net.geral.essomerie.client.communication.controllers.WarehouseController;
 import net.geral.essomerie.client.communication.controllers.MessagesController;
 import net.geral.essomerie.client.communication.controllers.PersonsController;
 import net.geral.essomerie.client.communication.controllers.SalesController;
 import net.geral.essomerie.client.communication.controllers.SysopController;
 import net.geral.essomerie.client.communication.controllers.SystemController;
 import net.geral.essomerie.client.communication.controllers.UsersController;
+import net.geral.essomerie.client.communication.controllers.WarehouseController;
 import net.geral.essomerie.client.core.Client;
 import net.geral.essomerie.client.core.configuration.CoreConfiguration;
 import net.geral.essomerie.client.core.events.Events;
@@ -101,10 +101,6 @@ public class Connection extends Thread implements ICommunication {
 
   public void finish() {
     running = false;
-  }
-
-  public WarehouseController warehouse() {
-    return warehouse;
   }
 
   public MessagesController messages() {
@@ -315,5 +311,9 @@ public class Connection extends Thread implements ICommunication {
 
   public UsersController users() {
     return users;
+  }
+
+  public WarehouseController warehouse() {
+    return warehouse;
   }
 }

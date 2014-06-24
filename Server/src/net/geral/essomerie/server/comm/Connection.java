@@ -10,13 +10,13 @@ import net.geral.essomerie.server.comm.controllers.BulletinBoardController;
 import net.geral.essomerie.server.comm.controllers.CalendarController;
 import net.geral.essomerie.server.comm.controllers.CallerIdController;
 import net.geral.essomerie.server.comm.controllers.CatalogController;
-import net.geral.essomerie.server.comm.controllers.WarehouseController;
 import net.geral.essomerie.server.comm.controllers.MessagesController;
 import net.geral.essomerie.server.comm.controllers.PersonsController;
 import net.geral.essomerie.server.comm.controllers.SalesController;
 import net.geral.essomerie.server.comm.controllers.SysopController;
 import net.geral.essomerie.server.comm.controllers.SystemController;
 import net.geral.essomerie.server.comm.controllers.UsersController;
+import net.geral.essomerie.server.comm.controllers.WarehouseController;
 import net.geral.essomerie.shared.BuildInfo;
 import net.geral.essomerie.shared.communication.Communication;
 import net.geral.essomerie.shared.communication.ICommunication;
@@ -78,8 +78,7 @@ public class Connection extends Thread implements ICommunication {
 	    final String msg = "Access Denied: required=" + mt.requires()
 		    + ", permissions=" + userPermissions;
 	    logger.warn(msg);
-	    comm.send(MessageSubSystem.System, SystemMessageType.InformError,
-		    msg);
+	    system.informError(false, msg);
 	    return false;
 	}
 
@@ -103,6 +102,11 @@ public class Connection extends Thread implements ICommunication {
 
     public int getUserId() {
 	return userId;
+    }
+
+    public void informError(final boolean fatal, final String msg)
+	    throws IOException {
+	system.informError(fatal, msg);
     }
 
     private void processMessage(final MessageData md) throws SQLException,
